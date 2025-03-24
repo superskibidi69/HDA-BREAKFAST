@@ -18,42 +18,45 @@
       line-height: 1.6;
       user-select: none;
     }
-/* Hide default scrollbar */
-html {
-    overflow: auto;
-}
-
-body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-}
-
-body::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
-
-/* Custom scrollbar styles */
-.custom-scrollbar {
-    position: fixed;
-    right: 0;
-    top: 0;
+    /* Scrollbar Styles for WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
     width: 10px;
-    height: 100vh;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
     background: rgba(26, 26, 26, 0.3);
-    z-index: 10000;
+    border-radius: 10px;
 }
 
-.custom-scrollbar-thumb {
-    position: absolute;
-    right: 0;
-    width: 10px;
+::-webkit-scrollbar-thumb {
     background: #ff6f61;
-    border-radius: 5px;
-    transition: background 0.2s;
+    border-radius: 10px;
+    border: 2px solid rgba(26, 26, 26, 0.3);
 }
 
-.custom-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #e65a50;
+}
+
+/* For browsers that support the new standard (Firefox) */
+@supports (scrollbar-color: auto) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #ff6f61 rgba(26, 26, 26, 0.3);
+    }
+}
+
+/* Fallback for iPad Safari which might ignore some styles */
+body {
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+  overflow: auto; clip-path: inset(0 0 -20px 0);
+}
+
+/* Optional: Force scrollbar to always be visible on iPad */
+html {
+    overflow: scroll;
+    overflow-x: hidden;
 }
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
@@ -503,9 +506,7 @@ body::-webkit-scrollbar {
       </div>
     </div>
   </section>
-<div class="custom-scrollbar">
-    <div class="custom-scrollbar-thumb"></div>
-</div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Check restaurant hours and update status
@@ -550,117 +551,6 @@ body::-webkit-scrollbar {
         observer.observe(element);
       });
     });
-    document.addEventListener('DOMContentLoaded', function() {
-    // Custom scrollbar implementation
-    const scrollbar = document.querySelector('.custom-scrollbar');
-    const scrollbarThumb = document.querySelector('.custom-scrollbar-thumb');
-    const body = document.body;
-    const html = document.documentElement;
-    
-    // Calculate the max scroll height
-    function updateScrollbar() {
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        );
-        
-        const scrollPercentage = (windowHeight / documentHeight) * 100;
-        const thumbHeight = Math.max(scrollPercentage, 10); // Minimum height of 10px
-        
-        scrollbarThumb.style.height = thumbHeight + '%';
-    }
-    
-    // Update scrollbar thumb position
-    function updateThumbPosition() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        ) - windowHeight;
-        
-        const scrollPercentage = (scrollTop / documentHeight) * 100;
-        scrollbarThumb.style.top = scrollPercentage + '%';
-    }
-    
-    // Handle scrollbar thumb drag
-    let isDragging = false;
-    
-    scrollbarThumb.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        e.preventDefault();
-    });
-    
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        
-        const scrollbarRect = scrollbar.getBoundingClientRect();
-        const relativeY = e.clientY - scrollbarRect.top;
-        const percentage = relativeY / scrollbarRect.height;
-        
-        const documentHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        ) - window.innerHeight;
-        
-        window.scrollTo(0, percentage * documentHeight);
-    });
-    
-    document.addEventListener('mouseup', function() {
-        isDragging = false;
-    });
-    
-    // Handle touch events for iPad
-    scrollbarThumb.addEventListener('touchstart', function(e) {
-        isDragging = true;
-        e.preventDefault();
-    });
-    
-    document.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        
-        const scrollbarRect = scrollbar.getBoundingClientRect();
-        const touch = e.touches[0];
-        const relativeY = touch.clientY - scrollbarRect.top;
-        const percentage = relativeY / scrollbarRect.height;
-        
-        const documentHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        ) - window.innerHeight;
-        
-        window.scrollTo(0, percentage * documentHeight);
-    });
-    
-    document.addEventListener('touchend', function() {
-        isDragging = false;
-    });
-    
-    // Initialize and update on resize/scroll
-    updateScrollbar();
-    updateThumbPosition();
-    
-    window.addEventListener('resize', function() {
-        updateScrollbar();
-    });
-    
-    window.addEventListener('scroll', function() {
-        updateThumbPosition();
-    });
-});
   </script>
 </body>
 </html>
