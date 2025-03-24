@@ -157,8 +157,8 @@
       font-weight: bold;
       margin-bottom: 20px;
       font-size: 18px;
-      opacity: 0; /* Start hidden */
-      animation: fadeIn 2s ease-out 1.5s forwards; /* Apply animation with delay */
+      opacity: 0; 
+-webkit-animation: roll-in-blurred-left 1.8s cubic-bezier(0.175, 0.885, 0.320, 1.275) ;
     }
 
     .open {
@@ -310,6 +310,7 @@
         opacity: 1;
       }
     }
+    @-webkit-keyframes roll-in-blurred-left{0%{-webkit-transform:translateX(-1000px) rotate(-720deg);transform:translateX(-1000px) rotate(-720deg);-webkit-filter:blur(50px);filter:blur(50px);opacity:0}100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);-webkit-filter:blur(0);filter:blur(0);opacity:1}}@keyframes roll-in-blurred-left{0%{-webkit-transform:translateX(-1000px) rotate(-720deg);transform:translateX(-1000px) rotate(-720deg);-webkit-filter:blur(50px);filter:blur(50px);opacity:0}100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);-webkit-filter:blur(0);filter:blur(0);opacity:1}}
 
     /* Responsive Styles */
     @media (max-width: 768px) {
