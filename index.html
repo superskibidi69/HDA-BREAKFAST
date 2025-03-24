@@ -18,10 +18,10 @@
       line-height: 1.6;
       user-select: none;
     }
-/* Scrollbar Styles */
+    /* Scrollbar Styles for WebKit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,19 +30,32 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #ff6f61, #e65a50);
+    background: #ff6f61;
     border-radius: 10px;
     border: 2px solid rgba(26, 26, 26, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #e65a50, #d44a40);
+    background: #e65a50;
 }
 
-/* For Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: #ff6f61 rgba(26, 26, 26, 0.3);
+/* For browsers that support the new standard (Firefox) */
+@supports (scrollbar-color: auto) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #ff6f61 rgba(26, 26, 26, 0.3);
+    }
+}
+
+/* Fallback for iPad Safari which might ignore some styles */
+body {
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+}
+
+/* Optional: Force scrollbar to always be visible on iPad */
+html {
+    overflow: scroll;
+    overflow-x: hidden;
 }
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
