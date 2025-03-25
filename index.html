@@ -765,92 +765,64 @@ nav ul li a:hover {
     // Menu item data with nutrition facts
     const menuItems = {
       "bacon": {
-        "calories": 135,
+        "calories": 130,
         "servingSize": "3 strips",
+        "time": "12 minutes"
       },
       "french-toast": {
-        "calories": 180,
+        "calories": 190,
         "servingSize": "3 slices",
+        "time": "14 minutes"
       },
       "hash-browns": {
-        "calories": 140,
+        "calories": 165,
         "servingSize": "4 pieces",
+        "time": "9 minutes"
       },
       "sunny-side-up": {
-        "calories": 90,
+        "calories": 70,
         "servingSize": "1 egg",
+        "time": "3 minutes"
       },
       "waffles": {
         "calories": 400,
-        "servingSize": "2 waffles (150g)",
-        "fat": "15g",
-        "carbs": "60g",
-        "protein": "8g",
-        "sugar": "20g",
-        "sodium": "500mg"
+        "servingSize": "2 waffles",
+        "time": "4 minutes"
       },
       "pancakes": {
         "calories": 350,
-        "servingSize": "2 pancakes (150g)",
-        "fat": "10g",
-        "carbs": "55g",
-        "protein": "8g",
-        "sugar": "15g",
-        "sodium": "450mg"
+        "servingSize": "2 pancakes",
+        "time": "4 minutes"
       },
       "yogurt": {
         "calories": 150,
-        "servingSize": "1 cup (245g)",
-        "fat": "3g",
-        "carbs": "20g",
-        "protein": "12g",
-        "sugar": "15g",
-        "sodium": "80mg"
+        "servingSize": "1 cup",
+        "time": "4 minutes"
       },
       "chocolate-milk": {
         "calories": 200,
-        "servingSize": "1 cup (240ml)",
-        "fat": "5g",
-        "carbs": "30g",
-        "protein": "8g",
-        "sugar": "25g",
-        "sodium": "150mg"
+        "servingSize": "1 cup",
+        "time": "4 minutes"
       },
       "icelandic-water": {
         "calories": 0,
-        "servingSize": "1 bottle (500ml)",
-        "fat": "0g",
-        "carbs": "0g",
-        "protein": "0g",
-        "sugar": "0g",
-        "sodium": "0mg"
+        "servingSize": "1 bottle",
+        "time": "4 minutes"
       },
       "orange-juice": {
         "calories": 110,
-        "servingSize": "1 cup (240ml)",
-        "fat": "0g",
-        "carbs": "26g",
-        "protein": "2g",
-        "sugar": "22g",
-        "sodium": "0mg"
+        "servingSize": "1 cup",
+        "time": "4 minutes"
       },
       "coffee": {
         "calories": 5,
-        "servingSize": "1 cup (240ml)",
-        "fat": "0g",
-        "carbs": "0g",
-        "protein": "0g",
-        "sugar": "0g",
-        "sodium": "5mg"
+        "servingSize": "1 cup",
+         "time": "4 minutes"
       },
       "fruit-bowl": {
         "calories": 150,
-        "servingSize": "1 bowl (200g)",
-        "fat": "0g",
-        "carbs": "35g",
-        "protein": "2g",
-        "sugar": "25g",
-        "sodium": "10mg"
+        "servingSize": "1 bowl",
+        "time": "4 minutes"
       }
     };
 
@@ -992,13 +964,13 @@ nav ul li a:hover {
           nutritionContainer.innerHTML = '';
           
           // Add serving size first
-          addNutritionFact(nutritionContainer, 'Serving Size', itemData.servingSize);
+          addNutritionFact(nutritionContainer, 'Serving size', itemData.servingSize);
           
           // Add calories
           addNutritionFact(nutritionContainer, 'Total calories', itemData.calories);
           
           ////others
-          addNutritionFact(nutritionContainer, 'Count', itemData.calories);
+          addNutritionFact(nutritionContainer, 'Time to prepare', itemData.time);
 
           modal.classList.add('active');
         });
