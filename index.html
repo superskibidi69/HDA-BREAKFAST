@@ -410,7 +410,7 @@ body {
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <video autoplay muted loop playsinline preload="auto" id="bg-video">
+   <video autoplay muted loop playsinline webkit-playsinline x-webkit-airplay="allow" preload="auto" id="bg-video">
   <source src="https://ia600706.us.archive.org/18/items/video_20250324/Video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -628,24 +628,6 @@ body {
         });
       });
     });
-    document.addEventListener('DOMContentLoaded', function() {
-  const video = document.getElementById('bg-video');
-  
-  // Try to autoplay (required for some browsers)
-  const playPromise = video.play();
-  
-  // If autoplay fails, play on user interaction
-  if (playPromise !== undefined) {
-    playPromise.catch(error => {
-      console.log('Autoplay blocked, waiting for interaction...');
-      
-      // Play on click/tap
-      document.addEventListener('click', function() {
-        video.play().catch(e => console.log('Still blocked:', e));
-      }, { once: true });
-    });
-  }
-});
   </script>
 </body>
 </html>
