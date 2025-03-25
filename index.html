@@ -111,7 +111,7 @@ body {
       animation: fadeIn 2s ease-out;
     }
 
-  .hero video {
+    .hero video {
   position: absolute;
   top: 0;
   left: 0;
@@ -143,8 +143,8 @@ body {
       margin-bottom: 20px;
       user-select: none;
       overflow: hidden;
-      opacity: 0; /* Start hidden */
-      animation: fadeInDownBig 1.5s ease-out forwards; /* Apply animation */
+      opacity: 0;
+      animation: fadeInDownBig 1.5s ease-out forwards;
     }
 
     .hero p {
@@ -152,8 +152,8 @@ body {
       margin-bottom: 40px;
       user-select: none;
       overflow: hidden;
-      opacity: 0; /* Start hidden */
-      animation: fadeInUpBig 1.5s ease-out 1s forwards; /* Apply animation with delay */
+      opacity: 0;
+      animation: fadeInUpBig 1.5s ease-out 1s forwards;
     }
 
     .hero b {
@@ -161,7 +161,7 @@ body {
       margin-bottom: 40px;
       user-select: none;
       overflow: hidden;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
       animation: rotateInUpLeft 1.5s forwards, rotateOutUpRight 1.5s 4s forwards, hideElement 0s 5.5s forwards;
     }
 
@@ -172,8 +172,8 @@ body {
       font-weight: bold;
       margin-bottom: 20px;
       font-size: 18px;
-      opacity: 0; /* Start hidden */
-      animation: fadeIn 2s ease-out 1.5s forwards; /* Apply animation with delay */
+      opacity: 0;
+      animation: fadeIn 2s ease-out 1.5s forwards;
     }
 
     .open {
@@ -217,22 +217,21 @@ body {
 
     /* Our Story Section */
     .our-story {
-      padding: 150px 20px 100px; /* Adjusted padding to account for the fixed header */
+      padding: 150px 20px 100px;
       text-align: center;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      margin: 0 20px 50px; /* Adjusted margin */
+      margin: 0 20px 50px;
       border-radius: 20px;
       position: relative;
       top: -100px;
     }
 
- 
     .our-story h2 {
       font-size: 48px;
       margin-bottom: 60px;
       color: #8eff61;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
     }
 
     .our-story p {
@@ -241,16 +240,16 @@ body {
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.8;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
     }
 
     /* Menu Section */
     .menu {
-      padding: 150px 20px 100px; /* Adjusted padding to account for the fixed header */
+      padding: 150px 20px 100px;
       text-align: center;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      margin: 0 20px 50px; /* Adjusted margin */
+      margin: 0 20px 50px;
       border-radius: 20px;
       position: relative;
       top: -100px;
@@ -260,7 +259,7 @@ body {
       font-size: 48px;
       margin-bottom: 60px;
       color: #8eff61;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
     }
 
     .menu-section {
@@ -272,7 +271,7 @@ body {
       margin-bottom: 40px;
       color: #8eff61;
       letter-spacing: 2px;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
     }
 
     .menu-items {
@@ -289,7 +288,9 @@ body {
       padding: 20px;
       border-radius: 15px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
+      position: relative;
+      overflow: visible;
     }
 
     .menu-item:hover {
@@ -308,13 +309,35 @@ body {
       font-size: 24px;
       margin: 20px 0 10px;
       color: #cfcfcf;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
     }
 
     .menu-item p {
       font-size: 16px;
       color: #cfcfcf;
-      opacity: 0; /* Start hidden */
+      opacity: 0;
+    }
+
+    /* Price Sticker Styles */
+    .price-sticker {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: #8eff61;
+      color: #1a1a1a;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 16px;
+      transform: rotate(15deg);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      z-index: 2;
+      border: 3px solid #1a1a1a;
+      transition: transform 0.3s ease;
     }
 
     /* Animations */
@@ -356,6 +379,12 @@ body {
         font-size: 2rem;
         bottom: 20px;
         right: 20px;
+      }
+
+      .price-sticker {
+        width: 60px;
+        height: 60px;
+        font-size: 14px;
       }
     }
   </style>
@@ -416,33 +445,39 @@ body {
       <h3 class="animate-on-scroll">Entrees</h3>
       <div class="menu-items">
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$8.21</div>
           <img src="https://ia601302.us.archive.org/20/items/img-0749_202503/IMG_0752.jpeg" alt="Bacon">
-          <h3 class="animate-on-scroll">Bacon ($8.21)</h3>
+          <h3 class="animate-on-scroll">Bacon</h3>
           <p class="animate-on-scroll">This bacon is as tasty as the finest cuisine. With the perfect balance of the best oil in the world and meat, this bacon will dance around on your tastebuds.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$12.99</div>
           <img src="https://ia601302.us.archive.org/20/items/img-0749_202503/IMG_0751.jpeg" alt="French Toast">
-          <h3 class="animate-on-scroll">French Toast ($12.99)</h3>
+          <h3 class="animate-on-scroll">French Toast</h3>
           <p class="animate-on-scroll">From the oven, French toast's flavors flip a bad day upside down. This dish consists of toast with honey freshly gathered, butter, and fruits.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$10.57</div>
           <img src="https://ia600809.us.archive.org/24/items/img-0756_202503/IMG_0754.jpeg" alt="Hash brown">
-          <h3 class="animate-on-scroll">Hash browns ($10.57)</h3>
+          <h3 class="animate-on-scroll">Hash browns</h3>
           <p class="animate-on-scroll">Our hash browns are perfectly cooked to the perfect golden brown color. They will make you want to take the whole supply home! They almost look like they are made of plastic! But that's just the perfect job our chef did!</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$4.64</div>
           <img src="https://ia600809.us.archive.org/24/items/img-0756_202503/IMG_0753.jpeg" alt="Sunny Side Up">
-          <h3 class="animate-on-scroll">Sunny side up ($4.64)</h3>
+          <h3 class="animate-on-scroll">Sunny side up</h3>
           <p class="animate-on-scroll">Our sunny side up eggs are the best of the best top tier eggs, they taste better than any other eggs you will ever have! And always come to your plate straight from a sizzling pan with butter and the best seasoning!</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$10.99</div>
           <img src="https://ia601302.us.archive.org/20/items/img-0749_202503/IMG_0749.jpeg" alt="Waffles">
-          <h3 class="animate-on-scroll">Waffles ($10.99)</h3>
+          <h3 class="animate-on-scroll">Waffles</h3>
           <p class="animate-on-scroll">Mmm! Our waffles are like icing on cake for your general breakfast. It is a stack of 4 waffles, and each have a unique fruit taste that will steal the spotlight.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$10.99</div>
           <img src="https://ia600809.us.archive.org/24/items/img-0756_202503/IMG_0755.jpeg" alt="Pancakes">
-          <h3 class="animate-on-scroll">Pancakes ($10.99)</h3>
+          <h3 class="animate-on-scroll">Pancakes</h3>
           <p class="animate-on-scroll">Best pancakes you will ever eat! Our pancakes are always freshly made with homemade syrup and whipped cream! Our pancakes will make you cry tears of joy!</p>
         </div>
       </div>
@@ -453,28 +488,33 @@ body {
       <h3 class="animate-on-scroll">Beverages</h3>
       <div class="menu-items">
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$6.63</div>
           <img src="https://ia601302.us.archive.org/20/items/img-0749_202503/IMG_0750.jpeg" alt="Yogurt">
-          <h3 class="animate-on-scroll">Yogurt ($6.63)</h3>
+          <h3 class="animate-on-scroll">Yogurt</h3>
           <p class="animate-on-scroll">Our yogurt's taste is the best in the world. We have a million flavors, including different fruit, and it is a delicious luxury. It is made from grass-fed cows' milk, and will have you finish it in 1 second.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$4.82</div>
           <img src="https://ia600705.us.archive.org/23/items/img-0758_202503/IMG_0757.jpeg" alt="Chocolate milk">
-          <h3 class="animate-on-scroll">Chocolate milk ($4.82)</h3>
+          <h3 class="animate-on-scroll">Chocolate milk</h3>
           <p class="animate-on-scroll">Our chocolate milk is as fresh as a shiny coin, and the chocolate is from cocoa beans that are carefully harvested.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$2.23</div>
           <img src="https://ia600705.us.archive.org/23/items/img-0758_202503/IMG_0758.jpeg" alt="Icelandic bottled water">
-          <h3 class="animate-on-scroll">Icelandic water ($2.23)</h3>
+          <h3 class="animate-on-scroll">Icelandic water</h3>
           <p class="animate-on-scroll">Ice cold Icelandic water that tastes as fresh as glacier water, and as cold as a mountain top. Icelandic water will cool you down.</p>
        </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$3.58</div>
           <img src="https://ia600705.us.archive.org/23/items/img-0758_202503/IMG_0759.jpeg" alt="orange juice">
-          <h3 class="animate-on-scroll">Orange juice ($3.58)</h3>
+          <h3 class="animate-on-scroll">Orange juice</h3>
           <p class="animate-on-scroll">We have the best orange juice ever made, the freshest and tastiest orange juice and it's all organic. Freshly squeezed right into your cup.</p>
         </div>
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$5.19</div>
           <img src="https://ia600705.us.archive.org/23/items/img-0758_202503/IMG_0761.jpeg" alt="coffee">
-          <h3 class="animate-on-scroll">Coffee ($5.19)</h3>
+          <h3 class="animate-on-scroll">Coffee</h3>
           <p class="animate-on-scroll">This coffee is as warm as a sauna. The coffee beans are fresh from the field.</p>
         </div>
       </div>
@@ -485,8 +525,9 @@ body {
       <h3 class="animate-on-scroll">Sides</h3>
       <div class="menu-items">
         <div class="menu-item animate-on-scroll">
+          <div class="price-sticker">$6.86</div>
           <img src="https://ia800809.us.archive.org/24/items/img-0756_202503/IMG_0756.jpeg" alt="Fruit bowl">
-          <h3 class="animate-on-scroll">Fruit bowl ($6.86)</h3>
+          <h3 class="animate-on-scroll">Fruit bowl</h3>
           <p class="animate-on-scroll">Come enjoy our fresh fruit bowl, our fruit bowl is the best. It's the most amazing and fresh fruit you will ever have! The fresh flavor will dance on your tongue! Our fruit bowl has a fresh fruit flavor and is one of our favorites. Try our fruit, it's the best fruit you will ever have.</p>
         </div>
       </div>
@@ -526,7 +567,7 @@ body {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate__animated', 'animate__fadeIn');
-            entry.target.style.opacity = 1; // Make element visible
+            entry.target.style.opacity = 1;
           }
         });
       }, {
@@ -546,7 +587,6 @@ body {
           const targetElement = document.querySelector(targetId);
           
           if (targetElement) {
-            // Calculate the position to scroll to, accounting for the fixed header
             const headerHeight = document.querySelector('header').offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
             
@@ -573,6 +613,20 @@ body {
           navMenu.classList.toggle('active');
         });
       }
+
+      // Make price stickers wiggle on hover
+      document.querySelectorAll('.menu-item').forEach(item => {
+        const sticker = item.querySelector('.price-sticker');
+        
+        item.addEventListener('mouseenter', () => {
+          sticker.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg) scale(1.1)';
+          sticker.style.transition = 'transform 0.2s ease';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          sticker.style.transform = 'rotate(15deg) scale(1)';
+        });
+      });
     });
   </script>
 </body>
