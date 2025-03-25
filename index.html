@@ -410,10 +410,10 @@ body {
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <video autoplay muted loop>
-      <source src="https://ia600706.us.archive.org/18/items/video_20250324/Video.mp4" type="video/mp4">
-      no video for this browser.
-    </video>
+    <video autoplay muted loop playsinline preload="auto" id="bg-video">
+  <source src="https://ia600706.us.archive.org/18/items/video_20250324/Video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
     <div class="hero-content">
       <h1 class="animate__animated animate__fadeInDownBig">Welcome to HDA Breakfast</h1>
       <div id="hours-status" class="hours-status"></div>
@@ -628,6 +628,24 @@ body {
         });
       });
     });
+    document.addEventListener('DOMContentLoaded', function() {
+  const video = document.getElementById('bg-video');
+  
+  // Try to autoplay (required for some browsers)
+  const playPromise = video.play();
+  
+  // If autoplay fails, play on user interaction
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.log('Autoplay blocked, waiting for interaction...');
+      
+      // Play on click/tap
+      document.addEventListener('click', function() {
+        video.play().catch(e => console.log('Still blocked:', e));
+      }, { once: true });
+    });
+  }
+});
   </script>
 </body>
 </html>
