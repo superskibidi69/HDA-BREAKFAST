@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
-    /* General Styles */
     body {
       font-family: 'Times', sans-serif;
       margin: 0;
@@ -17,9 +16,11 @@
       color: #fff;
       line-height: 1.6;
       user-select: none;
+      overflow-x: hidden;
       ::-webkit-scrollbar {
     display: none;
       }
+      scrollbar-width: 0;
     }
   
     h1, h2, h3 {
@@ -38,9 +39,9 @@
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(10px);
       padding: 20px;
-      position: fixed;
-      width: 100%;
+      position: sticky;
       top: 0;
+      width: 100%;
       user-select: none;
       z-index: 1000;
       display: flex;
@@ -75,7 +76,7 @@
     }
 
     nav ul li a:hover {
-      color: #ff6f61;
+      color: #8eff61;
       user-select: none;
     }
 
@@ -178,23 +179,6 @@
       }
     }
 
-    .hero button {
-      background: #ff6f61;
-      color: #fff;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-      opacity: 0; /* Start hidden */
-      animation: fadeIn 4s ease-in-out forwards; /* Apply animation */
-    }
-
-    .hero button:hover {
-      background: #e65a50;
-      transform: scale(1.1);
-    }
-
     /* Smooth Transition */
     .transition {
       height: 100px;
@@ -219,7 +203,7 @@
     .our-story h2 {
       font-size: 48px;
       margin-bottom: 60px;
-      color: #ff6f61;
+      color: #8eff61;
       opacity: 0; /* Start hidden */
     }
 
@@ -247,7 +231,7 @@
     .menu h2 {
       font-size: 48px;
       margin-bottom: 60px;
-      color: #ff6f61;
+      color: #8eff61;
       opacity: 0; /* Start hidden */
     }
 
@@ -258,7 +242,7 @@
     .menu-section h3 {
       font-size: 36px;
       margin-bottom: 40px;
-      color: #ff6f61;
+      color: #8eff61;
       letter-spacing: 2px;
       opacity: 0; /* Start hidden */
     }
@@ -283,7 +267,6 @@
     .menu-item:hover {
       transform: translateY(-10px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      transition: all 1s cubic-bezier(0.800, -0.600, 0.425, 1.645);
     }
 
     .menu-item img {
