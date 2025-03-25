@@ -765,40 +765,20 @@ nav ul li a:hover {
     // Menu item data with nutrition facts
     const menuItems = {
       "bacon": {
-        "calories": 250,
-        "servingSize": "3 strips (34g)",
-        "fat": "20g",
-        "carbs": "0g",
-        "protein": "15g",
-        "sugar": "0g",
-        "sodium": "450mg"
+        "calories": 135,
+        "servingSize": "3 strips",
       },
       "french-toast": {
-        "calories": 350,
-        "servingSize": "2 slices (150g)",
-        "fat": "12g",
-        "carbs": "45g",
-        "protein": "10g",
-        "sugar": "15g",
-        "sodium": "300mg"
+        "calories": 180,
+        "servingSize": "3 slices",
       },
       "hash-browns": {
-        "calories": 200,
-        "servingSize": "1 cup (100g)",
-        "fat": "10g",
-        "carbs": "25g",
-        "protein": "2g",
-        "sugar": "1g",
-        "sodium": "400mg"
+        "calories": 140,
+        "servingSize": "4 pieces",
       },
       "sunny-side-up": {
         "calories": 90,
-        "servingSize": "1 egg (50g)",
-        "fat": "7g",
-        "carbs": "0g",
-        "protein": "6g",
-        "sugar": "0g",
-        "sodium": "70mg"
+        "servingSize": "1 egg",
       },
       "waffles": {
         "calories": 400,
@@ -1015,7 +995,11 @@ nav ul li a:hover {
           addNutritionFact(nutritionContainer, 'Serving Size', itemData.servingSize);
           
           // Add calories
-          addNutritionFact(nutritionContainer, 'Calories', itemData.calories);
+          addNutritionFact(nutritionContainer, 'Total calories', itemData.calories);
+          
+          ////others
+          addNutritionFact(nutritionContainer, 'Count', itemData.calories);
+
           modal.classList.add('active');
         });
       });
