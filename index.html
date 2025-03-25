@@ -55,6 +55,20 @@
   nav ul {
     background: rgba(255, 255, 255, 0.9) !important;
   }
+  
+  /* Light mode adjustments for modal */
+  .modal-content {
+    background: white;
+    color: #333;
+  }
+  
+  .close-modal {
+    color: #333;
+  }
+  
+  .nutrition-fact {
+    border-bottom: 1px solid #eee;
+  }
 }
     
 html {
@@ -341,6 +355,7 @@ nav ul li a:hover {
   position: relative;
   overflow: visible;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .menu-item:hover {
@@ -388,6 +403,125 @@ nav ul li a:hover {
   z-index: 2;
   border: 3px solid var(--bg-card);
   transition: transform 0.3s ease;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.modal-title {
+  font-size: 28px;
+  margin: 0;
+  color: var(--text-accent);
+}
+
+.modal-price {
+  background: var(--price-bg);
+  color: var(--price-text);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.modal-description {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+}
+
+.nutrition-title {
+  font-size: 20px;
+  margin: 25px 0 15px;
+  color: var(--text-accent);
+  border-bottom: 1px solid var(--text-accent);
+  padding-bottom: 5px;
+}
+
+.nutrition-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.nutrition-fact {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg-secondary);
+}
+
+.nutrition-label {
+  font-weight: bold;
+}
+
+.nutrition-value {
+  color: var(--text-accent);
 }
 
 /* Animations */
@@ -443,6 +577,22 @@ nav ul li a:hover {
   
   .hero p {
     font-size: 18px;
+  }
+  
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .modal-image {
+    width: 100%;
+    height: 200px;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .nutrition-facts {
+    grid-template-columns: 1fr;
   }
 }
   </style>
@@ -502,37 +652,37 @@ nav ul li a:hover {
     <div class="menu-section">
       <h3 class="animate-on-scroll">Entrees</h3>
       <div class="menu-items">
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="bacon">
           <div class="price-sticker">$6.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0752.jpeg" alt="Bacon">
           <h3 class="animate-on-scroll">Bacon</h3>
           <p class="animate-on-scroll">This bacon is as tasty as the finest cuisine. With the perfect balance of the best oil in the world and meat, this bacon will dance around on your tastebuds.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="french-toast">
           <div class="price-sticker">$12.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0751.jpeg" alt="French Toast">
           <h3 class="animate-on-scroll">French Toast</h3>
           <p class="animate-on-scroll">From the oven, French toast's flavors flip a bad day upside down. This dish consists of toast with honey freshly gathered, butter, and fruits.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="hash-browns">
           <div class="price-sticker">$10.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0754.jpeg" alt="Hash brown">
           <h3 class="animate-on-scroll">Hash browns</h3>
           <p class="animate-on-scroll">Our hash browns are perfectly cooked to the perfect golden brown color. They will make you want to take the whole supply home! They almost look like they are made of plastic! But that's just the perfect job our chef did!</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="sunny-side-up">
           <div class="price-sticker">$4.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0753.jpeg" alt="Sunny Side Up">
           <h3 class="animate-on-scroll">Sunny side up</h3>
           <p class="animate-on-scroll">Our sunny side up eggs are the best of the best top tier eggs, they taste better than any other eggs you will ever have! And always come to your plate straight from a sizzling pan with butter and the best seasoning!</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="waffles">
           <div class="price-sticker">$10.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0749.jpeg" alt="Waffles">
           <h3 class="animate-on-scroll">Waffles</h3>
           <p class="animate-on-scroll">Mmm! Our waffles are like icing on cake for your general breakfast. It is a stack of 4 waffles, and each have a unique fruit taste that will steal the spotlight.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="pancakes">
           <div class="price-sticker">$10.99</div>
           <img src="IMG_0755.jpeg" alt="Pancakes">
           <h3 class="animate-on-scroll">Pancakes</h3>
@@ -545,31 +695,31 @@ nav ul li a:hover {
     <div class="menu-section">
       <h3 class="animate-on-scroll">Beverages</h3>
       <div class="menu-items">
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="yogurt">
           <div class="price-sticker">$6.99</div>
           <img src="https://hda-breakfast.vercel.app/Yogurt.jpeg" alt="Yogurt">
           <h3 class="animate-on-scroll">Yogurt</h3>
           <p class="animate-on-scroll">Our yogurt's taste is the best in the world. We have a million flavors, including different fruit, and it is a delicious luxury. It is made from grass-fed cows' milk, and will have you finish it in 1 second.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="chocolate-milk">
           <div class="price-sticker">$4.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0757.jpeg" alt="Chocolate milk">
           <h3 class="animate-on-scroll">Chocolate milk</h3>
           <p class="animate-on-scroll">Our chocolate milk is as fresh as a shiny coin, and the chocolate is from cocoa beans that are carefully harvested.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="icelandic-water">
           <div class="price-sticker">$2.99</div>
           <img src="https://hda-breakfast.vercel.app/Water.jpeg" alt="Icelandic bottled water">
           <h3 class="animate-on-scroll">Icelandic water</h3>
           <p class="animate-on-scroll">Ice cold Icelandic water that tastes as fresh as glacier water, and as cold as a mountain top. Icelandic water will cool you down.</p>
        </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="orange-juice">
           <div class="price-sticker">$3.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0759.jpeg" alt="orange juice">
           <h3 class="animate-on-scroll">Orange juice</h3>
           <p class="animate-on-scroll">We have the best orange juice ever made, the freshest and tastiest orange juice and it's all organic. Freshly squeezed right into your cup.</p>
         </div>
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="coffee">
           <div class="price-sticker">$5.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0761.jpeg" alt="coffee">
           <h3 class="animate-on-scroll">Coffee</h3>
@@ -582,7 +732,7 @@ nav ul li a:hover {
     <div class="menu-section">
       <h3 class="animate-on-scroll">Sides</h3>
       <div class="menu-items">
-        <div class="menu-item animate-on-scroll">
+        <div class="menu-item animate-on-scroll" data-item="fruit-bowl">
           <div class="price-sticker">$5.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0756.jpeg" alt="Fruit bowl">
           <h3 class="animate-on-scroll">Fruit bowl</h3>
@@ -592,7 +742,138 @@ nav ul li a:hover {
     </div>
   </section>
 
+  <!-- Modal Popup -->
+  <div class="modal-overlay" id="item-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-modal">&times;</span>
+      <div class="modal-header">
+        <img class="modal-image" id="modal-image" src="" alt="">
+        <div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="modal-price" id="modal-price"></div>
+        </div>
+      </div>
+      <p class="modal-description" id="modal-description"></p>
+      <h3 class="nutrition-title">Nutrition Facts</h3>
+      <div class="nutrition-facts" id="nutrition-facts">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Menu item data with nutrition facts
+    const menuItems = {
+      "bacon": {
+        "calories": 250,
+        "servingSize": "3 strips (34g)",
+        "fat": "20g",
+        "carbs": "0g",
+        "protein": "15g",
+        "sugar": "0g",
+        "sodium": "450mg"
+      },
+      "french-toast": {
+        "calories": 350,
+        "servingSize": "2 slices (150g)",
+        "fat": "12g",
+        "carbs": "45g",
+        "protein": "10g",
+        "sugar": "15g",
+        "sodium": "300mg"
+      },
+      "hash-browns": {
+        "calories": 200,
+        "servingSize": "1 cup (100g)",
+        "fat": "10g",
+        "carbs": "25g",
+        "protein": "2g",
+        "sugar": "1g",
+        "sodium": "400mg"
+      },
+      "sunny-side-up": {
+        "calories": 90,
+        "servingSize": "1 egg (50g)",
+        "fat": "7g",
+        "carbs": "0g",
+        "protein": "6g",
+        "sugar": "0g",
+        "sodium": "70mg"
+      },
+      "waffles": {
+        "calories": 400,
+        "servingSize": "2 waffles (150g)",
+        "fat": "15g",
+        "carbs": "60g",
+        "protein": "8g",
+        "sugar": "20g",
+        "sodium": "500mg"
+      },
+      "pancakes": {
+        "calories": 350,
+        "servingSize": "2 pancakes (150g)",
+        "fat": "10g",
+        "carbs": "55g",
+        "protein": "8g",
+        "sugar": "15g",
+        "sodium": "450mg"
+      },
+      "yogurt": {
+        "calories": 150,
+        "servingSize": "1 cup (245g)",
+        "fat": "3g",
+        "carbs": "20g",
+        "protein": "12g",
+        "sugar": "15g",
+        "sodium": "80mg"
+      },
+      "chocolate-milk": {
+        "calories": 200,
+        "servingSize": "1 cup (240ml)",
+        "fat": "5g",
+        "carbs": "30g",
+        "protein": "8g",
+        "sugar": "25g",
+        "sodium": "150mg"
+      },
+      "icelandic-water": {
+        "calories": 0,
+        "servingSize": "1 bottle (500ml)",
+        "fat": "0g",
+        "carbs": "0g",
+        "protein": "0g",
+        "sugar": "0g",
+        "sodium": "0mg"
+      },
+      "orange-juice": {
+        "calories": 110,
+        "servingSize": "1 cup (240ml)",
+        "fat": "0g",
+        "carbs": "26g",
+        "protein": "2g",
+        "sugar": "22g",
+        "sodium": "0mg"
+      },
+      "coffee": {
+        "calories": 5,
+        "servingSize": "1 cup (240ml)",
+        "fat": "0g",
+        "carbs": "0g",
+        "protein": "0g",
+        "sugar": "0g",
+        "sodium": "5mg"
+      },
+      "fruit-bowl": {
+        "calories": 150,
+        "servingSize": "1 bowl (200g)",
+        "fat": "0g",
+        "carbs": "35g",
+        "protein": "2g",
+        "sugar": "25g",
+        "sodium": "10mg"
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       // Check restaurant hours and update status
       function updateHoursStatus() {
@@ -685,6 +966,77 @@ nav ul li a:hover {
           sticker.style.transform = 'rotate(15deg) scale(1)';
         });
       });
+      
+      // Modal functionality
+      const modal = document.getElementById('item-modal');
+      const closeModal = document.getElementById('close-modal');
+      
+      // Close modal when clicking X
+      closeModal.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+      
+      // Close modal when clicking outside content
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      // Add click handlers to all menu items
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const itemId = this.getAttribute('data-item');
+          const itemData = menuItems[itemId];
+          const itemTitle = this.querySelector('h3').textContent;
+          const itemPrice = this.querySelector('.price-sticker').textContent;
+          const itemImage = this.querySelector('img').src;
+          const itemDescription = this.querySelector('p').textContent;
+          
+          // Populate modal
+          document.getElementById('modal-title').textContent = itemTitle;
+          document.getElementById('modal-price').textContent = itemPrice;
+          document.getElementById('modal-image').src = itemImage;
+          document.getElementById('modal-image').alt = itemTitle;
+          document.getElementById('modal-description').textContent = itemDescription;
+          
+          // Populate nutrition facts
+          const nutritionContainer = document.getElementById('nutrition-facts');
+          nutritionContainer.innerHTML = '';
+          
+          // Add serving size first
+          addNutritionFact(nutritionContainer, 'Serving Size', itemData.servingSize);
+          
+          // Add calories
+          addNutritionFact(nutritionContainer, 'Calories', itemData.calories);
+          modal.classList.add('active');
+        });
+      });
+      
+      // Helper function to add nutrition facts
+      function addNutritionFact(container, label, value) {
+        const factElement = document.createElement('div');
+        factElement.className = 'nutrition-fact';
+        
+        const labelElement = document.createElement('span');
+        labelElement.className = 'nutrition-label';
+        labelElement.textContent = label;
+        
+        const valueElement = document.createElement('span');
+        valueElement.className = 'nutrition-value';
+        valueElement.textContent = value;
+        
+        factElement.appendChild(labelElement);
+        factElement.appendChild(valueElement);
+        container.appendChild(factElement);
+      }
       
       // Detect color scheme
       function detectColorScheme() {
