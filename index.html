@@ -628,6 +628,19 @@ body {
         });
       });
     });
+    document.addEventListener('DOMContentLoaded', function() {
+  const video = document.querySelector('.hero video');
+  
+  // Try to autoplay (may fail due to browser policies)
+  video.play().catch(error => {
+    console.log('Autoplay blocked:', error);
+    
+    // Fallback: Play on first user interaction
+    document.body.addEventListener('click', function() {
+      video.play().catch(e => console.log('Still blocked:', e));
+    }, { once: true }); // Only runs once
+  });
+});
   </script>
 </body>
 </html>
