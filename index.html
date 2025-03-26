@@ -223,8 +223,10 @@ nav ul li a:hover {
   margin-bottom: 40px;
   user-select: none;
   overflow: hidden;
-  opacity: 0;
-  animation: animate__rubberBand 1.5s ease infinite forwards;
+  opacity: 1; /* Change from 0 to 1 to make it visible by default */
+  display: block; /* Ensure it's displayed as a block element */
+  color: var(--text-primary); /* Ensure proper color contrast */
+  margin-top: 20px; /* Add some spacing */
 }
 
 .hours-status {
