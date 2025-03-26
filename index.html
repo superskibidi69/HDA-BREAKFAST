@@ -1200,6 +1200,13 @@ if (menuSearch) {
     }
   });
 }
+      //food fight
+      document.getElementById('food-fight').addEventListener('click', () => {
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+    setTimeout(() => item.style.transform = '', 1000);
+  });
+});
   </script>
 </body>
 </html>
