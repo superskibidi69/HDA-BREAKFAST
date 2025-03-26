@@ -120,19 +120,23 @@
   transform: scale(0.9);
 }
 
-/* Animation for food fight */
 @keyframes foodFight {
   0% { transform: translate(0, 0) rotate(0deg); }
   100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); }
 }
+
 @keyframes foodFightReset {
   0% { 
     transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
-    animation-timing-function: ease-out;
+  }
+  80% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  90% {
+    transform: translate(0, -10px) rotate(0deg);
   }
   100% { 
     transform: translate(0, 0) rotate(0deg);
-    animation-timing-function: ease-in;
   }
 }
 
@@ -1246,12 +1250,19 @@ if (menuSearch) {
     }
   });
 }
-// Food Fight Functionality
+// Updated Food Fight Functionality
 document.getElementById('food-fight-btn').addEventListener('click', () => {
   const items = document.querySelectorAll('.menu-item');
   
-  // Scramble items
+  // First, remove any existing animations to prevent conflicts
   items.forEach(item => {
+    item.style.animation = 'none';
+    item.style.transform = '';
+    void item.offsetHeight; // Trigger reflow
+  });
+  
+  // Scramble items
+  items.forEach((item, index) => {
     const tx = (Math.random() * 200 - 106) + 'px'; // -106px to 106px
     const ty = (Math.random() * 200 - 100) + 'px';
     const rot = (Math.random() * 60 - 40) + 'deg'; // -40deg to 40deg
@@ -1259,22 +1270,32 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
     item.style.setProperty('--tx', tx);
     item.style.setProperty('--ty', ty);
     item.style.setProperty('--rot', rot);
-    item.style.animation = 'foodFight 0.64s ease-out forwards';
     
-    // Play throw sound if available
-    document.getElementById('sizzle')?.play();
+    // Use transform directly for better performance
+    item.style.transform = `translate(${tx}, ${ty}) rotate(${rot})`;
+    item.style.transition = 'transform 0.64s ease-out';
   });
   
-  // Reset after 3.5 seconds with smooth slide back
+  // Reset with staggered timing and bounce effect
   setTimeout(() => {
-    items.forEach(item => {
-      item.style.animation = 'foodFightReset 0.8s ease-in-out forwards';
+    items.forEach((item, index) => {
+      // Stagger the animations slightly
+      const delay = index * 50; // 50ms between each item
       
-      // Remove animation after it completes to allow future animations
-      item.addEventListener('animationend', function handler() {
-        item.style.animation = '';
-        item.removeEventListener('animationend', handler);
-      });
+      setTimeout(() => {
+        item.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        item.style.transform = 'translate(0, 0) rotate(0deg)';
+        
+        // After animation completes
+        setTimeout(() => {
+          item.style.transition = '';
+          
+          // Show alert when last item finishes
+          if (index === items.length - 1) {
+            alert("Haha, get pranked!");
+          }
+        }, 800);
+      }, delay);
     });
   }, 3500);
 });
