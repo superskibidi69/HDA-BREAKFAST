@@ -95,6 +95,37 @@
   }
 }
     
+/* Food Fight Button */
+.food-fight-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#food-fight-btn {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#food-fight-btn:hover {
+  transform: scale(1.1);
+}
+
+#food-fight-btn:active {
+  transform: scale(0.9);
+}
+
+/* Animation for food fight */
+@keyframes foodFight {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); }
+}
+
 html {
   overflow-x: hidden;
 }
@@ -714,6 +745,11 @@ nav ul li a:hover {
   <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
   <i class="fas fa-search"></i>
 </div>
+<div class="food-fight-container">
+    <button id="food-fight-btn" aria-label="Start food fight">
+      <i class="fas fa-utensils"></i> Food Fight!
+    </button>
+  </div>
    <!-- Entrees -->
     <div class="menu-section">
       <h3 class="animate-on-scroll">Entrees</h3>
@@ -1200,6 +1236,32 @@ if (menuSearch) {
     }
   });
 }
+// Food Fight Functionality
+document.getElementById('food-fight-btn').addEventListener('click', () => {
+  const items = document.querySelectorAll('.menu-item');
+  
+  // Scramble items
+  items.forEach(item => {
+    const tx = (Math.random() * 200 - 100) + 'px'; // -100px to 100px
+    const ty = (Math.random() * 200 - 100) + 'px';
+    const rot = (Math.random() * 60 - 30) + 'deg'; // -30deg to 30deg
+    
+    item.style.setProperty('--tx', tx);
+    item.style.setProperty('--ty', ty);
+    item.style.setProperty('--rot', rot);
+    item.style.animation = 'foodFight 0.5s ease-out forwards';
+    
+    // Play throw sound if available
+    document.getElementById('sizzle')?.play();
+  });
+  
+  // Reset after 1.5 seconds
+  setTimeout(() => {
+    items.forEach(item => {
+      item.style.animation = '';
+    });
+  }, 1500);
+});
   </script>
 </body>
 </html>
