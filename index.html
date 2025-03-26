@@ -217,14 +217,22 @@ nav ul li a:hover {
   opacity: 0;
   animation: fadeInUpBig 1.5s ease-out 1s forwards;
 }
-
+@keyframes rubberBand {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25, 0.75); }
+  40% { transform: scale(0.75, 1.25); }
+  50% { transform: scale(1.15, 0.85); }
+  65% { transform: scale(0.95, 1.05); }
+  75% { transform: scale(1.05, 0.95); }
+  100% { transform: scale(1); }
+}
 .hero b {
   font-size: 16px;
   margin-bottom: 40px;
   user-select: none;
   overflow: hidden;
   opacity: 0;
-  animation: animate__rubberBand 1.5s ease infinite forwards;
+  animation: rubberBand 1.5s ease infinite;
 }
 
 .hours-status {
@@ -624,7 +632,7 @@ nav ul li a:hover {
       <h1 class="animate__animated animate__fadeInDownBig">Welcome to HDA Breakfast</h1>
       <div id="hours-status" class="hours-status"></div>
       <p class="">We make your food, so you can be a couch potato and not do it</p>
-      <b class="animate__animated animate__rubberBand animate__delay-1s">Note: this is not a real resteraunt, and only for a school project.</b>
+      <b>Note: this is not a real resteraunt, and only for a school project.</b>
     </div>
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
