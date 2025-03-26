@@ -101,6 +101,53 @@
   margin: 20px 0;
 }
 
+/* Contact Form Styles */
+.contact {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+}
+
+.contact h2 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: var(--text-accent);
+}
+
+#contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--text-secondary);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  resize: vertical;
+}
+
+#submit-contact {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin-top: 10px;
+}
+
+#submit-contact:hover {
+  transform: scale(1.05);
+}
 #food-fight-btn {
   background: var(--price-bg);
   color: var(--price-text);
@@ -620,6 +667,64 @@ nav ul li a:hover {
   display: none;
 }
 
+/* Reservation Form Styles */
+.reservation {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+}
+
+.reservation h2 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: var(--text-accent);
+}
+
+#reservation-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--text-secondary);
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+#submit-reservation {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin-top: 10px;
+}
+
+#submit-reservation:hover {
+  transform: scale(1.05);
+}
+
 .menu-item.hidden {
   display: none;
 }
@@ -731,6 +836,8 @@ nav ul li a:hover {
         <li><a href="#home">Home</a></li>
         <li><a href="#our-story">Our Story</a></li>
         <li><a href="#menu">Menu</a></li>
+        <li><a href="#reservation">Reservations</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li>⠀⠀⠀⠀</li>
       </ul>
     </nav>
@@ -750,6 +857,43 @@ nav ul li a:hover {
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
     </a>
+    <!-- Reservation Section -->
+<section class="reservation" id="reservation">
+    <h2 class="animate-on-scroll">Make a Reservation</h2>
+    <form id="reservation-form" class="animate-on-scroll">
+      <div class="form-group">
+        <label for="reservation-name">Name</label>
+        <input type="text" id="reservation-name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label for="reservation-email">Email</label>
+        <input type="email" id="reservation-email" required placeholder="Your Email">
+      </div>
+      <div class="form-group">
+        <label for="reservation-date">Date</label>
+        <input type="date" id="reservation-date" required>
+      </div>
+      <div class="form-group">
+        <label for="reservation-time">Time</label>
+        <input type="time" id="reservation-time" min="06:30" max="10:00" required>
+      </div>
+      <div class="form-group">
+        <label for="reservation-guests">Number of Guests</label>
+        <select id="reservation-guests" required>
+          <option value="1">1 Person</option>
+          <option value="2">2 People</option>
+          <option value="3">3 People</option>
+          <option value="4">4 People</option>
+          <option value="5+">5+ People</option>
+        </select>
+      </div>
+      <button type="submit" id="submit-reservation">Book Table</button>
+    </form>
+    <div id="reservation-confirmation" style="display: none;">
+      <h3>Thank you! Your reservation has been submitted.</h3>
+      <p>We'll see you soon at HDA Breakfast!</p>
+    </div>
+  </section>
   </section>
   <div class="transition"></div>
   <section class="our-story" id="our-story">
@@ -904,7 +1048,29 @@ nav ul li a:hover {
         </div>
       </div>
   </section>
-
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2 class="animate-on-scroll">Contact Us</h2>
+    <form id="contact-form" class="animate-on-scroll">
+      <div class="form-group">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" required placeholder="Your Email">
+      </div>
+      <div class="form-group">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" rows="5" required placeholder="Your Message"></textarea>
+      </div>
+      <button type="submit" id="submit-contact">Send Message</button>
+    </form>
+    <div id="contact-confirmation" style="display: none;">
+      <h3>Thank you for your message!</h3>
+      <p>We'll get back to you soon.</p>
+    </div>
+  </section>
   <!-- Modal Popup -->
   <div class="modal-overlay" id="item-modal">
     <div class="modal-content">
@@ -1351,6 +1517,43 @@ document.addEventListener('DOMContentLoaded', function() {
       sizzleSound.pause();
     });
   });
+});
+
+// for reserve
+// Reservation Form Handling
+document.getElementById('reservation-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Simulate form submission (for school project)
+  const reservationData = {
+    name: document.getElementById('reservation-name').value,
+    email: document.getElementById('reservation-email').value,
+    date: document.getElementById('reservation-date').value,
+    time: document.getElementById('reservation-time').value,
+    guests: document.getElementById('reservation-guests').value
+  };
+  
+  console.log("Reservation Submitted:", reservationData); // For testing
+  
+  // Show confirmation message
+  document.getElementById('reservation-form').style.display = 'none';
+  document.getElementById('reservation-confirmation').style.display = 'block';
+});
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Simulate form submission (for school project)
+  const contactData = {
+    name: document.getElementById('contact-name').value,
+    email: document.getElementById('contact-email').value,
+    message: document.getElementById('contact-message').value
+  };
+  
+  console.log("Contact Form Submitted:", contactData); // For testing
+  
+  // Show confirmation message
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('contact-confirmation').style.display = 'block';
 });
   </script>
 </body>
