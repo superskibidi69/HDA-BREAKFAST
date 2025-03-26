@@ -917,6 +917,9 @@ nav ul li a:hover {
     <button id="close-alert" style="margin-top: 15px; padding: 8px 20px; background: var(--price-bg); color: var(--price-text); border: none; border-radius: 5px; cursor: pointer;">OK</button>
   </div>
   <div id="alert-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99998;"></div>
+  <audio id="sizzle-sound" preload="auto" loop>
+    <source src="sizzle.mp3" type="audio/mpeg">
+  </audio>
   <script>
     // Menu item data with nutrition facts
     const menuItems = {
@@ -1312,6 +1315,18 @@ closeAlert.addEventListener('click', () => {
       }, delay);
     });
   }, 3500);
+});
+document.addEventListener('DOMContentLoaded', function() {
+  const sizzleSound = document.getElementById('sizzle-sound');
+  const menuItems = document.querySelectorAll('.menu-item');
+  
+  menuItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      // Reset audio to start and play
+      sizzleSound.currentTime = 0;
+      sizzleSound.play().catch(e => console.log("Audio play failed:", e));
+    });
+  });
 });
   </script>
 </body>
