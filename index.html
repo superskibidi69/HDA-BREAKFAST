@@ -125,6 +125,16 @@
   0% { transform: translate(0, 0) rotate(0deg); }
   100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); }
 }
+@keyframes foodFightReset {
+  0% { 
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+    animation-timing-function: ease-out;
+  }
+  100% { 
+    transform: translate(0, 0) rotate(0deg);
+    animation-timing-function: ease-in;
+  }
+}
 
 html {
   overflow-x: hidden;
@@ -746,8 +756,8 @@ nav ul li a:hover {
   <i class="fas fa-search"></i>
 </div>
 <div class="food-fight-container">
-    <button id="food-fight-btn" aria-label="Start food fight">
-      <i class="fas fa-utensils"></i> Food Fight!
+    <button id="food-fight-btn" aria-label="Order Online">
+      <i class="fas fa-utensils"></i> Order online
     </button>
   </div>
    <!-- Entrees -->
@@ -1242,25 +1252,31 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
   
   // Scramble items
   items.forEach(item => {
-    const tx = (Math.random() * 200 - 100) + 'px'; // -100px to 100px
+    const tx = (Math.random() * 200 - 106) + 'px'; // -106px to 106px
     const ty = (Math.random() * 200 - 100) + 'px';
-    const rot = (Math.random() * 60 - 30) + 'deg'; // -30deg to 30deg
+    const rot = (Math.random() * 60 - 40) + 'deg'; // -40deg to 40deg
     
     item.style.setProperty('--tx', tx);
     item.style.setProperty('--ty', ty);
     item.style.setProperty('--rot', rot);
-    item.style.animation = 'foodFight 0.5s ease-out forwards';
+    item.style.animation = 'foodFight 0.64s ease-out forwards';
     
     // Play throw sound if available
     document.getElementById('sizzle')?.play();
   });
   
-  // Reset after 1.5 seconds
+  // Reset after 3.5 seconds with smooth slide back
   setTimeout(() => {
     items.forEach(item => {
-      item.style.animation = '';
+      item.style.animation = 'foodFightReset 0.8s ease-in-out forwards';
+      
+      // Remove animation after it completes to allow future animations
+      item.addEventListener('animationend', function handler() {
+        item.style.animation = '';
+        item.removeEventListener('animationend', handler);
+      });
     });
-  }, 1500);
+  }, 3500);
 });
   </script>
 </body>
