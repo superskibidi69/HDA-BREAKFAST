@@ -1130,8 +1130,7 @@ nav ul li a:hover {
       
       detectColorScheme();
     });
-
-      // Menu Search Functionality
+// Menu Search Functionality (Name Only)
 const menuSearch = document.getElementById('menu-search');
 if (menuSearch) {
   menuSearch.addEventListener('input', function() {
@@ -1139,14 +1138,14 @@ if (menuSearch) {
     const allMenuItems = document.querySelectorAll('.menu-item');
     const allMenuSections = document.querySelectorAll('.menu-section');
 
-    // Show all items if search is empty
+    // Show all if empty
     if (searchTerm === '') {
       allMenuItems.forEach(item => item.classList.remove('hidden'));
       allMenuSections.forEach(section => section.classList.remove('hidden'));
+      document.getElementById('no-results-message')?.remove();
       return;
     }
 
-    // Filter items
     let hasVisibleItems = false;
     
     allMenuSections.forEach(section => {
@@ -1155,9 +1154,8 @@ if (menuSearch) {
       
       sectionItems.forEach(item => {
         const itemName = item.querySelector('h3').textContent.toLowerCase();
-        const itemDesc = item.querySelector('p').textContent.toLowerCase();
         
-        if (itemName.includes(searchTerm) || itemDesc.includes(searchTerm)) {
+        if (itemName.includes(searchTerm)) { // Only check name now
           item.classList.remove('hidden');
           sectionHasVisibleItems = true;
         } else {
@@ -1173,15 +1171,16 @@ if (menuSearch) {
       }
     });
 
-    // Optional: Show message if no results
+    // No results message
     const noResultsMsg = document.getElementById('no-results-message');
     if (!hasVisibleItems) {
       if (!noResultsMsg) {
         const msg = document.createElement('p');
         msg.id = 'no-results-message';
-        msg.textContent = 'No items found. Try another search!';
+        msg.textContent = 'No dishes found. Try another name!';
         msg.style.textAlign = 'center';
-        msg.style.marginTop = '20px';
+        msg.style.margin = '40px 0';
+        msg.style.color = 'var(--text-secondary)';
         document.querySelector('.menu').appendChild(msg);
       }
     } else if (noResultsMsg) {
