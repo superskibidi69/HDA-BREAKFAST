@@ -912,7 +912,11 @@ nav ul li a:hover {
       </div>
     </div>
   </div>
-
+  <div id="custom-alert" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 99999; text-align: center;">
+    <p style="margin: 0; font-size: 18px; color: var(--text-primary);">Haha, get pranked!</p>
+    <button id="close-alert" style="margin-top: 15px; padding: 8px 20px; background: var(--price-bg); color: var(--price-text); border: none; border-radius: 5px; cursor: pointer;">OK</button>
+  </div>
+  <div id="alert-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99998;"></div>
   <script>
     // Menu item data with nutrition facts
     const menuItems = {
@@ -1292,7 +1296,17 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
           
           // Show alert when last item finishes
           if (index === items.length - 1) {
-            alert("Haha, get pranked!");
+            const customAlert = document.getElementById('custom-alert');
+const alertOverlay = document.getElementById('alert-overlay');
+const closeAlert = document.getElementById('close-alert');
+
+customAlert.style.display = 'block';
+alertOverlay.style.display = 'block';
+
+closeAlert.addEventListener('click', () => {
+  customAlert.style.display = 'none';
+  alertOverlay.style.display = 'none';
+});
           }
         }, 800);
       }, delay);
