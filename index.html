@@ -527,6 +527,50 @@ nav ul li a:hover {
   padding-bottom: 5px;
 }
 
+      /* Menu Search Bar */
+.menu-search-container {
+  position: sticky;
+  top: 100px; /* Adjust based on your header height */
+  z-index: 100;
+  margin: 0 auto 40px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border-radius: 30px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#menu-search {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  padding: 8px;
+  outline: none;
+}
+
+.menu-search-container i {
+  color: var(--text-secondary);
+  margin-left: 10px;
+}
+      .menu-search-container {
+  top: 80px; /* Header height */
+          animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Hide menu sections when filtering */
+.menu-section.hidden {
+  display: none;
+}
+
+.menu-item.hidden {
+  display: none;
+}
+
 .nutrition-facts {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -663,6 +707,10 @@ nav ul li a:hover {
   </section>
   <section class="menu" id="menu">
     <h2 class="animate-on-scroll">Our Menu</h2>
+      <div class="menu-search-container">
+  <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
+  <i class="fas fa-search"></i>
+</div>
    <!-- Entrees -->
     <div class="menu-section">
       <h3 class="animate-on-scroll">Entrees</h3>
@@ -1082,6 +1130,65 @@ nav ul li a:hover {
       
       detectColorScheme();
     });
+
+      // Menu Search Functionality
+const menuSearch = document.getElementById('menu-search');
+if (menuSearch) {
+  menuSearch.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const allMenuItems = document.querySelectorAll('.menu-item');
+    const allMenuSections = document.querySelectorAll('.menu-section');
+
+    // Show all items if search is empty
+    if (searchTerm === '') {
+      allMenuItems.forEach(item => item.classList.remove('hidden'));
+      allMenuSections.forEach(section => section.classList.remove('hidden'));
+      return;
+    }
+
+    // Filter items
+    let hasVisibleItems = false;
+    
+    allMenuSections.forEach(section => {
+      const sectionItems = section.querySelectorAll('.menu-item');
+      let sectionHasVisibleItems = false;
+      
+      sectionItems.forEach(item => {
+        const itemName = item.querySelector('h3').textContent.toLowerCase();
+        const itemDesc = item.querySelector('p').textContent.toLowerCase();
+        
+        if (itemName.includes(searchTerm) || itemDesc.includes(searchTerm)) {
+          item.classList.remove('hidden');
+          sectionHasVisibleItems = true;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+      
+      if (sectionHasVisibleItems) {
+        section.classList.remove('hidden');
+        hasVisibleItems = true;
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+
+    // Optional: Show message if no results
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (!hasVisibleItems) {
+      if (!noResultsMsg) {
+        const msg = document.createElement('p');
+        msg.id = 'no-results-message';
+        msg.textContent = 'No items found. Try another search!';
+        msg.style.textAlign = 'center';
+        msg.style.marginTop = '20px';
+        document.querySelector('.menu').appendChild(msg);
+      }
+    } else if (noResultsMsg) {
+      noResultsMsg.remove();
+    }
+  });
+}
   </script>
 </body>
 </html>
