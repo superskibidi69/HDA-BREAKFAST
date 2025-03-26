@@ -575,6 +575,11 @@ nav ul li a:hover {
   padding-bottom: 5px;
 }
 
+.menu-item[data-item="bacon"]:hover,
+.menu-item[data-item="oil-stick"]:hover,
+.menu-item[data-item="fry-dumpblings-jam"]:hover {
+  box-shadow: 0 0 15px rgba(28, 255, 28, 0.5);
+}
       /* Menu Search Bar */
 .menu-search-container {
   position: sticky;
@@ -1318,13 +1323,21 @@ closeAlert.addEventListener('click', () => {
 });
 document.addEventListener('DOMContentLoaded', function() {
   const sizzleSound = document.getElementById('sizzle-sound');
-  const menuItems = document.querySelectorAll('.menu-item');
-  
-  menuItems.forEach(item => {
+  // Only target these specific menu items
+  const sizzleItems = document.querySelectorAll(
+    '.menu-item[data-item="bacon"], ' +
+    '.menu-item[data-item="oil-stick"], ' +
+    '.menu-item[data-item="fry-dumpblings-jam"]'
+  );
+
+  sizzleItems.forEach(item => {
     item.addEventListener('mouseenter', () => {
-      // Reset audio to start and play
       sizzleSound.currentTime = 0;
       sizzleSound.play().catch(e => console.log("Audio play failed:", e));
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      sizzleSound.pause();
     });
   });
 });
