@@ -114,7 +114,7 @@
   margin: 20px 0;
 }
 
-/* Contact Form Styles */
+/* Enhanced Contact Form Styles */
 .contact {
   padding: 100px 20px;
   text-align: center;
@@ -122,44 +122,115 @@
   backdrop-filter: blur(10px);
   margin: 0 20px 50px;
   border-radius: 20px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
 }
 
-.contact h2 {
-  font-size: 48px;
-  margin-bottom: 40px;
-  color: var(--text-accent);
+.contact.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 #contact-form {
   max-width: 500px;
   margin: 0 auto;
   text-align: left;
+  transition: all 0.5s ease;
 }
 
-#contact-form textarea {
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-accent);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--text-secondary);
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid transparent;
   background: var(--bg-card);
   color: var(--text-primary);
-  resize: vertical;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 3px rgba(142, 255, 97, 0.2);
+  outline: none;
+}
+
+.form-group.active label,
+.form-group.active input,
+.form-group.active textarea {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 #submit-contact {
   background: var(--price-bg);
   color: var(--price-text);
   border: none;
-  padding: 12px 25px;
+  padding: 14px 30px;
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: all 0.3s;
   margin-top: 10px;
+  font-size: 16px;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.4s ease 0.3s;
+}
+
+#submit-contact.visible {
+  transform: scale(1);
+  opacity: 1;
 }
 
 #submit-contact:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) !important;
+  box-shadow: 0 5px 15px rgba(142, 255, 97, 0.3);
+}
+
+#contact-confirmation {
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
+}
+
+#contact-confirmation.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#contact-confirmation h3 {
+  color: var(--text-accent);
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+#contact-confirmation p {
+  font-size: 18px;
 }
 #food-fight-btn {
   background: var(--price-bg);
@@ -1436,27 +1507,68 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent actual form submission
+// Enhanced Contact Form Animation
+document.addEventListener('DOMContentLoaded', function() {
+  const contactSection = document.querySelector('.contact');
+  const contactForm = document.getElementById('contact-form');
   
-  // Get form values only when submitted
-  const contactData = {
-    name: document.getElementById('contact-name').value,
-    email: document.getElementById('contact-email').value,
-    message: document.getElementById('contact-message').value
-  };
-  
-  console.log("Contact Form Submitted:", contactData); // For testing
-  
-  // Clear form fields
-  document.getElementById('contact-name').value = '';
-  document.getElementById('contact-email').value = '';
-  document.getElementById('contact-message').value = '';
-  
-  // Show confirmation message
-  document.getElementById('contact-form').style.display = 'none';
-  document.getElementById('contact-confirmation').style.display = 'block';
-})
+  if (contactSection && contactForm) {
+    // Animate contact section into view
+    setTimeout(() => {
+      contactSection.classList.add('visible');
+      
+      // Animate form elements sequentially
+      const formGroups = document.querySelectorAll('.form-group');
+      formGroups.forEach((group, index) => {
+        setTimeout(() => {
+          group.classList.add('active');
+        }, 150 * index);
+      });
+      
+      // Animate submit button last
+      setTimeout(() => {
+        const submitBtn = document.getElementById('submit-contact');
+        if (submitBtn) submitBtn.classList.add('visible');
+      }, 150 * formGroups.length);
+    }, 300);
+    
+    // Form submission handler
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const contactData = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        message: document.getElementById('contact-message').value
+      };
+      
+      console.log("Contact Form Submitted:", contactData);
+      
+      // Hide form with animation
+      contactForm.style.opacity = '0';
+      contactForm.style.transform = 'translateY(-20px)';
+      
+      // Show confirmation with animation
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        const confirmation = document.getElementById('contact-confirmation');
+        confirmation.classList.add('visible');
+        
+        // Optional: Reset form after 5 seconds
+        setTimeout(() => {
+          confirmation.classList.remove('visible');
+          contactForm.reset();
+          contactForm.style.display = 'block';
+          setTimeout(() => {
+            contactForm.style.opacity = '1';
+            contactForm.style.transform = 'translateY(0)';
+          }, 50);
+        }, 5000);
+      }, 300);
+    });
+  }
+});
   </script>
 </body>
 </html>
