@@ -75,7 +75,14 @@
   .menu-toggle span {
     color: var(--text-primary);
   }
-  
+  .animate-on-scroll {
+  transition: opacity 0.6s ease-out;
+  opacity: 0;
+}
+
+.animate-on-scroll.fadeIn {
+  opacity: 1;
+}
   nav ul {
     background: rgba(255, 255, 255, 0.9) !important;
   }
@@ -89,7 +96,13 @@
   .close-modal {
     color: #333;
   }
-  
+  @keyframes wobble {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.menu-item:hover img {
+  animation: wobble 0.5s infinite;
+}
   .nutrition-fact {
     border-bottom: 1px solid #eee;
   }
