@@ -33,8 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
- <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
-    <style>
+  <style>
 :root {
   color-scheme: light dark;
   --text-primary: #fff;
@@ -51,18 +50,7 @@
   --github-color: white;
   --github-hover: #8eff61;
 }
-     .hero span{
-  font-size: 16px;
-  margin-bottom: 40px;
-  user-select: none;
-  overflow: hidden;
-  color: #d1ffdd;
-  opacity: 0;
-     }
-.leWaterWave span { animation: leWaterWave .2s linear infinite }
-@keyframes leWaterWave {
-    50% { transform: skewY(1deg) skewX(-1deg) scale(1.06) }
-}
+
 @media (prefers-color-scheme: light) {
   :root {
     --text-primary: #222;
@@ -432,13 +420,14 @@ nav ul li a:hover {
   animation: fadeInUpBig 1.5s ease-out 1s forwards;
 }
 
-.hero span {
+.hero b {
   font-size: 16px;
   margin-bottom: 40px;
   user-select: none;
   overflow: hidden;
    color: #d1ffdd;
   opacity: 0;
+  animation: rotateInUpLeft 1.5s forwards, rotateOutUpRight 1.5s 4s forwards, hideElement 0s 5.5s forwards;
 }
 
 .hours-status {
@@ -888,7 +877,7 @@ nav ul li a:hover {
       <h1 class="animate__animated animate__fadeInDownBig">Welcome to HDA Breakfast</h1>
       <div id="hours-status" class="hours-status"></div>
       <p class="animate__animated animate__fadeInUpBig animate__delay-1s">We make your food, so you can be a couch potato and not do it</p>
-      <b class="leWaterWave random">Note: this is not a real restaurant, and only for a school project.</b>
+      <b>Note: this is not a real restaurant, and only for a school project.</b>
     </div>
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
