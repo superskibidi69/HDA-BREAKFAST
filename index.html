@@ -1436,7 +1436,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-  // cintact
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevent actual form submission
+  
+  // Get form values only when submitted
   const contactData = {
     name: document.getElementById('contact-name').value,
     email: document.getElementById('contact-email').value,
@@ -1445,9 +1448,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   console.log("Contact Form Submitted:", contactData); // For testing
   
+  // Clear form fields
+  document.getElementById('contact-name').value = '';
+  document.getElementById('contact-email').value = '';
+  document.getElementById('contact-message').value = '';
+  
   // Show confirmation message
   document.getElementById('contact-form').style.display = 'none';
   document.getElementById('contact-confirmation').style.display = 'block';
+})
   </script>
 </body>
 </html>
