@@ -872,42 +872,6 @@ nav ul li a:hover {
     </a>
   </section>
   <div class="transition"></div>
-  <section class="reservation" id="reservation">
-    <h2 class="animate-on-scroll">Make a Reservation</h2>
-    <form id="reservation-form" class="animate-on-scroll">
-      <div class="form-group">
-        <label for="reservation-name">Name</label>
-        <input type="text" id="reservation-name" required placeholder="John Doe">
-      </div>
-      <div class="form-group">
-        <label for="reservation-email">Email</label>
-        <input type="email" id="reservation-email" required placeholder="example@exmaple.com">
-      </div>
-      <div class="form-group">
-        <label for="reservation-date">Date</label>
-        <input type="date" id="reservation-date" required>
-      </div>
-      <div class="form-group">
-        <label for="reservation-time">Time</label>
-        <input type="time" id="reservation-time" min="06:30" max="10:00" required>
-      </div>
-      <div class="form-group">
-        <label for="reservation-guests">Number of Guests</label>
-        <select id="reservation-guests" required>
-          <option value="1">1 Person</option>
-          <option value="2">2 People</option>
-          <option value="3">3 People</option>
-          <option value="4">4 People</option>
-          <option value="5+">5+ People</option>
-        </select>
-      </div>
-      <button type="submit" id="submit-reservation">Book Table</button>
-    </form>
-    <div id="reservation-confirmation" style="display: none;">
-      <h3>Thank you! Your reservation has been submitted.</h3>
-      <p>We'll see you soon at HDA Breakfast!</p>
-    </div>
-  </section>
   <div class="transition"></div>
   <section class="our-story" id="our-story">
     <h2 class="animate-on-scroll">Our Story</h2>
@@ -1233,25 +1197,20 @@ nav ul li a:hover {
       // Update every minute in case the page stays open
       setInterval(updateHoursStatus, 60000);
 
-      document.addEventListener('DOMContentLoaded', function() {
-  // Configure the intersection observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-      }
-    });
-  }, {
-    threshold: 0.1 // Trigger when 10% of element is visible
-  });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeIn', 'fadeIn');
+            entry.target.style.opacity = 1;
+          }
+        });
+      }, {
+        threshold: 0.15
+      });
 
-  // Set initial state and observe elements
-  document.querySelectorAll('#reservation, #contact, .animate-on-scroll').forEach(element => {
-    element.style.opacity = 0;
-    element.style.transition = 'opacity 0.8s ease-out';
-    observer.observe(element);
-  });
-});
+      document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.observe(element);
+      });
 
       // Smooth scrolling for navigation links
       document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
