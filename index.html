@@ -1233,20 +1233,25 @@ nav ul li a:hover {
       // Update every minute in case the page stays open
       setInterval(updateHoursStatus, 60000);
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate__animated', 'animate__fadeIn', 'fadeIn');
-            entry.target.style.opacity = 1;
-          }
-        });
-      }, {
-        threshold: 0.15
-      });
+      document.addEventListener('DOMContentLoaded', function() {
+  // Configure the intersection observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+      }
+    });
+  }, {
+    threshold: 0.1 // Trigger when 10% of element is visible
+  });
 
-      document.querySelectorAll('.animate-on-scroll').forEach(element => {
-        observer.observe(element);
-      });
+  // Set initial state and observe elements
+  document.querySelectorAll('#reservation, #contact, .animate-on-scroll').forEach(element => {
+    element.style.opacity = 0;
+    element.style.transition = 'opacity 0.8s ease-out';
+    observer.observe(element);
+  });
+});
 
       // Smooth scrolling for navigation links
       document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
