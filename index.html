@@ -1223,7 +1223,7 @@ nav ul li a:hover {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate__animated', 'animate__fadeIn');
+            entry.target.classList.add('animate__animated', 'animate__fadeIn', 'fadeIn');
             entry.target.style.opacity = 1;
           }
         });
