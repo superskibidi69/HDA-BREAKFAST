@@ -1469,7 +1469,7 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
   setTimeout(() => {
     items.forEach((item, index) => {
       // Stagger the animations slightly
-      const delay = index * 50; // 50ms between each item
+      const delay = index * 80; // 80ms between each item
       
       setTimeout(() => {
         item.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
@@ -1518,8 +1518,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
-// for reserve
 // Reservation Form Handling
 document.getElementById('reservation-form').addEventListener('submit', function(e) {
   e.preventDefault();
