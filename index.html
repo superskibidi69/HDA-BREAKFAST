@@ -912,12 +912,6 @@ nav ul li a:hover {
           <h3 class="animate-on-scroll">Bacon</h3>
           <p class="animate-on-scroll">This bacon is as tasty as the finest cuisine. With the perfect balance of the best oil in the world and meat, this bacon will dance around on your tastebuds.</p>
         </div>
-          <div class="menu-item animate-on-scroll" data-item="cross">
-              <div class="price-sticker">$3.99</div>
-              <img src="https://hda-breakfast.vercel.app/croissant.jpg" alt="croissant">
-              <h3 class="animate-on-scroll">Croissant</h3>
-              <p class="animate-on-scroll">Our croissant is as good as gold, with a flaky outer shell that crumbles like toast with each bite. Its crisp shell hides soft, buttery layers that melt in your mouth.</p>
-            </div>
         <div class="menu-item animate-on-scroll" data-item="french-toast">
           <div class="price-sticker">$7.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0751.jpeg" alt="French Toast">
@@ -938,7 +932,7 @@ nav ul li a:hover {
           </div>
           <div class="menu-item animate-on-scroll" data-item="pancakes">
           <div class="price-sticker">$5.99</div>
-          <img src="IMG_0755.jpeg" alt="Pancakes">
+          <img src="https://hda-breakfast.vercel.app/IMG_0755.jpeg" alt="Pancakes">
           <h3 class="animate-on-scroll">Pancakes</h3>
           <p class="animate-on-scroll">Best pancakes you will ever eat! Our pancakes are always freshly made with homemade syrup and whipped cream! Our pancakes will make you cry tears of joy!</p>
         </div>
@@ -1009,6 +1003,18 @@ nav ul li a:hover {
     <div class="menu-section">
       <h3 class="animate-on-scroll">Sides</h3>
       <div class="menu-items">
+        <div class="menu-item animate-on-scroll" data-item="cinnamon">
+            <div class="price-sticker">$4.59</div>
+            <img src="https://hda-breakfast.vercel.app/cinnamon.png" alt="Cinnamon Roll">
+            <h3 class="animate-on-scroll">Cinnamon Roll</h3>
+            <p class="animate-on-scroll">With a unique flavor you won't find anywhere else, this cinnamon roll has all the most delicious spices in it. The texture starts out crunchy like a chip, and then it reveals a soft, creamy center.</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="cross">
+            <div class="price-sticker">$3.99</div>
+            <img src="https://hda-breakfast.vercel.app/croissant.jpg" alt="croissant">
+            <h3 class="animate-on-scroll">Croissant</h3>
+            <p class="animate-on-scroll">Our croissant is as good as gold, with a flaky outer shell that crumbles like toast with each bite. Its crisp shell hides soft, buttery layers that melt in your mouth.</p>
+          </div>
         <div class="menu-item animate-on-scroll" data-item="fruit-bowl">
           <div class="price-sticker">$3.99</div>
           <img src="https://hda-breakfast.vercel.app/IMG_0756.jpeg" alt="Fruit bowl">
@@ -1024,13 +1030,13 @@ nav ul li a:hover {
         <div class="menu-items">
             <div class="menu-item animate-on-scroll" data-item="fry-dumpblings-jam">
             <div class="price-sticker">$2.99</div>
-            <img src="Jamaican-Fried-Dumpling_Featured-Image.jpg" alt="Youtiao (Chinese donut)">
+            <img src="https://hda-breakfast.vercel.app/Jamaican-Fried-Dumpling_Featured-Image.jpg" alt="Jamaican Fried Dumplings">
             <h3 class="animate-on-scroll">Jamaican Fried Dumplings</h3>
             <p class="animate-on-scroll">Jamaican fried dumplings are golden little pillows of happiness, crispy on the outside and soft like a warm campfire on the inside. With a buttery flavor that melts in your mouth, this dumpling's flavors will dance on your tastebuds. Yum!</p>
           </div>
           <div class="menu-item animate-on-scroll" data-item="oil-stick">
             <div class="price-sticker">$4.99</div>
-            <img src="Youtiao.jpg" alt="Youtiao (Chinese donut)">
+            <img src="https://hda-breakfast.vercel.app/Youtiao.jpg" alt="Youtiao (Chinese donut)">
             <h3 class="animate-on-scroll">Youtiao (Chinese donut)</h3>
             <p class="animate-on-scroll">Our Youtiao, or Chinese donut, is the tastiest donut ever. With freshly rolled dough fried in oil, this is the perfect dish when paired with any type of milk.</p>
           </div>
@@ -1084,7 +1090,7 @@ nav ul li a:hover {
   </div>
   <div id="alert-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99998;"></div>
   <audio id="sizzle-sound" preload="auto" loop>
-    <source src="sizzle.mp3" type="audio/mpeg">
+    <source src="https://hda-breakfast.vercel.app/sizzle.mp3" type="audio/mpeg">
   </audio>
   <script>
     // Menu item data with nutrition facts
@@ -1171,13 +1177,18 @@ nav ul li a:hover {
       },
       "cross": {
         "calories": 204,
-        "servingSize": "1 piece",
+        "servingSize": "1 bun",
         "time": "10 minutes"
       },
       "fry-dumpblings-jam":{
         "calories": 158,
         "servingSize": "1 piece",
         "time": "15 minutes"
+      },
+      "cinnamon":{
+        "calories": 243,
+        "servingSize": "1 roll",
+        "time": "18 minutes"
       },
     };
 
@@ -1471,16 +1482,16 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
           // Show alert when last item finishes
           if (index === items.length - 1) {
             const customAlert = document.getElementById('custom-alert');
-const alertOverlay = document.getElementById('alert-overlay');
-const closeAlert = document.getElementById('close-alert');
+        const alertOverlay = document.getElementById('alert-overlay');
+        const closeAlert = document.getElementById('close-alert');
 
-customAlert.style.display = 'block';
-alertOverlay.style.display = 'block';
+        customAlert.style.display = 'block';
+        alertOverlay.style.display = 'block';
 
-closeAlert.addEventListener('click', () => {
-  customAlert.style.display = 'none';
-  alertOverlay.style.display = 'none';
-});
+        closeAlert.addEventListener('click', () => {
+         customAlert.style.display = 'none';
+          alertOverlay.style.display = 'none';
+        }  );
           }
         }, 800);
       }, delay);
