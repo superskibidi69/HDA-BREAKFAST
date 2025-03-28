@@ -29,7 +29,7 @@
   <meta property="og:url" content="https://hda-breakfast.vercel.app/">
   <link rel="canonical" href="https://hda-breakfast.vercel.app/">
   <title>HDA Breakfast</title>
-  <link rel="icon" href="android-chrome-512x512.png">
+  <link rel="icon" href="https://hda-breakfast.vercel.app/android-chrome-512x512.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -752,7 +752,39 @@ nav ul li a:hover {
 .menu-section.hidden {
   display: none;
 }
+.order-notification {
+  position: absolute;
+  top: 120px; /* Below the menu title */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff; /* High contrast white text */
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 10;
+  animation: floatUp 3s ease-out forwards;
+}
 
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+}
 .menu-item.hidden {
   display: none;
 }
@@ -794,6 +826,15 @@ nav ul li a:hover {
     display: block;
   }
 
+
+/* For light mode */
+@media (prefers-color-scheme: light) {
+  .order-notification {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+}
   nav ul {
     display: none;
     flex-direction: column;
@@ -894,6 +935,7 @@ nav ul li a:hover {
   </section>
   <section class="menu" id="menu">
     <h2 class="animate-on-scroll">Our Menu</h2>
+    <div id="order-notification" class="order-notification"></div>
       <div class="menu-search-container">
   <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
   <i class="fas fa-search"></i>
@@ -1109,106 +1151,127 @@ nav ul li a:hover {
     // Menu item data with nutrition facts
     const menuItems = {
       "bacon": {
+        "displayName": "bacon",
         "calories": 130,
         "servingSize": "3 strips",
         "time": "12 minutes"
       },
       "french-toast": {
+        "displayName": "french toast",
         "calories": 190,
         "servingSize": "3 slices",
         "time": "14 minutes"
       },
       "hash-browns": {
+        "displayName": "hash browns",
         "calories": 165,
         "servingSize": "4 pieces",
         "time": "9 minutes"
       },
       "sunny-side-up": {
+        "displayName": "a sunny side up egg",
         "calories": 70,
         "servingSize": "1 egg",
         "time": "3 minutes"
       },
       "waffles": {
+        "displayName": "waffles",
         "calories": 218,
         "servingSize": "3 waffles",
         "time": "7 minutes"
       },
       "burrito": {
+        "displayName": "a burrito",
         "calories": 234,
         "servingSize": "1 roll",
         "time": "7 minutes"
       },
       "pancakes": {
+        "displayName": "some pancakes",
         "calories": 250,
         "servingSize": "3 pancakes",
         "time": "9 minutes"
       },
       "yogurt": {
+        "displayName": "yogurt",
         "calories": 150,
         "servingSize": "1 cup",
         "time": "6 minutes"
       },
       "chocolate-milk": {
+        "displayName": "a cup of chocolate milk",
         "calories": 197,
         "servingSize": "1 cup",
         "time": "3 minutes"
       },
        "milk": {
+        "displayName": "a cup of milk",
         "calories": 67,
         "servingSize": "1 cup",
         "time": "2 minutes"
       },
         "sausage": {
+        "displayName": "sausages",
         "calories": 125,
         "servingSize": "3 links",
         "time": "3 minutes"
       },
         "smoothie": {
+            "displayName": "a fruit smoothie",
          "calories": 75,
          "servingSize": "1 cup",
          "time": "2 minutes"
       },
       "icelandic-water": {
+        "displayName": "bottled icelandic water",
         "calories": 0,
         "servingSize": "1 bottle",
         "time": "30 seconds"
       },
       "orange-juice": {
+        "displayName": "fresh orange juice",
         "calories": 90,
         "servingSize": "1 cup",
         "time": "5 minutes"
       },
       "coffee": {
+        "displayName": "coffe",
         "calories": 3,
         "servingSize": "1 cup",
          "time": "4 minutes"
       },
       "fruit-bowl": {
+        "displayName": "a small fruit bowl",
         "calories": 120,
         "servingSize": "1 bowl",
         "time": "3 minutes"
       },
       "muffin": {
+        "displayName": "a muffin",
         "calories": 186,
         "servingSize": "1 piece",
         "time": "8 minutes"
       },
       "oil-stick": {
+        "displayName": "a few Youtiao (Chinese Doughnut)",
         "calories": 180,
         "servingSize": "2 sticks",
         "time": "9 minutes"
       },
       "cross": {
+        "displayName": "a butter croissant",
         "calories": 204,
         "servingSize": "1 bun",
         "time": "10 minutes"
       },
       "fry-dumpblings-jam":{
+        "displayName": "a Jamaican fried dumpling",
         "calories": 158,
         "servingSize": "1 piece",
         "time": "15 minutes"
       },
       "cinnamon":{
+        "displayName": "a cinnamon roll",
         "calories": 243,
         "servingSize": "1 roll",
         "time": "18 minutes"
@@ -1702,6 +1765,44 @@ function showCustomAlert(message) {
 document.getElementById('close-alert').addEventListener('click', function() {
   document.getElementById('custom-alert').style.display = 'none';
   document.getElementById('alert-overlay').style.display = 'none';
+});
+
+function showRandomOrder() {
+  const notification = document.getElementById('order-notification');
+  const itemKeys = Object.keys(menuItems);
+  const randomKey = itemKeys[Math.floor(Math.random() * itemKeys.length)];
+  const itemName = menuItems[randomKey].displayName;
+  
+  // Reset animation by removing and re-adding the class
+  notification.classList.remove('order-notification');
+  void notification.offsetWidth; // Trigger reflow
+  notification.classList.add('order-notification');
+  
+  // Set new content
+  notification.textContent = `Someone just ordered ${itemName}!`;
+  
+  // Force reflow and restart animation
+  notification.style.animation = 'none';
+  void notification.offsetWidth;
+  notification.style.animation = 'floatUp 3s ease-out forwards';
+}
+// Start notifications
+function startOrderNotifications() {
+  // Show first notification immediately
+  showRandomOrder();
+  
+  // Set recurring interval (5-10 seconds)
+  const notificationInterval = setInterval(() => {
+    showRandomOrder();
+  }, Math.random() * 5000 + 5000);
+  
+  // Optional: Return the interval ID if you need to clear it later
+  return notificationInterval;
+}
+
+// Start the notifications when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  startOrderNotifications();
 });
   </script>
 </body>
