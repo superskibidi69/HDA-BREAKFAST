@@ -1455,7 +1455,7 @@ if (menuSearch) {
     }
   });
 }
-// Updated Food Fight Functionality
+      // food right
 document.getElementById('food-fight-btn').addEventListener('click', () => {
   const items = document.querySelectorAll('.menu-item');
   
@@ -1464,19 +1464,23 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
     item.style.animation = 'none';
     item.style.transform = '';
     void item.offsetHeight; // Trigger reflow
+    
+    // Reset hover effects by removing and re-adding the class
+    item.classList.remove('menu-item');
+    void item.offsetHeight;
+    item.classList.add('menu-item');
   });
   
   // Scramble items
   items.forEach((item, index) => {
-    const tx = (Math.random() * 200 - 106) + 'px'; // -106px to 106px
+    const tx = (Math.random() * 200 - 106) + 'px';
     const ty = (Math.random() * 200 - 100) + 'px';
-    const rot = (Math.random() * 60 - 40) + 'deg'; // -40deg to 40deg
+    const rot = (Math.random() * 60 - 40) + 'deg';
     
     item.style.setProperty('--tx', tx);
     item.style.setProperty('--ty', ty);
     item.style.setProperty('--rot', rot);
     
-    // Use transform directly for better performance
     item.style.transform = `translate(${tx}, ${ty}) rotate(${rot})`;
     item.style.transition = 'transform 0.64s ease-out';
   });
@@ -1484,30 +1488,17 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
   // Reset with staggered timing and bounce effect
   setTimeout(() => {
     items.forEach((item, index) => {
-      // Stagger the animations slightly
-      const delay = index * 80; // 80ms between each item
+      const delay = index * 80;
       
       setTimeout(() => {
         item.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
         item.style.transform = 'translate(0, 0) rotate(0deg)';
         
-        // After animation completes
         setTimeout(() => {
           item.style.transition = '';
           
-          // Show alert when last item finishes
           if (index === items.length - 1) {
-            const customAlert = document.getElementById('custom-alert');
-        const alertOverlay = document.getElementById('alert-overlay');
-        const closeAlert = document.getElementById('close-alert');
-
-        customAlert.style.display = 'block';
-        alertOverlay.style.display = 'block';
-
-        closeAlert.addEventListener('click', () => {
-         customAlert.style.display = 'none';
-          alertOverlay.style.display = 'none';
-        }  );
+            showCustomAlert('Haha, get pranked!');
           }
         }, 800);
       }, delay);
@@ -1596,33 +1587,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-let isBaconMode = false;
+      /* bacon */
+      let isBaconMode = false;
 const originalImages = {};
 
 document.querySelector('.logo').addEventListener('click', function() {
   const menuItems = document.querySelectorAll('.menu-item');
-  const customAlert = document.getElementById('custom-alert');
-  const alertOverlay = document.getElementById('alert-overlay');
-  const alertMessage = customAlert.querySelector('p');
-
+  
   // Immediately change images before animation
   if (!isBaconMode) {
     menuItems.forEach(item => {
       const img = item.querySelector('img');
-      // Store original image only if not already stored
       if (!originalImages[item.dataset.item]) {
         originalImages[item.dataset.item] = {
           src: img.src,
           alt: img.alt
         };
       }
-      // Immediately change to bacon
       img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
       img.alt = 'Bacon';
     });
-    alertMessage.textContent = 'Everything is bacon now! 🥓';
+    showCustomAlert('Everything is bacon now! 🥓');
   } else {
-    // Restore original images
     menuItems.forEach(item => {
       const img = item.querySelector('img');
       const original = originalImages[item.dataset.item];
@@ -1631,7 +1617,7 @@ document.querySelector('.logo').addEventListener('click', function() {
         img.alt = original.alt;
       }
     });
-    alertMessage.textContent = 'Images restored!';
+    showCustomAlert('Images restored!');
   }
 
   // Apply animation to all images
@@ -1639,19 +1625,40 @@ document.querySelector('.logo').addEventListener('click', function() {
     const img = item.querySelector('img');
     img.classList.add('image-transition');
     
-    // Remove animation after it completes
     setTimeout(() => {
       img.classList.remove('image-transition');
     }, 500);
   });
 
-  // Toggle mode and show alert
   isBaconMode = !isBaconMode;
-  customAlert.style.display = 'block';
-  alertOverlay.style.display = 'block';
 });
 
-// Close alert handler
+// Unified custom alert function
+function showCustomAlert(message) {
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+  
+  // Remove any existing event listeners to prevent duplicates
+  const closeAlert = document.getElementById('close-alert');
+  const newCloseAlert = closeAlert.cloneNode(true);
+  closeAlert.parentNode.replaceChild(newCloseAlert, closeAlert);
+  
+  // Set new message
+  alertMessage.textContent = message;
+  
+  // Show alert
+  customAlert.style.display = 'block';
+  alertOverlay.style.display = 'block';
+  
+  // Add new event listener
+  newCloseAlert.addEventListener('click', function() {
+    customAlert.style.display = 'none';
+    alertOverlay.style.display = 'none';
+  });
+}
+
+// Close alert handler (initial setup)
 document.getElementById('close-alert').addEventListener('click', function() {
   document.getElementById('custom-alert').style.display = 'none';
   document.getElementById('alert-overlay').style.display = 'none';
