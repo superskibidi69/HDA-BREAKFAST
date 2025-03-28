@@ -1459,16 +1459,15 @@ if (menuSearch) {
 document.getElementById('food-fight-btn').addEventListener('click', () => {
   const items = document.querySelectorAll('.menu-item');
   
-  // First, remove any existing animations to prevent conflicts
+  // First, remove food fight animations but preserve other styles
   items.forEach(item => {
-    item.style.animation = 'none';
+    // Clear any transform/transition styles we added
     item.style.transform = '';
-    void item.offsetHeight; // Trigger reflow
+    item.style.transition = '';
+    item.style.animation = '';
     
-    // Reset hover effects by removing and re-adding the class
-    item.classList.remove('menu-item');
+    // Force reflow to ensure styles are cleared
     void item.offsetHeight;
-    item.classList.add('menu-item');
   });
   
   // Scramble items
@@ -1495,8 +1494,24 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
         item.style.transform = 'translate(0, 0) rotate(0deg)';
         
         setTimeout(() => {
+          // Clean up our styles but leave original classes intact
+          item.style.transform = '';
           item.style.transition = '';
           
+          // Restore hover animations by reattaching event listeners
+          const sticker = item.querySelector('.price-sticker');
+          if (sticker) {
+            item.addEventListener('mouseenter', () => {
+              sticker.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg) scale(1.1)';
+              sticker.style.transition = 'transform 0.2s ease';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+              sticker.style.transform = 'rotate(15deg) scale(1)';
+            });
+          }
+          
+          // Show alert when last item finishes
           if (index === items.length - 1) {
             showCustomAlert('Haha, get pranked!');
           }
@@ -1505,6 +1520,24 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
     });
   }, 3500);
 });
+
+// Helper function to show custom alerts
+function showCustomAlert(message) {
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+  
+  alertMessage.textContent = message;
+  customAlert.style.display = 'block';
+  alertOverlay.style.display = 'block';
+  
+  // Reset close button event listener
+  const closeAlert = document.getElementById('close-alert');
+  closeAlert.onclick = function() {
+    customAlert.style.display = 'none';
+    alertOverlay.style.display = 'none';
+  };
+}
 document.addEventListener('DOMContentLoaded', function() {
   const sizzleSound = document.getElementById('sizzle-sound');
   // Only target these specific menu items
