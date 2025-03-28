@@ -1591,6 +1591,54 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+  let isBaconMode = false;
+const originalImages = {};
+
+document.querySelector('.logo').addEventListener('click', function() {
+  const menuItems = document.querySelectorAll('.menu-item');
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+  
+  menuItems.forEach(item => {
+    const img = item.querySelector('img');
+    
+    // Add animation class
+    img.classList.add('image-transition');
+    
+    setTimeout(() => {
+      if (!isBaconMode) {
+        // First click - store original and switch to bacon
+        if (!originalImages[item.dataset.item]) {
+          originalImages[item.dataset.item] = {
+            src: img.src,
+            alt: img.alt
+          };
+        }
+        img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
+        img.alt = 'Bacon';
+        alertMessage.textContent = 'Everything is bacon now! 🥓';
+      } else {
+        // Second click - restore original
+        const original = originalImages[item.dataset.item];
+        img.src = original.src;
+        img.alt = original.alt;
+        alertMessage.textContent = 'Images restored!';
+      }
+      
+      // Show custom alert
+      customAlert.style.display = 'block';
+      alertOverlay.style.display = 'block';
+      
+      // Remove animation class after transition
+      setTimeout(() => {
+        img.classList.remove('image-transition');
+      }, 300);
+    }, 150);
+  });
+  
+  isBaconMode = !isBaconMode;
+});
   </script>
 </body>
 </html>
