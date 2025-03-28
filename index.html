@@ -1601,48 +1601,57 @@ const originalImages = {};
 
 document.querySelector('.logo').addEventListener('click', function() {
   const menuItems = document.querySelectorAll('.menu-item');
-  
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+
+  // Immediately change images before animation
+  if (!isBaconMode) {
+    menuItems.forEach(item => {
+      const img = item.querySelector('img');
+      // Store original image only if not already stored
+      if (!originalImages[item.dataset.item]) {
+        originalImages[item.dataset.item] = {
+          src: img.src,
+          alt: img.alt
+        };
+      }
+      // Immediately change to bacon
+      img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
+      img.alt = 'Bacon';
+    });
+    alertMessage.textContent = 'Everything is bacon now! 🥓';
+  } else {
+    // Restore original images
+    menuItems.forEach(item => {
+      const img = item.querySelector('img');
+      const original = originalImages[item.dataset.item];
+      if (original) {
+        img.src = original.src;
+        img.alt = original.alt;
+      }
+    });
+    alertMessage.textContent = 'Images restored!';
+  }
+
+  // Apply animation to all images
   menuItems.forEach(item => {
     const img = item.querySelector('img');
     img.classList.add('image-transition');
     
+    // Remove animation after it completes
     setTimeout(() => {
-      if (!isBaconMode) {
-        // Store original and switch to bacon
-        if (!originalImages[item.dataset.item]) {
-          originalImages[item.dataset.item] = {
-            src: img.src,
-            alt: img.alt
-          };
-        }
-        img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
-        img.alt = 'Bacon';
-      } else {
-        // Restore original
-        const original = originalImages[item.dataset.item];
-        img.src = original.src;
-        img.alt = original.alt;
-      }
-      
-      setTimeout(() => {
-        img.classList.remove('image-transition');
-      }, 300);
-    }, 150);
+      img.classList.remove('image-transition');
+    }, 500);
   });
 
-  // Show custom alert
-  const customAlert = document.getElementById('custom-alert');
-  const alertOverlay = document.getElementById('alert-overlay');
-  const alertMessage = customAlert.querySelector('p');
-  
-  alertMessage.textContent = isBaconMode ? 'Images restored!' : 'Everything is bacon now! 🥓';
+  // Toggle mode and show alert
+  isBaconMode = !isBaconMode;
   customAlert.style.display = 'block';
   alertOverlay.style.display = 'block';
-  
-  isBaconMode = !isBaconMode;
 });
 
-// Make sure this event listener exists for your OK button
+// Close alert handler
 document.getElementById('close-alert').addEventListener('click', function() {
   document.getElementById('custom-alert').style.display = 'none';
   document.getElementById('alert-overlay').style.display = 'none';
