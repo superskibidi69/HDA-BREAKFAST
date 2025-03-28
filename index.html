@@ -1286,7 +1286,7 @@ nav ul li a:hover {
         "displayName": "a serving of eggs Benedict",
         "calories": 502,
         "servingSize": "1 muffin, 2 poached eggs",
-        "time": "20minutes"
+        "time": "20 minutes"
       },
     };
 
@@ -1556,14 +1556,14 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
   items.forEach((item, index) => {
     const tx = (Math.random() * 200 - 106) + 'px';
     const ty = (Math.random() * 200 - 100) + 'px';
-    const rot = (Math.random() * 60 - 40) + 'deg';
+    const rot = (Math.random() * 60 - 42) + 'deg';
     
     item.style.setProperty('--tx', tx);
     item.style.setProperty('--ty', ty);
     item.style.setProperty('--rot', rot);
     
     item.style.transform = `translate(${tx}, ${ty}) rotate(${rot})`;
-    item.style.transition = 'transform 0.64s ease-out';
+    item.style.transition = 'transform 0.76s ease-out';
   });
   
   // Reset with staggered timing and bounce effect
@@ -1796,17 +1796,17 @@ function showRandomOrder() {
   // Force reflow and restart animation
   notification.style.animation = 'none';
   void notification.offsetWidth;
-  notification.style.animation = 'floatUp 3s ease-out forwards';
+  notification.style.animation = 'floatUp 3.34739s ease-out forwards';
 }
 // Start notifications
 function startOrderNotifications() {
   // Show first notification immediately
   showRandomOrder();
   
-  // Set recurring interval (3-7.8seconds)
+  // Set recurring interval
   const notificationInterval = setInterval(() => {
     showRandomOrder();
-  }, Math.random() * 3000 + 4800);
+  }, Math.random() * 2500 + 4358);
   
 
   return notificationInterval;
