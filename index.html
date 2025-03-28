@@ -1772,50 +1772,39 @@ function showCustomAlert(message) {
     alertOverlay.style.display = 'none';
   });
 }
-
-// Close alert handler (initial setup)
 document.getElementById('close-alert').addEventListener('click', function() {
   document.getElementById('custom-alert').style.display = 'none';
   document.getElementById('alert-overlay').style.display = 'none';
 });
 
+// fake orders
+let notificationInterval;
 function showRandomOrder() {
   const notification = document.getElementById('order-notification');
   const itemKeys = Object.keys(menuItems);
   const randomKey = itemKeys[Math.floor(Math.random() * itemKeys.length)];
   const itemName = menuItems[randomKey].displayName;
-  
-  // Reset animation by removing and re-adding the class
-  notification.classList.remove('order-notification');
-  void notification.offsetWidth; // Trigger reflow
-  notification.classList.add('order-notification');
-  
-  // Set new content
-  notification.textContent = `A customer just ordered ${itemName}!`;
-  
-  // Force reflow and restart animation
   notification.style.animation = 'none';
-  void notification.offsetWidth;
-  notification.style.animation = 'floatUp 3.34739s ease-out forwards';
+  void notification.offsetWidth; // Force reflow
+  notification.textContent = `A customer just ordered ${itemName}!`;
+  notification.style.animation = 'floatUp 3.35s ease-out forwards';
+  console.log('New order:', itemName); 
 }
-// Start notifications
 function startOrderNotifications() {
-  // Show first notification immediately
+  if (notificationInterval) {
+    clearInterval(notificationInterval);
+  }
   showRandomOrder();
-  
-  // Set recurring interval
-  const notificationInterval = setInterval(() => {
-    showRandomOrder();
-  }, Math.random() * 7294 + 2563);
-  
-
-  return notificationInterval;
+  function scheduleNext() {
+    const delay = Math.random() * 7000 + 3000;
+    notificationInterval = setTimeout(() => {
+      showRandomOrder();
+      scheduleNext();
+    }, delay);
+  }
+  scheduleNext();
 }
-
-// Start the notifications when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  startOrderNotifications();
-});
+document.addEventListener('DOMContentLoaded', startOrderNotifications);
   </script>
 </body>
 </html>
