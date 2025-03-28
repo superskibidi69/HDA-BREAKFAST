@@ -786,6 +786,18 @@ nav ul li a:hover {
   }
 }
 
+.image-transition {
+  transition: all 0.3s ease;
+  transform: scale(0.9);
+  opacity: 0.7;
+  filter: sepia(1);
+}
+
+.image-transition:hover {
+  transform: scale(1);
+  opacity: 1;
+  filter: none;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -1590,6 +1602,72 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 300);
     });
   }
+});
+      /* baconfier*/ document.querySelector('.logo').addEventListener('click', function() {
+  // Get all menu item images
+  const menuImages = document.querySelectorAll('.menu-item img');
+  
+  // Change each image to bacon
+  menuImages.forEach(img => {
+    img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg'; // Bacon image URL
+    img.alt = 'Bacon'; // Update alt text
+  });
+  
+  // Optional: Add a temporary alert so user knows it worked
+  alert('Everything is bacon now! 🥓');
+});
+      let isBaconMode = false;
+const originalImages = {};
+
+document.querySelector('.logo').addEventListener('click', function() {
+  const menuItems = document.querySelectorAll('.menu-item');
+  
+  menuItems.forEach(item => {
+    const img = item.querySelector('img');
+    
+    // Add animation class
+    img.classList.add('image-transition');
+    
+    setTimeout(() => {
+      if (!isBaconMode) {
+        // First click - store original and switch to bacon
+        if (!originalImages[item.dataset.item]) {
+          originalImages[item.dataset.item] = {
+            src: img.src,
+            alt: img.alt
+          };
+        }
+        img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
+        img.alt = 'Bacon';
+          const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  
+  // Update the alert message
+  const alertMessage = customAlert.querySelector('p');
+  alertMessage.textContent = 'Everything is bacon now!';
+  
+  // Show the alert
+  customAlert.style.display = 'block';
+  alertOverlay.style.display = 'block';
+          closeAlert.addEventListener('click', () => {
+         customAlert.style.display = 'none';
+          alertOverlay.style.display = 'none';
+        }
+      } else {
+        // Second click - restore original
+        const original = originalImages[item.dataset.item];
+        img.src = original.src;
+        img.alt = original.alt;
+      }
+      
+      // Remove animation class after transition
+      setTimeout(() => {
+        img.classList.remove('image-transition');
+      }, 300);
+    }, 150);
+  });
+  
+  isBaconMode = !isBaconMode;
 });
   </script>
 </body>
