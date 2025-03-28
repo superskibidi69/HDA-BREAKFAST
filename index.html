@@ -1797,12 +1797,12 @@ function startOrderNotifications() {
   // Show first notification immediately
   showRandomOrder();
   
-  // Set recurring interval (5-10 seconds)
+  // Set recurring interval (3-7.8seconds)
   const notificationInterval = setInterval(() => {
     showRandomOrder();
-  }, Math.random() * 5000 + 5000);
+  }, Math.random() * 3000 + 4800);
   
-  // Optional: Return the interval ID if you need to clear it later
+
   return notificationInterval;
 }
 
