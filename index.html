@@ -765,10 +765,13 @@ nav ul li a:hover {
   font-weight: 500;
   opacity: 0;
   pointer-events: none;
-  white-space: nowrap;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   z-index: 10;
-  animation: floatUp 3s ease-out forwards;
+  animation: floatUp 3.5s ease-out forwards;
+  max-width: 80%; /* Limit width to prevent overly wide notifications */
+  width: max-content; /* Allow it to grow with content */
+  word-wrap: break-word; /* Allow words to break if needed */
+  text-align: center; /* Center the text */
 }
 
 @keyframes floatUp {
