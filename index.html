@@ -1780,7 +1780,11 @@ document.getElementById('close-alert').addEventListener('click', function() {
 
 // fake orders
 let notificationInterval;
+let isNotificationShowing = false; // Track if a notification is currently visible
+
 function showRandomOrder() {
+  if (isNotificationShowing) return; // Skip if one is already showing
+  
   const notification = document.getElementById('order-notification');
   const itemKeys = Object.keys(menuItems);
   const randomKey = itemKeys[Math.floor(Math.random() * itemKeys.length)];
@@ -1794,28 +1798,44 @@ function showRandomOrder() {
   "and immediately ordered seconds!",
 "but tripped and spilled their food!"
 ];
-  // Generate random name
-  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   const randomComment = funnyComments[Math.floor(Math.random() * funnyComments.length)];
+
+  // Reset animation
+  notification.style.animation = 'none';
+  void notification.offsetWidth; // Trigger reflow
   notification.textContent = `${randomFirstName} ${randomLastName} just ordered ${itemName} ${randomComment}`;
+  
+  isNotificationShowing = true;
   notification.style.animation = 'floatUp 3.35s ease-out forwards';
+
+  // Reset flag when animation completes
+  notification.addEventListener('animationend', () => {
+    isNotificationShowing = false;
+  }, { once: true });
+
   console.log('New order:', randomFirstName, randomLastName, itemName); 
 }
+
 function startOrderNotifications() {
   if (notificationInterval) {
     clearInterval(notificationInterval);
   }
-  showRandomOrder();
+  
   function scheduleNext() {
-    const delay = Math.random() * 7000 + 3000;
+    const delay = Math.random() * 7000 + 3000; // 3-10 seconds
     notificationInterval = setTimeout(() => {
       showRandomOrder();
-      scheduleNext();
+      scheduleNext(); // Schedule the next one
     }, delay);
   }
+  
+  // Initial call
+  showRandomOrder();
   scheduleNext();
 }
+
 document.addEventListener('DOMContentLoaded', startOrderNotifications);
   </script>
 </body>
