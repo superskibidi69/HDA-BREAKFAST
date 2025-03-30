@@ -126,7 +126,18 @@
   opacity: 0;
   transition: all 0.8s ease-out;
 }
-
+.figurative-language {
+  background-color: #8eff61;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 18px;
+  opacity: 0;
+  animation: fadeIn 2s ease-out 2s forwards;
+  color: var(--price-text);
+}
 .contact.visible {
   transform: translateY(0);
   opacity: 1;
@@ -929,6 +940,7 @@ nav ul li a:hover {
       <p class="animate__animated animate__fadeInUpBig animate__delay-1s">We make your food, so you can be a couch potato and not do it</p>
       <b>Note: this is not a real restaurant, and only for a school project.</b>
     </div>
+      <div id="figurative-language" class="hours-status"></div>
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
     </a>
@@ -1336,6 +1348,53 @@ const lastNames = ['S.', 'J.', 'W.', 'B.', 'A.', 'M.', 'D.', 'G.', 'R.', 'C.', '
       // Update every minute in case the page stays open
       setInterval(updateHoursStatus, 60000);
 
+        // thing
+        function updateFigurativeLanguage() {
+  // Array of figurative language types with examples
+  const figurativeLanguageTypes = [
+    { 
+      type: "Simile"
+    },
+    { 
+      type: "Metaphor"
+    },
+    { 
+      type: "Hyperbole"
+    },
+    { 
+      type: "Personification"
+    },
+    { 
+      type: "Alliteration"
+    },
+    { 
+      type: "Onomatopoeia"
+    },
+    { 
+      type: "Idiom"
+    }
+  ];
+  
+  // Get day of week (0-6)
+  const day = new Date().getDay();
+  
+  // Get today's figurative language
+  const language = figurativeLanguageTypes[day];
+  
+  // Update the element
+  const languageElement = document.getElementById('figurative-language');
+  languageElement.innerHTML = `
+    <strong>Today's Figurative Language:</strong> ${language.type}<br>
+    <em>"${language.example}"</em>
+  `;
+  languageElement.className = 'hours-status figurative-language';
+}
+
+// Initial update
+updateFigurativeLanguage();
+
+// Update every day at midnight (in case page stays open)
+setInterval(updateFigurativeLanguage, 86400000); // 24 hours
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
