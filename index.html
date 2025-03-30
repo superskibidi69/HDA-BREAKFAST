@@ -139,6 +139,7 @@
   max-width: 80%;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  animation: fadeIn 2s ease-out forwards;
 }
 
 .figurative-language strong {
@@ -951,8 +952,8 @@ nav ul li a:hover {
       <div id="hours-status" class="hours-status"></div>
       <p class="animate__animated animate__fadeInUpBig animate__delay-1s">We make your food, so you can be a couch potato and not do it</p>
       <b>Note: this is not a real restaurant, and only for a school project.</b>
+        <div id="figurative-language" class="hours-status"></div>
     </div>
-      <div id="figurative-language" class="hours-status"></div>
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
     </a>
@@ -1364,7 +1365,7 @@ function updateFigurativeLanguage() {
   const figurativeLanguageTypes = [
     { 
       type: "Simile",
-      example: "Our pancakes are as fluffy as a pillow!"
+      example: "Our pancakes are as fluffy as clouds!"
     },
     { 
       type: "Metaphor",
@@ -1380,7 +1381,7 @@ function updateFigurativeLanguage() {
     },
     { 
       type: "Alliteration",
-      example: "Perfectly prepared pancakes please picky people!"
+      example: "Perfectly prepared pancakes please picky patrons!"
     },
     { 
       type: "Onomatopoeia",
@@ -1404,18 +1405,8 @@ function updateFigurativeLanguage() {
     <strong>Today's Figurative Language:</strong> ${language.type}<br>
     <em>"${language.example}"</em>
   `;
-  languageElement.className = 'figurative-language';
-  
-  // Add animation
-  languageElement.style.animation = 'fadeIn 2s ease-out forwards';
   languageElement.style.opacity = '0';
-  
-  // Reset animation after 1 second to allow it to trigger again if needed
-  setTimeout(() => {
-    languageElement.style.animation = 'none';
-    void languageElement.offsetWidth; // Trigger reflow
-    languageElement.style.animation = 'fadeIn 2s ease-out forwards';
-  }, 1000);
+  languageElement.style.animation = 'fadeIn 2s ease-out forwards';
 }
 
 // Initial update
@@ -1660,9 +1651,9 @@ document.getElementById('food-fight-btn').addEventListener('click', () => {
   
   // Scramble items
   items.forEach((item, index) => {
-    const tx = (Math.random() * 200 - 106) + 'px';
-    const ty = (Math.random() * 200 - 100) + 'px';
-    const rot = (Math.random() * 60 - 42) + 'deg';
+    const tx = (Math.random() * 250 - 106) + 'px';
+    const ty = (Math.random() * 230 - 100) + 'px';
+    const rot = (Math.random() * 90 - 42) + 'deg';
     
     item.style.setProperty('--tx', tx);
     item.style.setProperty('--ty', ty);
