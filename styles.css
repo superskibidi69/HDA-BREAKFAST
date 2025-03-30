@@ -39,7 +39,14 @@
   .menu-toggle span {
     color: var(--text-primary);
   }
-  
+  .animate-on-scroll {
+  transition: opacity 0.6s ease-out;
+  opacity: 0;
+}
+
+.animate-on-scroll.fadeIn {
+  opacity: 1;
+}
   nav ul {
     background: rgba(255, 255, 255, 0.9) !important;
   }
@@ -53,7 +60,13 @@
   .close-modal {
     color: #333;
   }
-  
+  @keyframes wobble {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.menu-item:hover img {
+  animation: wobble 0.5s infinite;
+}
   .nutrition-fact {
     border-bottom: 1px solid #eee;
   }
@@ -65,6 +78,148 @@
   margin: 20px 0;
 }
 
+/* Enhanced Contact Form Styles */
+.contact {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+.figurative-language {
+  background-color: #16873f;
+  color: #fff;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: 10px 0 20px;
+  font-size: 18px;
+  opacity: 0;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  animation: fadeIn 2s ease-out forwards;
+}
+
+.figurative-language strong {
+  font-weight: bold;
+}
+
+.figurative-language em {
+  font-style: italic;
+  display: inline-block;
+  margin-top: 5px;
+}
+.contact.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  transition: all 0.5s ease;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-accent);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 3px rgba(142, 255, 97, 0.2);
+  outline: none;
+}
+
+.form-group.active label,
+.form-group.active input,
+.form-group.active textarea {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#submit-contact {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  font-size: 16px;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.4s ease 0.3s;
+}
+
+#submit-contact.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#submit-contact:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 5px 15px rgba(142, 255, 97, 0.3);
+}
+
+#contact-confirmation {
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
+}
+
+#contact-confirmation.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#contact-confirmation h3 {
+  color: var(--text-accent);
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+#contact-confirmation p {
+  font-size: 18px;
+}
 #food-fight-btn {
   background: var(--price-bg);
   color: var(--price-text);
@@ -179,7 +334,12 @@ nav ul li a {
   transition: color 0.3s ease;
   user-select: none;
 }
-
+.image-transition {
+  transition: all 0.3s ease;
+  transform: scale(0.9);
+  opacity: 0.7;
+  filter: sepia(1);
+}
 nav ul li a:hover {
   color: var(--nav-hover);
   user-select: none;
@@ -201,7 +361,6 @@ nav ul li a:hover {
   text-align: center;
   color: var(--text-primary);
   position: relative;
-  user-select: none;
   overflow: hidden;
   animation: fadeIn 2s ease-out;
 }
@@ -230,13 +389,11 @@ nav ul li a:hover {
 .hero-content {
   position: relative;
   z-index: 1;
-  user-select: none;
 }
 
 .hero h1 {
   font-size: 72px;
   margin-bottom: 20px;
-  user-select: none;
   overflow: hidden;
   opacity: 0;
   animation: fadeInDownBig 1.5s ease-out forwards;
@@ -302,7 +459,7 @@ nav ul li a:hover {
 
 @keyframes hideElement {
   to {
-    visibility: hidden;
+    display: none;
   }
 }
 
@@ -539,6 +696,11 @@ nav ul li a:hover {
   padding-bottom: 5px;
 }
 
+.menu-item[data-item="bacon"]:hover,
+.menu-item[data-item="oil-stick"]:hover,
+.menu-item[data-item="fry-dumpblings-jam"]:hover {
+  box-shadow: 0 0 15px rgba(28, 255, 28, 0.5);
+}
       /* Menu Search Bar */
 .menu-search-container {
   position: sticky;
@@ -578,7 +740,46 @@ nav ul li a:hover {
 .menu-section.hidden {
   display: none;
 }
+.order-notification {
+  position: absolute;
+  top: 120px; /* Below the menu title */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff; /* High contrast white text */
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 10;
+  animation: floatUp 3.5s ease-out forwards;
+  max-width: 80%; /* Limit width to prevent overly wide notifications */
+  width: max-content; /* Allow it to grow with content */
+  word-wrap: break-word; /* Allow words to break if needed */
+  text-align: center; /* Center the text */
+}
 
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translate(-0%, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+    54% {
+        opacity: 0.7;
+        transform: transalate(-50%, 0);
+    }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+}
 .menu-item.hidden {
   display: none;
 }
@@ -620,6 +821,15 @@ nav ul li a:hover {
     display: block;
   }
 
+
+/* For light mode */
+@media (prefers-color-scheme: light) {
+  .order-notification {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+}
   nav ul {
     display: none;
     flex-direction: column;
