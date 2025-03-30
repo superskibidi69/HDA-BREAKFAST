@@ -127,16 +127,28 @@
   transition: all 0.8s ease-out;
 }
 .figurative-language {
-  background-color: #8eff61;
+  background-color: #16873f;
+  color: #fff;
   display: inline-block;
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
   font-size: 18px;
   opacity: 0;
-  animation: fadeIn 2s ease-out 2s forwards;
-  color: var(--price-text);
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.figurative-language strong {
+  font-weight: bold;
+}
+
+.figurative-language em {
+  font-style: italic;
+  display: inline-block;
+  margin-top: 5px;
 }
 .contact.visible {
   transform: translateY(0);
@@ -1347,31 +1359,36 @@ const lastNames = ['S.', 'J.', 'W.', 'B.', 'A.', 'M.', 'D.', 'G.', 'R.', 'C.', '
       
       // Update every minute in case the page stays open
       setInterval(updateHoursStatus, 60000);
-
-        // thing
-        function updateFigurativeLanguage() {
+function updateFigurativeLanguage() {
   // Array of figurative language types with examples
   const figurativeLanguageTypes = [
     { 
-      type: "Simile"
+      type: "Simile",
+      example: "Our pancakes are as fluffy as clouds!"
     },
     { 
-      type: "Metaphor"
+      type: "Metaphor",
+      example: "Our orange juice is liquid sunshine in a glass!"
     },
     { 
-      type: "Hyperbole"
+      type: "Hyperbole",
+      example: "Our bacon is so good it'll make you cry tears of joy for a week!"
     },
     { 
-      type: "Personification"
+      type: "Personification",
+      example: "Our waffles dance with flavor in your mouth!"
     },
     { 
-      type: "Alliteration"
+      type: "Alliteration",
+      example: "Perfectly prepared pancakes please picky patrons!"
     },
     { 
-      type: "Onomatopoeia"
+      type: "Onomatopoeia",
+      example: "Crunch! Our hash browns sing with crispiness!"
     },
     { 
-      type: "Idiom"
+      type: "Idiom",
+      example: "Our breakfast burrito is the best thing since sliced bread!"
     }
   ];
   
@@ -1387,7 +1404,18 @@ const lastNames = ['S.', 'J.', 'W.', 'B.', 'A.', 'M.', 'D.', 'G.', 'R.', 'C.', '
     <strong>Today's Figurative Language:</strong> ${language.type}<br>
     <em>"${language.example}"</em>
   `;
-  languageElement.className = 'hours-status figurative-language';
+  languageElement.className = 'figurative-language';
+  
+  // Add animation
+  languageElement.style.animation = 'fadeIn 2s ease-out forwards';
+  languageElement.style.opacity = '0';
+  
+  // Reset animation after 1 second to allow it to trigger again if needed
+  setTimeout(() => {
+    languageElement.style.animation = 'none';
+    void languageElement.offsetWidth; // Trigger reflow
+    languageElement.style.animation = 'fadeIn 2s ease-out forwards';
+  }, 1000);
 }
 
 // Initial update
@@ -1395,6 +1423,7 @@ updateFigurativeLanguage();
 
 // Update every day at midnight (in case page stays open)
 setInterval(updateFigurativeLanguage, 86400000); // 24 hours
+ 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
