@@ -1906,9 +1906,10 @@ function showRandomOrder() {
   "while singing 'Africa'!",
   "and tried to pay with Monopoly money!",
   "and whispered, 'This dish... it speaks to me.'",
-  "then left a note saying, ‘Whoever made this, I hope you have a wonderful day. It tastes amazing.’",
+  "then left a note saying, ‘Whoever made this, I hope you have a wonderful day.’",
   "then bought an extra meal to give to someone in need.",
-  "and after finishing, declared it the best breakfast they’ve ever eaten."
+  "and after finishing, declared it the best breakfast they’ve ever eaten.",
+  "and took 15 pictures of the food before eating it."
   
 ];
     const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -1937,10 +1938,10 @@ function startOrderNotifications() {
   }
   
   function scheduleNext() {
-    const delay = Math.random() * 7000 + 3000; // 3-10 seconds
+    const delay = Math.random() * 7000 + 3000; 
     notificationInterval = setTimeout(() => {
       showRandomOrder();
-      scheduleNext(); // Schedule the next one
+      scheduleNext(); 
     }, delay);
   }
   
