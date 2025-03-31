@@ -981,6 +981,13 @@ nav ul li a:hover {
     <div class="menu-section">
       <h3 class="animate-on-scroll">Entrees</h3>
       <div class="menu-items">
+          
+        <div class="menu-item animate-on-scroll" data-item="gravy">
+            <div class="price-sticker">$6.95</div>
+            <img src="https://hda-breakfast.vercel.app/IMG_0797.jpeg" loading="lazy" alt="Burrito">
+            <h3 class="animate-on-scroll">Biscuits and gravy</h3>
+            <p class="animate-on-scroll">Our breakfast burrito is so delicious, it could make an earthquake stop to take another bite! With fresh ingredients, this is the tastiest burrito in the world!</p>
+          </div>
         <div class="menu-item animate-on-scroll" data-item="burrito">
             <div class="price-sticker">$4.99</div>
             <img src="https://hda-breakfast.vercel.app/BreakfastBurritos_13.jpg" loading="lazy" alt="Burrito">
@@ -1177,7 +1184,6 @@ nav ul li a:hover {
       <p class="modal-description" id="modal-description"></p>
       <h3 class="nutrition-title">Nutrition Facts</h3>
       <div class="nutrition-facts" id="nutrition-facts">
-        <!-- Will be populated by JavaScript -->
       </div>
     </div>
   </div>
@@ -1435,12 +1441,9 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
       document.querySelectorAll('.animate-on-scroll').forEach(element => {
         observer.observe(element);
       });
-
-      // Smooth scrolling for navigation links
       document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-          
           const targetId = this.getAttribute('href');
           const targetElement = document.querySelector(targetId);
           
@@ -1452,8 +1455,7 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
               top: targetPosition,
               behavior: 'smooth'
             });
-            
-            // Close mobile menu if open
+    
             const navMenu = document.getElementById('nav-menu');
             if (navMenu.classList.contains('active')) {
               navMenu.classList.remove('active');
@@ -1471,8 +1473,6 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
           navMenu.classList.toggle('active');
         });
       }
-
-      // Make price stickers wiggle on hover
       document.querySelectorAll('.menu-item').forEach(item => {
         const sticker = item.querySelector('.price-sticker');
         
