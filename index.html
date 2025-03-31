@@ -1582,24 +1582,19 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
       
       detectColorScheme();
     });
-// Menu Search Functionality (Name Only)
 const menuSearch = document.getElementById('menu-search');
 if (menuSearch) {
   menuSearch.addEventListener('input', function() {
     const searchTerm = this.value.toLowerCase();
     const allMenuItems = document.querySelectorAll('.menu-item');
     const allMenuSections = document.querySelectorAll('.menu-section');
-
-    // Show all if empty
     if (searchTerm === '') {
       allMenuItems.forEach(item => item.classList.remove('hidden'));
       allMenuSections.forEach(section => section.classList.remove('hidden'));
       document.getElementById('no-results-message')?.remove();
       return;
     }
-
     let hasVisibleItems = false;
-    
     allMenuSections.forEach(section => {
       const sectionItems = section.querySelectorAll('.menu-item');
       let sectionHasVisibleItems = false;
@@ -1607,7 +1602,7 @@ if (menuSearch) {
       sectionItems.forEach(item => {
         const itemName = item.querySelector('h3').textContent.toLowerCase();
         
-        if (itemName.includes(searchTerm)) { // Only check name now
+        if (itemName.includes(searchTerm)) {
           item.classList.remove('hidden');
           sectionHasVisibleItems = true;
         } else {
