@@ -2109,33 +2109,35 @@ function loadCSS(href) {
 
   // diff expire
   function updateOfferStatus() {
-  const offerItem = document.querySelector('.deal-item[data-offer-end]');
-  if (!offerItem) return;
+  const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
+  if (!offerItems.length) return;
 
-  // Set end date to midnight at START of the end day (not end of day)
-  const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
-  const now = new Date();
-  const badge = document.getElementById('deal-badge');
-  const countdown = document.getElementById('countdown-timer');
-  
-  const timeRemaining = endDate - now;
-  
-  // If offer has ended more than 24 hours ago
-  if (timeRemaining < -86400000) {
-    offerItem.remove();
-    return;
-  }
-  
-  // If offer has ended but less than 24 hours ago
-  if (timeRemaining < 0) {
-    offerItem.classList.add('expired');
-    badge.textContent = 'Offer Ended';
-    countdown.textContent = 'This offer has ended. No need to feel down; a new offer will come out as quick as a running cheetah!';
-    return;
-  }
-  
-  // Update countdown display
-  updateCountdown(timeRemaining, countdown);
+  offerItems.forEach(offerItem => {
+    // Set end date to midnight at START of the end day (not end of day)
+    const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
+    const now = new Date();
+    const badge = offerItem.querySelector('.deal-badge');
+    const countdown = offerItem.querySelector('.countdown-timer');
+    
+    const timeRemaining = endDate - now;
+    
+    // If offer has ended more than 24 hours ago
+    if (timeRemaining < -86400000) {
+      offerItem.remove();
+      return;
+    }
+    
+    // If offer has ended but less than 24 hours ago
+    if (timeRemaining < 0) {
+      offerItem.classList.add('expired');
+      badge.textContent = 'Offer Ended';
+      countdown.textContent = 'This offer has ended. No need to feel down; a new offer will come out as quick as a running cheetah!';
+      return;
+    }
+    
+    // Update countdown display
+    updateCountdown(timeRemaining, countdown);
+  });
   
   // Update every second
   setTimeout(updateOfferStatus, 1000);
@@ -2160,8 +2162,10 @@ function updateCountdown(timeRemaining, element) {
   
   element.textContent = `Time remaining: ${countdownStr.trim()}`;
 }
+
 document.addEventListener('DOMContentLoaded', function() {
   updateOfferStatus();
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
