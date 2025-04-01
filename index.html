@@ -2084,24 +2084,28 @@ function loadCSS(href) {
   const offerItem = document.querySelector('.deal-item[data-offer-end]');
   if (!offerItem) return;
 
-  const endDate = new Date(offerItem.dataset.offerEnd);
+  // Set end date to midnight at START of the end day (not end of day)
+  const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
   const now = new Date();
   const badge = document.getElementById('deal-badge');
   const countdown = document.getElementById('countdown-timer');
-
+  
   const timeRemaining = endDate - now;
+  
+  // If offer has ended more than 24 hours ago
   if (timeRemaining < -86400000) {
     offerItem.remove();
     return;
   }
+  
+  // If offer has ended but less than 24 hours ago
   if (timeRemaining < 0) {
     offerItem.classList.add('expired');
     badge.textContent = 'Offer Ended';
-    countdown.textContent = 'Final day to see this offer';
+    countdown.textContent = 'Final day to view this offer';
     return;
   }
   
-  // If offer is still active
   // Update countdown display
   updateCountdown(timeRemaining, countdown);
   
@@ -2110,20 +2114,23 @@ function loadCSS(href) {
 }
 
 function updateCountdown(timeRemaining, element) {
-  // Calculate days, hours, minutes, seconds
-  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+  // Calculate total seconds remaining first
+  const totalSeconds = Math.floor(timeRemaining / 1000);
   
-  // Format the countdown string
+  // Then calculate each time component
+  const days = Math.floor(totalSeconds / (3600 * 24));
+  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+  
+  // Build the display string
   let countdownStr = '';
-  if (days > 0) countdownStr += `${days}d `;
-  if (hours > 0 || days > 0) countdownStr += `${hours}h `;
-  if (minutes > 0 || hours > 0 || days > 0) countdownStr += `${minutes}m `;
-  countdownStr += `${seconds}s`;
+  if (days > 0) countdownStr += `${days} day${days !== 1 ? 's' : ''} `;
+  if (hours > 0 || days > 0) countdownStr += `${hours} hour${hours !== 1 ? 's' : ''} `;
+  if (minutes > 0 || hours > 0 || days > 0) countdownStr += `${minutes} minute${minutes !== 1 ? 's' : ''} `;
+  countdownStr += `${seconds} second${seconds !== 1 ? 's' : ''}`;
   
-  element.textContent = `Time remaining: ${countdownStr}`;
+  element.textContent = `Time remaining: ${countdownStr.trim()}`;
 }
 document.addEventListener('DOMContentLoaded', function() {
   updateOfferStatus();
