@@ -932,7 +932,27 @@ nav ul li a:hover {
   max-width: 1200px;
   padding: 0 20px;
 }
+.countdown-timer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-accent);
+  font-weight: bold;
+  text-align: center;
+}
 
+.deal-item.expired {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+
+.deal-item.expired .deal-badge {
+  background: #f44336;
+  color: white;
+}
+
+.deal-item.expired .deal-price {
+  text-decoration: line-through;
+}
 .deal-item {
   background: var(--bg-card);
   border-radius: 15px;
@@ -1053,11 +1073,12 @@ nav ul li a:hover {
     <h2 class="animate-on-scroll">Our Menu</h2>
     <h3 class="animate-on-scroll" id="offer-h3">Special offers</h3>
     <div class="special-deals-banner">
-      <div class="deal-item animate-on-scroll">
-        <span class="deal-badge">Ends on 4/19/2025</span>
+      <div class="deal-item animate-on-scroll" data-offer-end="2025-04-19">
+        <span class="deal-badge" id="deal-badge">Ends on 4/19/2025</span>
         <h3>Meal Deal</h3>
         <p>Choose one entree, 1-2 sides, and 1 beverage for <span class="deal-price">25% off</span> the total price</p>
         <small>Weekends only</small>
+        <div class="countdown-timer" id="countdown-timer"></div>
       </div>
     </div>
     <div id="order-notification" class="order-notification"></div>
@@ -2057,6 +2078,68 @@ function loadCSS(href) {
   window.addEventListener('load', function() {
     loadCSS('styles.css');
   });
+
+  // diff expire
+  function updateOfferStatus() {
+  const offerItem = document.querySelector('.deal-item[data-offer-end]');
+  if (!offerItem) return;
+
+  const endDate = new Date(offerItem.dataset.offerEnd);
+  const now = new Date();
+  const badge = document.getElementById('deal-badge');
+  const countdown = document.getElementById('countdown-timer');
+
+  const timeRemaining = endDate - now;
+  if (timeRemaining < -86400000) {
+    offerItem.remove();
+    return;
+  }
+  if (timeRemaining < 0) {
+    offerItem.classList.add('expired');
+    badge.textContent = 'Offer Ended';
+    countdown.textContent = 'Final day to see this offer';
+    return;
+  }
+  
+  // If offer is still active
+  // Update countdown display
+  updateCountdown(timeRemaining, countdown);
+  
+  // Update every second
+  setTimeout(updateOfferStatus, 1000);
+}
+
+function updateCountdown(timeRemaining, element) {
+  // Calculate days, hours, minutes, seconds
+  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+  
+  // Format the countdown string
+  let countdownStr = '';
+  if (days > 0) countdownStr += `${days}d `;
+  if (hours > 0 || days > 0) countdownStr += `${hours}h `;
+  if (minutes > 0 || hours > 0 || days > 0) countdownStr += `${minutes}m `;
+  countdownStr += `${seconds}s`;
+  
+  element.textContent = `Time remaining: ${countdownStr}`;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  updateOfferStatus();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        updateOfferStatus();
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  const offerSection = document.querySelector('.special-deals-banner');
+  if (offerSection) {
+    observer.observe(offerSection);
+  }
+});
   </script>
 </body>
 </html>
