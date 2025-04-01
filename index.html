@@ -161,6 +161,7 @@
   margin: 0 auto;
   text-align: left;
   transition: all 0.5s ease;
+  opacity: 0;
 }
 
 .form-group {
@@ -921,6 +922,89 @@ nav ul li a:hover {
     grid-template-columns: 1fr;
   }
 }
+/* Special Deals Banner */
+.special-deals-banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 auto 40px;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.deal-item {
+  background: var(--bg-card);
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+}
+#offer-h3 {
+  font-size: 48px;
+  color: var(--text-accent);
+  opacity: 0;
+}
+.deal-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.deal-badge {
+  background: var(--price-bg);
+  color: var(--price-text);
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-transform: uppercase;
+}
+
+.deal-item h3 {
+  color: var(--text-accent);
+  margin: 10px 0 8px;
+  font-size: 20px;
+}
+
+.deal-item p {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.deal-price {
+  color: var(--text-accent);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.deal-item small {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-style: italic;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .special-deals-banner {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .deal-item {
+    max-width: 100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -967,6 +1051,15 @@ nav ul li a:hover {
   </section>
   <section class="menu" id="menu">
     <h2 class="animate-on-scroll">Our Menu</h2>
+    <h3 class="animate-on-scroll" id="offer-h3">Special offers</h3>
+    <div class="special-deals-banner">
+      <div class="deal-item animate-on-scroll">
+        <span class="deal-badge">Ends on 4/19/2025</span>
+        <h3>Meal Deal</h3>
+        <p>Choose one entree, 1-2 sides, and 1 beverage for <span class="deal-price">25% off</span> the total price</p>
+        <small>Weekends only</small>
+      </div>
+    </div>
     <div id="order-notification" class="order-notification"></div>
       <div class="menu-search-container">
   <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
@@ -985,7 +1078,7 @@ nav ul li a:hover {
         <div class="menu-item animate-on-scroll" data-item="gravy">
             <div class="price-sticker">$6.95</div>
             <img src="https://hda-breakfast.vercel.app/IMG_0797.jpeg" loading="eager" alt="Biscuit gravy">
-            <h3 class="animate-on-scroll">Biscuits and gravy</h3>
+            <h3 class="animate-on-scroll">Biscuits and Gravy</h3>
             <p class="animate-on-scroll">With the smoothest gravy ever, this biscuits and gravy dish is like bread and butter. The biscuits are as crunchy as toast, and each bite will make you forget every bland meal you ever had!</p>
           </div>
         <div class="menu-item animate-on-scroll" data-item="burrito">
