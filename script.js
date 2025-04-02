@@ -30,10 +30,16 @@
         "servingSize": "3 waffles",
         "time": "7 minutes"
       },
+              "zhou": {
+        "displayName": "a bowl of 粥",
+        "calories": 204,
+        "servingSize": "1 bowl",
+        "time": "11 minutes"
+      },
       "burrito": {
         "displayName": "a burrito",
-        "calories": 234,
-        "servingSize": "1 roll",
+        "calories": 213,
+        "servingSize": "1 burrito",
         "time": "7 minutes"
       },
       "pancakes": {
@@ -66,11 +72,23 @@
         "servingSize": "1 cup",
         "time": "7 minutes"
       },
+        "crepes": {
+        "displayName": "3 crêpes",
+        "calories": 239,
+        "servingSize": "3 crêpes",
+        "time": "14 minutes"
+      },
         "sausage": {
         "displayName": "sausages",
         "calories": 125,
         "servingSize": "3 links",
         "time": "3 minutes"
+      },
+       "gravy": {
+        "displayName": "biscuits",
+        "calories": 274,
+        "servingSize": "2 biscuits, ½ cup of gravy",
+        "time": "10 minutes"
       },
         "smoothie": {
             "displayName": "a fruit smoothie",
@@ -144,8 +162,14 @@
         "servingSize": "1 muffin, 2 poached eggs",
         "time": "20 minutes"
       },
+      "beef-hash":{
+        "displayName": "a cup of corned beef hash",
+        "calories": 284,
+        "servingSize": "1 cup",
+        "time": "23 minutes"
+      },
     };
-/* names*/ const firstNames = ['James', 'Mary', 'John', 'Karen', 'Hector', 'Jason', 'Mason', 'Dhruv', 'Ephraim', 'Patricia', 'Robert', 'Jennifer', 'Travis', 'Michael', 'Linda', 'William', 'Elizabeth', 'Jack', 'Alex', 'Tim', 'Timmy', 'Drona'];
+/* names*/ const firstNames = ['James', 'Mary', 'John', 'Karen', 'Hector', 'Jason', 'Mason','Jordan', 'Jeremy', 'Tyler', 'Dhruv', 'Ephraim', 'Patricia', 'Penelope', 'Robert', 'Jennifer', 'Travis', 'Michael', 'Linda', 'William', 'Elizabeth', 'Jack', 'Alex', 'Tim', 'Timmy', 'Drona'];
 const lastNames = ['S.', 'J.', 'W.', 'B.', 'A.', 'M.', 'D.', 'G.', 'R.', 'C.', 'T.', 'R.', 'K.'];
     document.addEventListener('DOMContentLoaded', function() {
       // Check restaurant hours and update status
@@ -243,12 +267,9 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
       document.querySelectorAll('.animate-on-scroll').forEach(element => {
         observer.observe(element);
       });
-
-      // Smooth scrolling for navigation links
       document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-          
           const targetId = this.getAttribute('href');
           const targetElement = document.querySelector(targetId);
           
@@ -260,8 +281,7 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
               top: targetPosition,
               behavior: 'smooth'
             });
-            
-            // Close mobile menu if open
+    
             const navMenu = document.getElementById('nav-menu');
             if (navMenu.classList.contains('active')) {
               navMenu.classList.remove('active');
@@ -279,8 +299,6 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
           navMenu.classList.toggle('active');
         });
       }
-
-      // Make price stickers wiggle on hover
       document.querySelectorAll('.menu-item').forEach(item => {
         const sticker = item.querySelector('.price-sticker');
         
@@ -390,24 +408,19 @@ setInterval(updateFigurativeLanguage, 86400000); // 24 hours
       
       detectColorScheme();
     });
-// Menu Search Functionality (Name Only)
 const menuSearch = document.getElementById('menu-search');
 if (menuSearch) {
   menuSearch.addEventListener('input', function() {
     const searchTerm = this.value.toLowerCase();
     const allMenuItems = document.querySelectorAll('.menu-item');
     const allMenuSections = document.querySelectorAll('.menu-section');
-
-    // Show all if empty
     if (searchTerm === '') {
       allMenuItems.forEach(item => item.classList.remove('hidden'));
       allMenuSections.forEach(section => section.classList.remove('hidden'));
       document.getElementById('no-results-message')?.remove();
       return;
     }
-
     let hasVisibleItems = false;
-    
     allMenuSections.forEach(section => {
       const sectionItems = section.querySelectorAll('.menu-item');
       let sectionHasVisibleItems = false;
@@ -415,7 +428,7 @@ if (menuSearch) {
       sectionItems.forEach(item => {
         const itemName = item.querySelector('h3').textContent.toLowerCase();
         
-        if (itemName.includes(searchTerm)) { // Only check name now
+        if (itemName.includes(searchTerm)) {
           item.classList.remove('hidden');
           sectionHasVisibleItems = true;
         } else {
@@ -714,9 +727,10 @@ function showRandomOrder() {
   "while singing 'Africa'!",
   "and tried to pay with Monopoly money!",
   "and whispered, 'This dish... it speaks to me.'",
-  "then left a note saying, ‘Whoever made this, I hope you have a wonderful day. It tastes amazing.’",
+  "then left a note saying, ‘Whoever made this, I hope you have a wonderful day.’",
   "then bought an extra meal to give to someone in need.",
-  "and after finishing, declared it the best breakfast they’ve ever eaten."
+  "and after finishing, declared it the best breakfast they’ve ever eaten.",
+  "and took 15 pictures of the food before eating it."
   
 ];
     const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -745,10 +759,10 @@ function startOrderNotifications() {
   }
   
   function scheduleNext() {
-    const delay = Math.random() * 7000 + 3000; // 3-10 seconds
+    const delay = Math.random() * 7000 + 3000; 
     notificationInterval = setTimeout(() => {
       showRandomOrder();
-      scheduleNext(); // Schedule the next one
+      scheduleNext(); 
     }, delay);
   }
   
@@ -758,3 +772,88 @@ function startOrderNotifications() {
 }
 
 document.addEventListener('DOMContentLoaded', startOrderNotifications);
+
+// performance help
+function loadCSS(href) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+  
+  window.addEventListener('load', function() {
+    loadCSS('styles.css');
+  });
+
+  // diff expire
+  function updateOfferStatus() {
+  const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
+  if (!offerItems.length) return;
+
+  offerItems.forEach(offerItem => {
+    // Set end date to midnight at START of the end day (not end of day)
+    const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
+    const now = new Date();
+    const badge = offerItem.querySelector('.deal-badge');
+    const countdown = offerItem.querySelector('.countdown-timer');
+    
+    const timeRemaining = endDate - now;
+    
+    // If offer has ended more than 24 hours ago
+    if (timeRemaining < -86400000) {
+      offerItem.remove();
+      return;
+    }
+    
+    // If offer has ended but less than 24 hours ago
+    if (timeRemaining < 0) {
+      offerItem.classList.add('expired');
+      badge.textContent = 'Offer Ended';
+      countdown.textContent = 'This offer has ended. No need to feel down; a new offer will come out as quick as a running cheetah!';
+      return;
+    }
+    
+    // Update countdown display
+    updateCountdown(timeRemaining, countdown);
+  });
+  
+  // Update every second
+  setTimeout(updateOfferStatus, 1000);
+}
+
+function updateCountdown(timeRemaining, element) {
+  // Calculate total seconds remaining first
+  const totalSeconds = Math.floor(timeRemaining / 1000);
+  
+  // Then calculate each time component
+  const days = Math.floor(totalSeconds / (3600 * 24));
+  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+  
+  // Build the display string
+  let countdownStr = '';
+  if (days > 0) countdownStr += `${days} day${days !== 1 ? 's' : ''} `;
+  if (hours > 0 || days > 0) countdownStr += `${hours} hour${hours !== 1 ? 's' : ''} `;
+  if (minutes > 0 || hours > 0 || days > 0) countdownStr += `${minutes} minute${minutes !== 1 ? 's' : ''} `;
+  countdownStr += `${seconds} second${seconds !== 1 ? 's' : ''}`;
+  
+  element.textContent = `Time remaining: ${countdownStr.trim()}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateOfferStatus();
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        updateOfferStatus();
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  const offerSection = document.querySelector('.special-deals-banner');
+  if (offerSection) {
+    observer.observe(offerSection);
+  }
+});
