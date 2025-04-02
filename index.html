@@ -939,7 +939,16 @@ nav ul li a:hover {
   font-weight: bold;
   text-align: center;
 }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 
+.pulse {
+  animation: pulse 0.5s ease;
+  display: inline-block;
+}
 .deal-item.expired {
   opacity: 0.7;
   filter: grayscale(0.5);
@@ -1040,6 +1049,219 @@ nav ul li a:hover {
   .deal-item {
     max-width: 100%;
   }
+}
+.rewards {
+  padding: 150px 20px 100px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  position: relative;
+  top: -100px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.rewards.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rewards h2 {
+  font-size: 48px;
+  margin-bottom: 60px;
+  color: var(--text-accent);
+}
+
+.rewards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.points-display {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.points-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--price-bg);
+}
+
+.points-display h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.points-display p {
+  color: var(--text-secondary);
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+#points-counter {
+  color: var(--text-accent);
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.reward-item {
+  background: var(--bg-card);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(142, 255, 97, 0.2);
+}
+
+.reward-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border-color: rgba(142, 255, 97, 0.5);
+}
+
+.reward-item h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--text-accent);
+}
+
+.reward-item p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.reward-cost {
+  background: var(--price-bg);
+  color: var(--price-text);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.redeem-btn {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.redeem-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(142, 255, 97, 0.3);
+}
+
+.redeem-btn:disabled {
+  background: var(--text-secondary);
+  color: var(--bg-card);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Progress bar style */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--price-bg);
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rewards {
+    padding: 100px 20px 60px;
+    top: -50px;
+  }
+  
+  .rewards h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .points-display h3 {
+    font-size: 24px;
+  }
+}
+
+/* Animation for when points are added */
+@keyframes pointsAdded {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.points-added {
+  animation: pointsAdded 0.5s ease;
+}
+.animate-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+  transition-delay: var(--delay, 0s);
+}
+
+.animate-element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.points-display {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
     </style>
 </head>
@@ -1314,6 +1536,36 @@ nav ul li a:hover {
       </div>
     </div>
   </section>
+<!-- Rewards Section -->
+<section class="rewards animate-section" id="rewards">
+  <h2 class="animate-element">Loyalty Rewards</h2>
+  <div class="rewards-container">
+    <div class="points-display animate-element" style="--delay: 0.1s">
+      <h3>Your Points: <span id="points-counter">0</span></h3>
+      <p>Earn 5 points for each menu item you click!</p>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-item animate-element" style="--delay: 0.2s" data-cost="10">
+        <h3>Free Coffee</h3>
+        <p>Get a free cup of our premium coffee</p>
+        <div class="reward-cost">10 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="25">
+        <h3>Breakfast Combo</h3>
+        <p>Any entree + side + drink</p>
+        <div class="reward-cost">25 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="50">
+        <h3>VIP Breakfast</h3>
+        <p>Full breakfast for two people</p>
+        <div class="reward-cost">50 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Contact Section -->
 <section class="contact" id="contact">
     <h2 class="animate-on-scroll">Contact Us</h2>
@@ -2223,7 +2475,97 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(offerSection);
   }
 });
+function setupRewardsAnimations() {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // Animate child elements with staggered delays
+        const elements = entry.target.querySelectorAll('.animate-element');
+        elements.forEach(el => {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, parseFloat(getComputedStyle(el).getPropertyValue('--delay').replace('s', '')) * 1000);
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-section').forEach(section => {
+    sectionObserver.observe(section);
+  });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setupRewardsAnimations();
+  
+  // Your existing points system code...
+  let userPoints = parseInt(localStorage.getItem('hdaBreakfastPoints')) || 0;
+  updatePointsDisplay();
+
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+      addPoints(5);
+    });
+  });
+
+  document.querySelectorAll('.redeem-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const rewardItem = this.closest('.reward-item');
+      const cost = parseInt(rewardItem.getAttribute('data-cost'));
+      
+      if (userPoints >= cost) {
+        redeemReward(cost, rewardItem.querySelector('h3').textContent);
+      } else {
+        showCustomAlert(`You need ${cost - userPoints} more points for this reward!`);
+      }
+    });
+  });
+
+  function addPoints(points) {
+    userPoints += points;
+    updatePointsDisplay();
+    localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
+    
+    // Show smooth points notification
+    const notification = document.getElementById('order-notification');
+    notification.textContent = `+${points} points! Total: ${userPoints} points`;
+    notification.style.animation = 'none';
+    void notification.offsetWidth;
+    notification.style.animation = 'floatUp 3s ease-out forwards';
+  }
+
+  function updatePointsDisplay() {
+    const pointsDisplay = document.getElementById('points-counter');
+    if (pointsDisplay) {
+      // Add smooth counter animation
+      pointsDisplay.style.transition = 'all 0.5s ease-out';
+      pointsDisplay.textContent = userPoints;
+      
+      // Pulse animation
+      pointsDisplay.classList.add('pulse');
+      setTimeout(() => {
+        pointsDisplay.classList.remove('pulse');
+      }, 500);
+
+      // Update button states
+      document.querySelectorAll('.reward-item').forEach(item => {
+        const cost = parseInt(item.getAttribute('data-cost'));
+        const button = item.querySelector('.redeem-btn');
+        button.disabled = userPoints < cost;
+      });
+    }
+  }
+
+  function redeemReward(cost, rewardName) {
+    userPoints -= cost;
+    updatePointsDisplay();
+    localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
+    showCustomAlert(`Congratulations! You redeemed: ${rewardName}`);
+  }
+});
   </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
