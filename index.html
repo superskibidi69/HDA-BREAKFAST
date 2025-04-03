@@ -1545,13 +1545,19 @@ nav ul li a:hover {
         <div class="reward-cost">10 points</div>
         <button class="redeem-btn">Redeem</button>
       </div>
-      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="30">
+      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="15">
+        <h3>Free Dessert</h3>
+        <p>Claim a free dessert when you order a breakfast that costs more than <span class="deal-special">$6.00</span>.</p>
+        <div class="reward-cost">15 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="30">
         <h3>Breakfast Combo</h3>
-        <p>Any entree + side + drink for 80% off</p>
+        <p>Any entree + side + beverage for 60% off</p>
         <div class="reward-cost">30 points</div>
         <button class="redeem-btn">Redeem</button>
       </div>
-      <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="50">
+      <div class="reward-item animate-element" style="--delay: 0.5s" data-cost="50">
         <h3>Double Breakfast</h3>
         <p>Full breakfast for two people (1 entree for each, 2 sides for each, 1 beverage for each, and 1 dessert for each.) for <span class="deal-special">$4.49</span></p>
         <div class="reward-cost">50 points</div>
@@ -2401,16 +2407,23 @@ function loadCSS(href) {
   function updateOfferStatus() {
   const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
   if (!offerItems.length) return;
+
   offerItems.forEach(offerItem => {
+    // Set end date to midnight at START of the end day (not end of day)
     const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
     const now = new Date();
     const badge = offerItem.querySelector('.deal-badge');
     const countdown = offerItem.querySelector('.countdown-timer');
-  const timeRemaining = endDate - now;
+    
+    const timeRemaining = endDate - now;
+    
+    // If offer has ended more than 24 hours ago
     if (timeRemaining < -86400000) {
       offerItem.remove();
       return;
     }
+    
+    // If offer has ended but less than 24 hours ago
     if (timeRemaining < 0) {
       offerItem.classList.add('expired');
       badge.textContent = 'Offer Ended';
@@ -2476,6 +2489,7 @@ function setupRewardsAnimations() {
       }
     });
   }, { threshold: 0.1 });
+
   document.querySelectorAll('.animate-section').forEach(section => {
     sectionObserver.observe(section);
   });
@@ -2502,25 +2516,34 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
   function addPoints(points) {
     userPoints += points;
     updatePointsDisplay();
     localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
+    
+    // Show smooth points notification
     const notification = document.getElementById('order-notification');
     notification.textContent = `+${points} points! Total: ${userPoints} points`;
     notification.style.animation = 'none';
     void notification.offsetWidth;
     notification.style.animation = 'floatUp 3s ease-out forwards';
   }
+
   function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('points-counter');
     if (pointsDisplay) {
+      // Add smooth counter animation
       pointsDisplay.style.transition = 'all 0.5s ease-out';
       pointsDisplay.textContent = userPoints;
+      
+      // Pulse animation
       pointsDisplay.classList.add('pulse');
       setTimeout(() => {
         pointsDisplay.classList.remove('pulse');
       }, 500);
+
+      // Update button states
       document.querySelectorAll('.reward-item').forEach(item => {
         const cost = parseInt(item.getAttribute('data-cost'));
         const button = item.querySelector('.redeem-btn');
