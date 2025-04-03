@@ -1278,6 +1278,7 @@ nav ul li a:hover {
         <li><a href="#home">Home</a></li>
         <li><a href="#our-story">Our Story</a></li>
         <li><a href="#menu">Menu</a></li>
+        <li><a href="#rewards">Rewards</a></li>
         <li><a href="#contact">Contact</a></li>
         <li>⠀⠀⠀⠀</li>
       </ul>
@@ -1311,13 +1312,6 @@ nav ul li a:hover {
     <h2 class="animate-on-scroll">Our Menu</h2>
     <h3 class="animate-on-scroll" id="offer-h3">Special offers</h3>
     <div class="special-deals-banner">
-      <div class="deal-item animate-on-scroll" data-offer-end="2025-04-19">
-        <span class="deal-badge">Ends on 4/19/2025</span>
-        <h3>Meal Combo</h3>
-        <p>Choose 1 entree, 1-2 sides, and 1 beverage for <span class="deal-special">25% off</span> the total price</p>
-        <small>Weekends only</small>
-        <div class="countdown-timer"></div>
-      </div>
       <div class="deal-item animate-on-scroll" data-offer-end="2025-04-25">
         <span class="deal-badge">Ends on 4/25/2025</span>
         <h3>Early Bird Special</h3>
@@ -1327,7 +1321,7 @@ nav ul li a:hover {
       </div>
       <div class="deal-item animate-on-scroll" data-offer-end="2025-04-05">
         <span class="deal-badge">Ends on 4/05/2025</span>
-        <h3>Taste Tester Deal</h3>
+        <h3>Taste Tester Special</h3>
         <p><span class="deal-special">30% off</span> if you can guess a dish blindfolded</p>
         <small>Entrees only</small>
         <div class="countdown-timer"></div>
@@ -1538,11 +1532,11 @@ nav ul li a:hover {
   </section>
 <!-- Rewards Section -->
 <section class="rewards animate-section" id="rewards">
-  <h2 class="animate-element">Loyalty Rewards</h2>
+  <h2 class="animate-element"> Rewards</h2>
   <div class="rewards-container">
     <div class="points-display animate-element" style="--delay: 0.1s">
       <h3>Your Points: <span id="points-counter">0</span></h3>
-      <p>Earn 5 points for each menu item you click!</p>
+      <p>Earn 1 point for each menu item you click!</p>
     </div>
     <div class="rewards-grid">
       <div class="reward-item animate-element" style="--delay: 0.2s" data-cost="10">
@@ -1551,15 +1545,15 @@ nav ul li a:hover {
         <div class="reward-cost">10 points</div>
         <button class="redeem-btn">Redeem</button>
       </div>
-      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="25">
+      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="30">
         <h3>Breakfast Combo</h3>
-        <p>Any entree + side + drink</p>
-        <div class="reward-cost">25 points</div>
+        <p>Any entree + side + drink for 80% off</p>
+        <div class="reward-cost">30 points</div>
         <button class="redeem-btn">Redeem</button>
       </div>
       <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="50">
-        <h3>VIP Breakfast</h3>
-        <p>Full breakfast for two people</p>
+        <h3>Double Breakfast</h3>
+        <p>Full breakfast for two people (1 entree for each, 2 sides for each, 1 beverage for each, and 1 dessert for each.) for <span class="deal-special">$4.49</span></p>
         <div class="reward-cost">50 points</div>
         <button class="redeem-btn">Redeem</button>
       </div>
@@ -1649,7 +1643,7 @@ nav ul li a:hover {
         "time": "7 minutes"
       },
               "zhou": {
-        "displayName": "a bowl of 粥",
+        "displayName": "a bowl of 粥 (congee)",
         "calories": 204,
         "servingSize": "1 bowl",
         "time": "11 minutes"
@@ -1745,7 +1739,7 @@ nav ul li a:hover {
         "time": "8 minutes"
       },
       "oil-stick": {
-        "displayName": "a few pieces of Youtiao (Chinese Doughnut)",
+        "displayName": "a few pieces of 油条 (fried dough sticks)",
         "calories": 180,
         "servingSize": "2 sticks",
         "time": "9 minutes"
@@ -2407,23 +2401,16 @@ function loadCSS(href) {
   function updateOfferStatus() {
   const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
   if (!offerItems.length) return;
-
   offerItems.forEach(offerItem => {
-    // Set end date to midnight at START of the end day (not end of day)
     const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
     const now = new Date();
     const badge = offerItem.querySelector('.deal-badge');
     const countdown = offerItem.querySelector('.countdown-timer');
-    
-    const timeRemaining = endDate - now;
-    
-    // If offer has ended more than 24 hours ago
+  const timeRemaining = endDate - now;
     if (timeRemaining < -86400000) {
       offerItem.remove();
       return;
     }
-    
-    // If offer has ended but less than 24 hours ago
     if (timeRemaining < 0) {
       offerItem.classList.add('expired');
       badge.textContent = 'Offer Ended';
@@ -2480,8 +2467,6 @@ function setupRewardsAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        
-        // Animate child elements with staggered delays
         const elements = entry.target.querySelectorAll('.animate-element');
         elements.forEach(el => {
           setTimeout(() => {
@@ -2491,23 +2476,17 @@ function setupRewardsAnimations() {
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.animate-section').forEach(section => {
     sectionObserver.observe(section);
   });
 }
-
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   setupRewardsAnimations();
-  
-  // Your existing points system code...
   let userPoints = parseInt(localStorage.getItem('hdaBreakfastPoints')) || 0;
   updatePointsDisplay();
-
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', function() {
-      addPoints(5);
+      addPoints(1);
     });
   });
 
@@ -2523,34 +2502,25 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
   function addPoints(points) {
     userPoints += points;
     updatePointsDisplay();
     localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
-    
-    // Show smooth points notification
     const notification = document.getElementById('order-notification');
     notification.textContent = `+${points} points! Total: ${userPoints} points`;
     notification.style.animation = 'none';
     void notification.offsetWidth;
     notification.style.animation = 'floatUp 3s ease-out forwards';
   }
-
   function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('points-counter');
     if (pointsDisplay) {
-      // Add smooth counter animation
       pointsDisplay.style.transition = 'all 0.5s ease-out';
       pointsDisplay.textContent = userPoints;
-      
-      // Pulse animation
       pointsDisplay.classList.add('pulse');
       setTimeout(() => {
         pointsDisplay.classList.remove('pulse');
       }, 500);
-
-      // Update button states
       document.querySelectorAll('.reward-item').forEach(item => {
         const cost = parseInt(item.getAttribute('data-cost'));
         const button = item.querySelector('.redeem-btn');
