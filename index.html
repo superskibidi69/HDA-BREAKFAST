@@ -2396,52 +2396,35 @@ function startOrderNotifications() {
 }
 
 document.addEventListener('DOMContentLoaded', startOrderNotifications);
-
-// performance help
 function loadCSS(href) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = href;
     document.head.appendChild(link);
   }
-  
-  window.addEventListener('load', function() {
-    loadCSS('styles.css');
-  });
-
   // diff expire
   function updateOfferStatus() {
   const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
   if (!offerItems.length) return;
 
   offerItems.forEach(offerItem => {
-    // Set end date to midnight at START of the end day (not end of day)
     const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
     const now = new Date();
     const badge = offerItem.querySelector('.deal-badge');
     const countdown = offerItem.querySelector('.countdown-timer');
-    
     const timeRemaining = endDate - now;
-    
-    // If offer has ended more than 24 hours ago
     if (timeRemaining < -86400000) {
       offerItem.remove();
       return;
     }
-    
-    // If offer has ended but less than 24 hours ago
     if (timeRemaining < 0) {
       offerItem.classList.add('expired');
       badge.textContent = 'Offer Ended';
       countdown.textContent = 'This offer has ended. No need to feel down; a new offer will come out as quick as a running cheetah!';
       return;
     }
-    
-    // Update countdown display
     updateCountdown(timeRemaining, countdown);
   });
-  
-  // Update every second
   setTimeout(updateOfferStatus, 1000);
 }
 
@@ -2527,8 +2510,6 @@ document.addEventListener('DOMContentLoaded', function() {
     userPoints += points;
     updatePointsDisplay();
     localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
-    
-    // Show smooth points notification
     const notification = document.getElementById('order-notification');
     notification.textContent = `+${points} points! Total: ${userPoints} points`;
     notification.style.animation = 'none';
@@ -2539,17 +2520,12 @@ document.addEventListener('DOMContentLoaded', function() {
   function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('points-counter');
     if (pointsDisplay) {
-      // Add smooth counter animation
       pointsDisplay.style.transition = 'all 0.5s ease-out';
       pointsDisplay.textContent = userPoints;
-      
-      // Pulse animation
       pointsDisplay.classList.add('pulse');
       setTimeout(() => {
         pointsDisplay.classList.remove('pulse');
       }, 500);
-
-      // Update button states
       document.querySelectorAll('.reward-item').forEach(item => {
         const cost = parseInt(item.getAttribute('data-cost'));
         const button = item.querySelector('.redeem-btn');
