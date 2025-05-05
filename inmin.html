@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="HDA Breakfast - A school project restaurant serving delicious figurative breakfast dishes like bacon, waffles, and fresh orange juice. Explore our figurative menu!">
+  <meta name="keywords" content="breakfast restaurant, school project, HDA Breakfast, waffles, bacon, pancakes, orange juice, imaginary restaurant">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HDA Breakfast">
+  <meta property="og:description" content="Discover HDA Breakfast's goofy menu - from golden waffles to crispy bacon. A school project turned imaginary restaurant!">
+  <meta property="og:image" content="https://hda-breakfast.vercel.app/banner.jpeg">
+  <meta property="og:url" content="https://hda-breakfast.vercel.app/">
+  <link rel="canonical" href="https://hda-breakfast.vercel.app/">
+  <meta name="google-site-verification" content="XhMe-Xj6dd2dw2KH4skT37mX2ScCW-wiNdq7iAceEaw" />
+  <title>HDA Breakfast</title>
+  <link rel="icon" href="https://hda-breakfast.vercel.app/android-chrome-512x512.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="csswrapper.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://hda-breakfast.vercel.app/cooltext478980411259758.png">
+    </div>
+    <nav>
+      <div class="menu-toggle" id="mobile-menu">
+        <span>&#9776;</span>
+      </div>
+      <ul id="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#our-story">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#rewards">Rewards</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>⠀⠀⠀⠀</li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+   <video autoplay muted loop playsinline webkit-playsinline x-webkit-airplay="allow" preload="auto" id="bg-video">
+  <source src="https://hda-breakfast.vercel.app/hero.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+    <div class="hero-content">
+      <h1 class="animate__animated animate__fadeInDownBig">Welcome to HDA Breakfast</h1>
+      <div id="hours-status" class="hours-status"></div>
+      <p class="animate__animated animate__fadeInUpBig animate__delay-1s">We make your food, so you can be a couch potato and not do it</p>
+      <b>Note: this is not a real restaurant, and only for a school project.</b>
+        <div id="figurative-language" class="hours-status"></div>
+    </div>
+    <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </section>
+  <div class="transition"></div>
+  <section class="our-story" id="our-story">
+    <h2 class="animate-on-scroll">Our Story</h2>
+    <p class="animate-on-scroll">
+      HDA Breakfast was founded in 2025 by three students with a simple mission: to provide the most figurative breakfast possible. Our journey began in a language arts class, where we created this for a project. Today, we are proud to serve our class with a menu that combines humor and work, using only the freshest ingredients. Whether you're here for our not so famous bacon, stiff pancakes, or smashed orange juice, we attempt to make every meal a goofy one. Thank you for being a skibidi customer!
+    </p>
+  </section>
+  <section class="menu" id="menu">
+    <h2 class="animate-on-scroll">Our Menu</h2>
+    <h3 class="animate-on-scroll" id="offer-h3">Special offers</h3>
+    <div class="special-deals-banner">
+      <div class="deal-item animate-on-scroll" data-offer-end="2025-05-15">
+        <span class="deal-badge">Ends on 5/15/2025</span>
+        <h3>Early Bird Special</h3>
+        <p><span class="deal-special">10% off</span> all orders before 7:30 AM</p>
+        <small>Weekdays only</small>
+        <div class="countdown-timer"></div>
+      </div>
+      <div class="deal-item animate-on-scroll" data-offer-end="2025-04-30">
+        <span class="deal-badge">Ends on 4/30/2025</span>
+        <h3>Taste Tester Special</h3>
+        <p><span class="deal-special">30% off</span> if you can guess a dish blindfolded</p>
+        <small>Entrees only</small>
+        <div class="countdown-timer"></div>
+      </div>
+    </div>
+    <div id="order-notification" class="order-notification"></div>
+      <div class="menu-search-container">
+  <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
+  <i class="fas fa-search"></i>
+</div>
+<div class="food-fight-container">
+    <button id="food-fight-btn" aria-label="Order Online">
+      <i class="fas fa-utensils"></i> Order online
+    </button>
+  </div>
+   <!-- Entrees -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Entrees</h3>
+      <div class="menu-items">
+        <div class="menu-item animate-on-scroll" data-item="gravy">
+            <div class="price-sticker">$6.95</div>
+            <img src="https://hda-breakfast.vercel.app/IMG_0797.jpeg" loading="eager" alt="Biscuit gravy">
+            <h3 class="animate-on-scroll">Biscuits and Gravy</h3>
+            <p class="animate-on-scroll">With the smoothest gravy ever, this biscuits and gravy dish is like bread and butter. The biscuits are as crunchy as toast, and each bite will make you forget every bland meal you ever had!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="burrito">
+            <div class="price-sticker">$4.99</div>
+            <img src="https://hda-breakfast.vercel.app/BreakfastBurritos_13.jpg" loading="lazy" alt="Burrito">
+            <h3 class="animate-on-scroll">Burrito</h3>
+            <p class="animate-on-scroll">Our breakfast burrito is so delicious, it could make an earthquake stop to take another bite! The ingredients are wrapped like in a sleeping bag. With fresh ingredients, this is the tastiest burrito in the world!</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="beef-hash">
+            <div class="price-sticker">$10.00</div>
+            <img src="https://hda-breakfast.vercel.app/Corned_Beef_Hash_Pan.jpg" loading="lazy" alt="Corned Beef hash">
+            <h3 class="animate-on-scroll">Corned Beef Hash</h3>
+            <p class="animate-on-scroll">Sprinkled with fresh spices even Gordon Ramsay would be jealous of, our corned beef hash is like no other. All of the ingredients will cause a painting in your mouth! Our hash has a flavor that is uniquely ours.</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="benedict">
+            <div class="price-sticker">$5.99</div>
+            <img src="https://hda-breakfast.vercel.app/Eggs-Benedict-FT-RECIPE0123-4f5f2f2544464dc89a667b5d960603b4.jpg" loading="lazy" alt="Eggs Benedict">
+            <h3 class="animate-on-scroll">Eggs Benedict</h3>
+            <p class="animate-on-scroll">Muffins mixed with the most memorable eggs, our eggs Benedict dish has the best flavors ever. It's made mildly salty, so its like machine-made. Made from fresh, savory muffins, a poached egg, and our special sauce.</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="french-toast">
+          <div class="price-sticker">$7.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0751.jpeg" loading="lazy" alt="French Toast">
+          <h3 class="animate-on-scroll">French Toast</h3>
+          <p class="animate-on-scroll">From the oven, French toast's flavors flip a bad day upside down. This dish consists of toast with freshly gathered honey, butter, and fruits. The sweetness of the toast will melt in your mouth, and it will fill your tastebuds with joy.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="hash-browns">
+          <div class="price-sticker">$5.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0754.jpeg" loading="lazy" alt="Hash brown">
+          <h3 class="animate-on-scroll">Hash browns</h3>
+          <p class="animate-on-scroll">Our hash browns are perfectly cooked to the perfect golden brown color. They will make you want to take the whole supply home! They almost look like they are made of plastic! But that's just the perfect job our chef did!</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="oatmeal">
+            <div class="price-sticker">$5.49</div>
+            <img src="https://hda-breakfast.vercel.app/oatmeal.jpg" loading="lazy" alt="Oatmeal">
+            <h3 class="animate-on-scroll">Oatmeal</h3>
+            <p class="animate-on-scroll">Our oatmeal is the creamiest oatmeal ever, it is like eating a cloud. With fruit of your choice added, this is the best oatmeal in the world! It is so good, it almost feels like it was generated by artificial intelligence!</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="ome">
+          <div class="price-sticker">$7.00</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0793.jpeg" loading="lazy" alt="An Omelette">
+          <h3 class="animate-on-scroll">Omelette</h3>
+          <p class="animate-on-scroll">Stuffed with delicious fillings that can be modified upon request, this omelette is a unique dish that has many contrasting flavors, like a bookshelf's books. This omellete will bring immense joy to you!</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="pancakes">
+          <div class="price-sticker">$5.98</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0755.jpeg" loading="lazy" alt="Pancakes">
+          <h3 class="animate-on-scroll">Pancakes</h3>
+          <p class="animate-on-scroll">Best pancakes you will ever eat! Our pancakes are always freshly made with homemade syrup and whipped cream! Our pancakes will make you cry tears of joy!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="waffles">
+          <div class="price-sticker">$5.98</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0749.jpeg" loading="lazy" alt="Waffles">
+          <h3 class="animate-on-scroll">Waffles</h3>
+          <p class="animate-on-scroll">Mmm! Our waffles are like icing on cake for your general breakfast. It is a stack of 4 waffles, and each have a unique fruit taste that will steal the spotlight.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="zhou">
+          <div class="price-sticker">$6.00</div>
+          <img src="https://hda-breakfast.vercel.app/08c81ab41cccafa4.jpg" loading="lazy" alt="Congee/zhou">
+          <h3 class="animate-on-scroll">粥 (Congee)</h3>
+          <p class="animate-on-scroll">This is the best soup you will ever taste! It has a rich, creamy rice topped with meat, vegetables, eggs, or other foods. Each food will cause a flavor battle in your mouth, and the most delicious gets to be eaten.</p>
+        </div>
+    </div>
+    </div>
+    <!-- Sides -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Sides</h3>
+      <div class="menu-items">
+        <div class="menu-item animate-on-scroll" data-item="bacon">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0752.jpeg" loading="lazy" alt="Bacon">
+          <h3 class="animate-on-scroll">Bacon</h3>
+          <p class="animate-on-scroll">This bacon is as tasty as the finest cuisine. With the perfect balance of the best oil in the world and meat, this bacon will dance around on your tastebuds. They will sizzle like a firecracker in a pan. It tastes like it was made by Jamie Oliver in a Michelin-star restaurant!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="fruit-bowl">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0756.jpeg" loading="lazy" alt="Fruit bowl">
+          <h3 class="animate-on-scroll">Fruit bowl</h3>
+          <p class="animate-on-scroll">Come enjoy our fresh fruit bowl, our fruit bowl is the best. It's the most amazing and fresh fruit you will ever have! The fresh flavor will dance on your tongue! Our fruit bowl has a fresh fruit flavor and is a favorites. Try our fruit, it's the best fruit you will ever have.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="fry-dumpblings-jam">
+          <div class="price-sticker">$2.99</div>
+          <img src="https://hda-breakfast.vercel.app/Jamaican-Fried-Dumpling_Featured-Image.jpg" loading="lazy" alt="Jamaican Fried Dumplings">
+          <h3 class="animate-on-scroll">Jamaican Fried Dumplings</h3>
+          <p class="animate-on-scroll">These dumplings are like golden little pillows of happiness, crispy on the outside and soft on the inside. With a buttery flavor that melts in your mouth, this dumpling will dance on your tastebuds. Yum!</p>
+        </div>      
+         <div class="menu-item animate-on-scroll" data-item="sausage">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0788.webp" loading="lazy" alt="sausage link">
+          <h3 class="animate-on-scroll">Sausage Links</h3>
+          <p class="animate-on-scroll">Seasoned with the freshest spices in the world, our sausage links will provide a unique taste that will be an amazing side dish. It's cooked to the perfect golden brown color, and has a crunchy outer shell. Paired with french toast, this dish is like 2 peas in a pod.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="muffin">
+            <div class="price-sticker">$2.99</div>
+            <img src="https://hda-breakfast.vercel.app/savoury-breakfast-muffins-recipe-header.jpg" alt="Muffin">
+            <h3 class="animate-on-scroll">Savory Muffin</h3>
+            <p class="animate-on-scroll">With ingredients as delicious as watermelon on a hot day, our muffin is baked perfectly to a golden color. With a recipe that is as sacred as the bible, this dish is uniquely ours. Each puff is the muffin improving itself, until it is suited for all your requests!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="sunny-side-up">
+          <div class="price-sticker">$2.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0753.jpeg" loading="lazy" alt="Sunny Side Up">
+          <h3 class="animate-on-scroll">Sunny side up</h3>
+          <p class="animate-on-scroll">Our sunny side up eggs are the best of the best top tier eggs, they taste better than any other eggs you will ever have! And they always come to your plate straight from a sizzling pan with butter and the best seasoning that is sprinkled by an expert chef!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="oil-stick">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/Youtiao.jpg" loading="lazy" alt="Youtiao (Chinese donut)">
+          <h3 class="animate-on-scroll">油条 (Fried Dough Sticks)</h3>
+          <p class="animate-on-scroll">Our 油条, or Fried dough sticks, is the tastiest stick ever. With freshly rolled dough fried in oil, this is the perfect dish when paired with any type of milk. Perfect for picky children, it is like a combination of fries and bread.</p>
+        </div>
+      </div>
+    </div>
+  <!-- Beverages -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Beverages</h3>
+      <div class="menu-items">
+                  <div class="menu-item animate-on-scroll" data-item="chocolate-milk">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0757.jpeg" loading="lazy" alt="Chocolate milk">
+          <h3 class="animate-on-scroll">Chocolate milk</h3>
+          <p class="animate-on-scroll">Our chocolate milk is as fresh as a shiny coin, and the chocolate is from cocoa beans that are carefully harvested. Cooked with a low temperature, drinking it will put you on cloud nine.</p>
+        </div>
+           <div class="menu-item animate-on-scroll" data-item="coffee">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0761.jpeg" loading="lazy" alt="coffee">
+          <h3 class="animate-on-scroll">Coffee</h3>
+          <p class="animate-on-scroll">This coffee is as warm as a sauna. The coffee beans are fresh from the field. We offer different roast levels, and have many varieties based on request. Our premium coffee beans are fresh from brazil.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="icelandic-water">
+          <div class="price-sticker">$0.99</div>
+          <img src="https://hda-breakfast.vercel.app/Water.jpeg" loading="lazy" alt="Icelandic bottled water">
+          <h3 class="animate-on-scroll">Icelandic water</h3>
+          <p class="animate-on-scroll">Ice cold Icelandic water that tastes as fresh as glacier water, and as cold as a mountain top. Icelandic water will cool you down. It tastes just like Gatorade, but healthier and 1000 times more refreshing.</p>
+       </div>
+           <div class="menu-item animate-on-scroll" data-item="milk">
+            <div class="price-sticker">$2.99</div>
+            <img src="https://cdn.britannica.com/77/200377-050-4326767F/milk-splashing-glass.jpg" loading="lazy" alt="milk">
+            <h3 class="animate-on-scroll">Milk</h3>
+            <p class="animate-on-scroll">Fresh cow milk to start your day off, with nutriets as beneficial as an umbrella on a rainy day. Our cows are grass-fed, and with no antibiotics. It is the best milk in the world, and can't get more delicious!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="orange-juice">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0759.jpeg" loading="lazy" alt="orange juice">
+          <h3 class="animate-on-scroll">Orange juice</h3>
+          <p class="animate-on-scroll">It comes from the farm, where carefully harvested. We have the best orange juice ever made, the freshest and tastiest orange juice and it's all organic. Freshly squeezed right into your cup. Now, you can enjoy it.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="smoothie">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/smothie.webp" loading="lazy" alt="A smoothie">
+          <h3 class="animate-on-scroll">Smoothies</h3>
+          <p class="animate-on-scroll">Made from the freshest fruits, and blended with almond milk, we offer a million flavors that are the best in the world. We will modify a smoothie, and change it to the perfect mix. It's creamy and rich, and filled with nutrition.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="yogurt">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/Yogurt.jpeg" loading="lazy" alt="Yogurt">
+          <h3 class="animate-on-scroll">Yogurt</h3>
+          <p class="animate-on-scroll">Our yogurt's taste is the best in the world. We have a million flavors, including different fruit, and it is a delicious luxury. It is made from grass-fed cows' milk, and will have you finish it in 1 second. Each spoonful is like a flavor explosion in your mouth!</p>
+        </div>
+      </div>
+    </div>
+      <!-- dessert -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Pastries</h3>
+      <div class="menu-items">
+             <div class="menu-item animate-on-scroll" data-item="cinnamon">
+            <div class="price-sticker">$4.59</div>
+            <img src="https://hda-breakfast.vercel.app/cinnamon.png" loading="lazy" alt="Cinnamon Roll">
+            <h3 class="animate-on-scroll">Cinnamon Roll</h3>
+            <p class="animate-on-scroll">With a unique flavor you won't find anywhere else, this cinnamon roll has all the most delicious spices in it. The texture starts out crunchy like a chip, and then it reveals a soft, creamy center.</p>
+          </div>
+              <div class="menu-item animate-on-scroll" data-item="crepes">
+            <div class="price-sticker">$5.00</div>
+            <img src="crepe.png" loading="lazy" alt="Crepes">
+            <h3 class="animate-on-scroll">Crêpes</h3>
+            <p class="animate-on-scroll">These crêpes are so good, you’ll forget your own name after the first bite! Crispy edges, chewy middle, and fillings so delicious that they should be illegal. It looks like plastic, but it's just our chef's talent!</p>
+          </div>
+              <div class="menu-item animate-on-scroll" data-item="cross">
+            <div class="price-sticker">$3.99</div>
+            <img src="https://hda-breakfast.vercel.app/croissant.jpg" loading="lazy" alt="croissant">
+            <h3 class="animate-on-scroll">Croissant</h3>
+            <p class="animate-on-scroll">Our croissant is as good as gold, with a flaky outer shell that crumbles like toast with each bite. Its crisp shell hides soft, buttery layers that are as fluffy as a pillow. It is almost like a sculpture, but it is our chef's specialty.</p>
+          </div>
+      </div>
+    </div>
+  </section>
+<!-- Rewards Section -->
+<section class="rewards animate-section" id="rewards">
+  <h2 class="animate-element"> Rewards</h2>
+  <div class="rewards-container">
+    <div class="points-display animate-element" style="--delay: 0.1s">
+      <h3>Your Points: <span id="points-counter">0</span></h3>
+      <p>Earn 1 point for each menu item you click!</p>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-item animate-element" style="--delay: 0.2s" data-cost="10">
+        <h3>Free Coffee</h3>
+        <p>Get a <span class="deal-special">free</span> cup of our premium coffee</p>
+        <div class="reward-cost">10 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="15">
+        <h3>Free Dessert</h3>
+        <p>Claim a free dessert when you order a breakfast that costs more than <span class="deal-special">$6.00</span></p>
+        <div class="reward-cost">15 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="30">
+        <h3>Breakfast Combo</h3>
+        <p>Any entree + side + beverage for <span class="deal-special">60%</span> off</p>
+        <div class="reward-cost">30 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.5s" data-cost="50">
+        <h3>Double Breakfast</h3>
+        <p>Full breakfast for two people (1 entree for each, 2 sides for each, 1 beverage for each, and 1 dessert for each.) for <span class="deal-special">$4.49</span></p>
+        <div class="reward-cost">50 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+        <div class="reward-item animate-element" style="--delay: 0.6s" data-cost="120">
+        <h3>Breakfast Buffet</h3>
+        <p>Mix and make your own breakfast for <span class="deal-special">$10.75</span></p>
+        <div class="reward-cost">120 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2 class="animate-on-scroll">Contact Us</h2>
+    <form id="contact-form" class="animate-on-scroll">
+      <div class="form-group">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" required placeholder="Your Email">
+      </div>
+      <div class="form-group">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" rows="5" required placeholder="Your Message"></textarea>
+      </div>
+      <button type="submit" id="submit-contact">Send Message</button>
+    </form>
+    <div id="contact-confirmation" style="display: none;">
+      <h3>Thank you for your message!</h3>
+      <p>We'll get back to you soon.</p>
+    </div>
+  </section>
+  <!-- Modal Popup -->
+  <div class="modal-overlay" id="item-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-modal">&times;</span>
+      <div class="modal-header">
+        <img class="modal-image" id="modal-image" src="" alt="">
+        <div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="modal-price" id="modal-price"></div>
+        </div>
+      </div>
+      <p class="modal-description" id="modal-description"></p>
+      <h3 class="nutrition-title">Nutrition Facts</h3>
+      <div class="nutrition-facts" id="nutrition-facts">
+      </div>
+    </div>
+  </div>
+  <div id="custom-alert" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 99999; text-align: center;">
+    <p style="margin: 0; font-size: 18px; color: var(--text-primary);">Haha, get pranked!</p>
+    <button id="close-alert" style="margin-top: 15px; padding: 8px 20px; background: var(--price-bg); color: var(--price-text); border: none; border-radius: 5px; cursor: pointer;">OK</button>
+  </div>
+  <div id="alert-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99998;"></div>
+  <audio id="sizzle-sound" preload="auto" loop>
+    <source src="https://hda-breakfast.vercel.app/sizzle.mp3" type="audio/mpeg">
+  </audio>
+  <script defer src="script.min.js"></script>
+</body>
+</html>
