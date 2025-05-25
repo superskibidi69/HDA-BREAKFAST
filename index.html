@@ -1290,11 +1290,6 @@ nav ul li a:hover {
     <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
       <i class="fab fa-github"></i>
     </a>
-    <section id="dish-of-the-day" class="menu-section" style="text-align:center; padding: 60px 20px;">
-  <h2 style="color: var(--text-accent);">Your Dish of the Day</h2>
-  <div id="dish-container" style="margin-top: 20px;"></div>
-</section>
-
   </section>
   <div class="transition"></div>
   <section class="our-story" id="our-story">
@@ -2540,25 +2535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
     showCustomAlert(`Congratulations! You redeemed: ${rewardName}`);
   }
-});
-    document.addEventListener("DOMContentLoaded", function () {
-  const dishes = Object.entries(menuItems);
-  const today = new Date();
-  const dayIndex = today.getDate() % dishes.length; // Deterministic but rotates daily
-
-  const [key, dish] = dishes[dayIndex];
-  const imageSrc = document.querySelector(`.menu-item[data-item="${key}"] img`)?.src || '';
-  const description = document.querySelector(`.menu-item[data-item="${key}"] p`)?.textContent || '';
-
-  const container = document.getElementById("dish-container");
-  container.innerHTML = `
-    <div style="max-width: 400px; margin: 0 auto; background: var(--bg-card); border-radius: 15px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-      <img src="${imageSrc}" alt="${dish.displayName}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;" />
-      <h3 style="color: var(--text-accent); margin-top: 15px;">${dish.displayName}</h3>
-      <p style="color: var(--text-secondary); font-size: 15px;">${description}</p>
-      <div style="margin-top: 10px; font-weight: bold; color: var(--price-bg);">${dish.calories} calories · ${dish.servingSize}</div>
-    </div>
-  `;
 });
   </script>
 </body>
