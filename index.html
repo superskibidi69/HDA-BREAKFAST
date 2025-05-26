@@ -919,7 +919,6 @@ nav ul li a:hover {
     grid-template-columns: 1fr;
   }
 }
-/* Special Deals Banner */
 .special-deals-banner {
   display: flex;
   justify-content: center;
@@ -963,23 +962,19 @@ nav ul li a:hover {
   background: var(--bg-card);
   border-radius: 15px;
   padding: 20px;
-  width: calc(33.333% - 20px); /* Three items per row accounting for gap */
+  width: calc(33.333% - 20px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
-  margin-bottom: 20px; /* Add bottom margin for when items wrap */
+  margin-bottom: 20px;
 }
-
-/* For two items per row on medium screens */
 @media (max-width: 900px) {
   .deal-item {
     width: calc(50% - 20px);
   }
 }
-
-/* Single column on mobile */
 @media (max-width: 600px) {
   .deal-item {
     width: 100%;
@@ -1036,8 +1031,6 @@ nav ul li a:hover {
   display: block;
   margin-top: 5px;
 }
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .special-deals-banner {
     align-items: center;
@@ -1230,8 +1223,6 @@ nav ul li a:hover {
     font-size: 24px;
   }
 }
-
-/* Animation for when points are added */
 @keyframes pointsAdded {
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }
@@ -1284,7 +1275,7 @@ nav ul li a:hover {
   <!-- Hero Section -->
   <section class="hero" id="home">
    <video autoplay muted loop playsinline webkit-playsinline x-webkit-airplay="allow" preload="auto" id="bg-video">
-  <source src="https://hda-breakfast.vercel.app/hero.mp4" type="video/mp4">
+  <source src="hero.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
     <div class="hero-content">
@@ -1321,6 +1312,13 @@ nav ul li a:hover {
         <h3>Taste Tester Special</h3>
         <p><span class="deal-special">20% off</span> if you can guess a dish blindfolded</p>
         <small>Entrees only</small>
+        <div class="countdown-timer"></div>
+      </div>
+        <div class="deal-item animate-on-scroll" data-offer-end="2025-06-25">
+        <span class="deal-badge">Ends on 6/15/2025</span>
+        <h3>Pastry for a Post</h3>
+        <p>Earn a <span class="deal-special">free</span> pastry if you share about us on social media</p>
+        <small>Must show proof to a staff member, limited one free pastry per person</small>
         <div class="countdown-timer"></div>
       </div>
     </div>
@@ -1388,13 +1386,13 @@ nav ul li a:hover {
         </div>
           <div class="menu-item animate-on-scroll" data-item="pancakes">
           <div class="price-sticker">$5.98</div>
-          <img src="https://hda-breakfast.vercel.app/IMG_0755.jpeg" loading="lazy" alt="Pancakes">
+          <img src="IMG_0755.jpeg" loading="lazy" alt="Pancakes">
           <h3 class="animate-on-scroll">Pancakes</h3>
           <p class="animate-on-scroll">Best pancakes you will ever eat! Our pancakes are always freshly made with homemade syrup and whipped cream! Our pancakes will make you cry tears of joy!</p>
         </div>
         <div class="menu-item animate-on-scroll" data-item="waffles">
           <div class="price-sticker">$5.98</div>
-          <img src="https://hda-breakfast.vercel.app/IMG_0749.jpeg" loading="lazy" alt="Waffles">
+          <img src="/IMG_0749.jpeg" loading="lazy" alt="Waffles">
           <h3 class="animate-on-scroll">Waffles</h3>
           <p class="animate-on-scroll">Mmm! Our waffles are like icing on cake for your general breakfast. It is a stack of 4 waffles, and each have a unique fruit taste that will steal the spotlight.</p>
         </div>
@@ -1856,14 +1854,8 @@ function updateFigurativeLanguage() {
       example: "Our breakfast burrito is the best thing since sliced bread!"
     }
   ];
-  
-  // Get day of week (0-6)
   const day = new Date().getDay();
-  
-  // Get today's figurative language
   const language = figurativeLanguageTypes[day];
-  
-  // Update the element
   const languageElement = document.getElementById('figurative-language');
   languageElement.innerHTML = `
     <strong>Today's Figurative Language:</strong> ${language.type}<br>
@@ -1872,11 +1864,7 @@ function updateFigurativeLanguage() {
   languageElement.style.opacity = '0';
   languageElement.style.animation = 'fadeIn 2s ease-out forwards';
 }
-
-// Initial update
 updateFigurativeLanguage();
-
-// Update every day at midnight (in case page stays open)
 setInterval(updateFigurativeLanguage, 86400000); // 24 hours
  
       const observer = new IntersectionObserver((entries) => {
@@ -2356,27 +2344,21 @@ function showRandomOrder() {
   "then left a note saying, ‘Whoever made this, I hope you have a wonderful day.’",
   "then bought an extra meal to give to someone in need.",
   "and after finishing, declared it the best breakfast they’ve ever eaten.",
-  "and took 15 pictures of the food before eating it."
-  
+  "and took 15 pictures of the food before eating it.",
+  "and created a video tagged with #hdabreakfast on YouTube!"
 ];
     const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   const randomComment = funnyComments[Math.floor(Math.random() * funnyComments.length)];
-
-  // Reset animation
   notification.style.animation = 'none';
-  void notification.offsetWidth; // Trigger reflow
+  void notification.offsetWidth;
   notification.textContent = `${randomFirstName} ${randomLastName} just ordered ${itemName} ${randomComment}`;
-  
   isNotificationShowing = true;
   notification.style.animation = 'floatUp 4.7329383829293s ease-out forwards';
-
-  // Reset flag when animation completes
   notification.addEventListener('animationend', () => {
     isNotificationShowing = false;
   }, { once: true });
-
-  console.log('New order:', randomFirstName, randomLastName, itemName); 
+  console.log(' order:', randomFirstName, randomLastName, itemName); 
 }
 
 function startOrderNotifications() {
