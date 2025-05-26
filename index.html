@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.error('Service Worker registration failed', err));
+  }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <meta name="robots" content="index, follow">
@@ -2537,19 +2544,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
   </script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker
-        .register('/service-worker.js')
-        .then(function (registration) {
-          console.log('yay service Worker registered with scope:', registration.scope);
-        })
-        .catch(function (error) {
-          console.error('service Worker registration failed, aw man', error);
-        });
-    });
-  }
-</script>
 </body>
 </html>
