@@ -1,5 +1,4 @@
-// service-worker.js
-const CACHE_NAME = 'hda-cache-v1';
+const CACHE_NAME = 'hda';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -8,6 +7,7 @@ const urlsToCache = [
   '/hero.mp4',
   '/sizzle.mp3',
   '/manifest.json',
+  'Corned_Beef_Hash_Pan.jpg'
 ];
 
 self.addEventListener('install', (event) => {
