@@ -1,12 +1,23 @@
-const CACHE_NAME = 'hda-breakfast-v1';
-const MAX_ITEMS = 100; // Limit total number of cached requests
+const CACHE_NAME = 'hda-breakfast-v2';
+const MAX_ITEMS = 100;
 
-// Clean up old cache keys
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.addAll([
+        '/offline.html',
+        '/' // Ensures root is available
+      ])
+    )
+  );
+  self.skipWaiting();
+});
+
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
+    caches.keys().then((keys) =>
       Promise.all(
-        keys.map(key => {
+        keys.map((key) => {
           if (key !== CACHE_NAME) return caches.delete(key);
         })
       )
@@ -15,38 +26,35 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Cache everything dynamically with cleanup
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) return cachedResponse;
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
 
       return fetch(event.request)
         .then((response) => {
           const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, cloned);
-            cleanUpCache(cache); // cleanup logic here
+            cleanUpCache(cache);
           });
           return response;
         })
-        .catch(() =>
-          new Response('Offline or resource unavailable.', {
-            status: 503,
-            statusText: 'Service Unavailable',
-          })
-        );
+        .catch(() => {
+          if (event.request.mode === 'navigate') {
+            return caches.match('/offline.html');
+          }
+          return new Response('', { status: 204 });
+        });
     })
   );
 });
 
-// Cache cleanup helper: enforce MAX_ITEMS
 async function cleanUpCache(cache) {
   const keys = await cache.keys();
   if (keys.length > MAX_ITEMS) {
-    // Delete oldest entries
     await cache.delete(keys[0]);
   }
 }
