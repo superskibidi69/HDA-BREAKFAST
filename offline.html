@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - HDA Breakfast</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap">
+  <style>
+    :root {
+      --text-primary: #fff;
+      --text-secondary: #cfcfcf;
+      --text-accent: #8eff61;
+      --bg-primary: linear-gradient(135deg, #1a1a1a, #2c3e50);
+      --bg-card: #383838;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .offline-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .offline-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: var(--text-accent);
+    }
+
+    .offline-card p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .offline-card img {
+      margin-top: 20px;
+      width: 100px;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 8px var(--text-accent));
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-card">
+    <h1>You're Offline</h1>
+    <p>Looks like you're not connected to the internet.<br>
+    Please check your connection and try again.</p>
+    <img src="favicon.png" alt="HDA Breakfast Logo">
+  </div>
+</body>
+</html>
