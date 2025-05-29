@@ -12,6 +12,9 @@ self.addEventListener('install', (event) => {
         '/Corned_Beef_Hash_Pan.jpg',
         '/IMG_0749.jpeg',
         '/IMG_0752.jpeg',
+        '/milk.jpeg',
+        '/hero.mp4',
+        '/favicon.png'
       ])
     )
   );
