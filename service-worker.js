@@ -1,12 +1,17 @@
 const CACHE_NAME = 'hda-breakfast-v2';
-const MAX_ITEMS = 100;
+const MAX_ITEMS = 150;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
       cache.addAll([
         '/offline.html',
-        '/' // Ensures root is available
+        '/',
+        '/index.html',
+        '/BreakfastBurritos_13.jpg',
+        '/Corned_Beef_Hash_Pan.jpg',
+        '/IMG_0749.jpeg',
+        '/IMG_0752.jpeg',
       ])
     )
   );
