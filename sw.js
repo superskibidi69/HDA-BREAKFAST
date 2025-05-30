@@ -1,5 +1,5 @@
 const CACHE_NAME = 'hda-breakfast-v2';
-const MAX_ITEMS = 150;
+const MAX_ITEMS = 500;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
