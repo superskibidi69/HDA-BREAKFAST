@@ -35,22 +35,16 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   const isImage = IMAGE_EXTENSIONS.some(ext => url.pathname.endsWith(`.${ext}`));
-  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm');
-
-  // Skip non-GET requests and Vercel analytics
+  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm') || url.pathname.endsWith('.mov');
   if (event.request.method !== 'GET' || url.pathname.startsWith('/_vercel')) {
     return;
   }
-
-  // Special handling for videos
   if (isVideo) {
     event.respondWith(
       cacheFirstWithRefresh(event.request, VIDEO_CACHE)
     );
     return;
   }
-
-  // Cache-first for images, network-first for other files
   event.respondWith(
     isImage ? cacheFirst(event.request) : networkFirst(event.request)
   );
