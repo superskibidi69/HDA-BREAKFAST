@@ -1,5 +1,5 @@
-const CACHE_NAME = 'hda-breakfast-v4';
-const VIDEO_CACHE = 'hda-videos-v1';
+const CACHE_NAME = 'hda-breakfast';
+const VIDEO_CACHE = 'hda-videos';
 const MAX_CACHE_SIZE = 150;
 const PRECACHE_ASSETS = [
   '/',
