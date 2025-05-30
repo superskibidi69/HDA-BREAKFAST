@@ -9,6 +9,7 @@ const PRECACHE_ASSETS = [
   '/favicon.png',
 ];
 const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -34,20 +35,28 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   const isImage = IMAGE_EXTENSIONS.some(ext => url.pathname.endsWith(`.${ext}`));
-  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm') || url.pathname.endsWith('.mov');
+  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm');
+
+  // Skip non-GET requests and Vercel analytics
   if (event.request.method !== 'GET' || url.pathname.startsWith('/_vercel')) {
     return;
   }
+
+  // Special handling for videos
   if (isVideo) {
     event.respondWith(
       cacheFirstWithRefresh(event.request, VIDEO_CACHE)
     );
     return;
   }
+
+  // Cache-first for images, network-first for other files
   event.respondWith(
     isImage ? cacheFirst(event.request) : networkFirst(event.request)
   );
 });
+
+// Strategies
 async function cacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
@@ -69,6 +78,8 @@ async function networkFirst(request) {
 async function cacheFirstWithRefresh(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
+  
+  // Always try to update video in background
   if (navigator.onLine) {
     fetchAndCache(request, cache).catch(() => {});
   }
@@ -78,6 +89,8 @@ async function cacheFirstWithRefresh(request, cacheName) {
 
 async function fetchAndCache(request, cache) {
   const response = await fetch(request);
+  
+  // Only cache successful responses
   if (response.ok) {
     await cleanCache(cache);
     await cache.put(request, response.clone());
@@ -89,9 +102,11 @@ async function fetchAndCache(request, cache) {
 async function cleanCache(cache) {
   const keys = await cache.keys();
   if (keys.length > MAX_CACHE_SIZE) {
-    await cache.delete(keys[0]);
+    await cache.delete(keys[0]); // Remove oldest
   }
 }
+
+// Background sync example
 self.addEventListener('sync', event => {
   if (event.tag === 'update-content') {
     event.waitUntil(updateCache());
