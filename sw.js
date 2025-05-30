@@ -9,7 +9,6 @@ self.addEventListener('install', (event) => {
         '/Corned_Beef_Hash_Pan.jpg',
         '/IMG_0749.jpeg',
         '/IMG_0752.jpeg',
-        '/hero.mp4',
         '/favicon.png',
         '/IMG_0754.jpeg',
         '/IMG_0755.jpeg',
@@ -48,7 +47,35 @@ self.addEventListener('install', (event) => {
   );
   self.skipWaiting();
 });
-
+self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  if (url.pathname.endsWith('hero.mp4')) {
+    event.respondWith(
+      caches.match(event.request)
+        .then(cached => cached || fetchAndCacheVideo(event.request))
+    );
+    return;
+  }
+  async function fetchAndCacheVideo(request) {
+  const cache = await caches.open(CACHE_NAME);
+  try {
+    // Force full video download
+    const response = await fetch(request, {
+      headers: { 'Range': '' } // Override range requests
+    });
+    
+    // Verify complete download
+    if (response.status === 200) {
+      await cache.put(request, response.clone());
+      return response;
+    }
+    throw new Error('Incomplete video download');
+  } catch (err) {
+    // Fallback to network or cached partial
+    const cached = await cache.match(request);
+    return cached || Response.error();
+  }
+}
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
