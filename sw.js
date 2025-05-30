@@ -34,7 +34,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   const isImage = IMAGE_EXTENSIONS.some(ext => url.pathname.endsWith(`.${ext}`));
-  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm'); || url.pathname.endsWith('.mov');
+  const isVideo = url.pathname.endsWith('.mp4') || url.pathname.endsWith('.webm') || url.pathname.endsWith('.mov');
   if (event.request.method !== 'GET' || url.pathname.startsWith('/_vercel')) {
     return;
   }
