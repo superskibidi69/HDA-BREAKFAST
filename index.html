@@ -1,1 +1,2539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful:', registration);
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+}
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preload" href="hero.mp4" as="video" type="video/mp4" importance="high">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="HDA Breakfast - A school project restaurant serving delicious figurative breakfast dishes like bacon, waffles, and fresh orange juice. Explore our figurative menu!">
+  <meta name="keywords" content="breakfast restaurant, school project, HDA Breakfast, waffles, bacon, pancakes, orange juice, imaginary restaurant">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HDA Breakfast">
+  <meta property="og:description" content="Discover HDA Breakfast's goofy menu - from golden waffles to crispy bacon. A school project turned imaginary restaurant!">
+  <meta property="og:image" content="banner.jpeg">
+  <meta property="og:url" content="https://hda-breakfast.vercel.app/">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#00000000">
+  <link rel="canonical" href="https://hda-breakfast.vercel.app/">
+  <meta name="google-site-verification" content="XhMe-Xj6dd2dw2KH4skT37mX2ScCW-wiNdq7iAceEaw" />
+  <title>HDA Breakfast</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+  color-scheme: light dark;
+  --text-primary: #fff;
+  --text-secondary: #cfcfcf;
+  --text-accent: #8eff61;
+  --bg-primary: linear-gradient(135deg, #1a1a1a, #2c3e50);
+  --bg-secondary: rgba(255, 255, 255, 0.1);
+  --bg-header: rgba(0, 0, 0, 0.7);
+  --bg-card: #383838;
+  --price-bg: #8eff61;
+  --price-text: #1a1a1a;
+  --transition-gradient: linear-gradient(to bottom, rgba(26, 26, 26, 0), rgba(26, 26, 26, 1));
+  --nav-hover: #8eff61;
+  --github-color: white;
+  --github-hover: #8eff61;
+}
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-primary: #222;
+    --text-secondary: #444;
+    --text-accent: #2e7d32;
+    --bg-primary: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    --bg-secondary: rgba(0, 0, 0, 0.05);
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --bg-card: #ffffff;
+    --price-bg: #2e7d32;
+    --price-text: white;
+    --transition-gradient: linear-gradient(to bottom, rgba(248, 249, 250, 0), rgba(248, 249, 250, 1));
+    --nav-hover: #2e7d32;
+    --github-color: #222;
+    --github-hover: #2e7d32;
+  }
+  
+  .hero::before {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .menu-toggle span {
+    color: var(--text-primary);
+  }
+  .animate-on-scroll {
+  transition: opacity 0.6s ease-out;
+  opacity: 0;
+}
+
+.animate-on-scroll.fadeIn {
+  opacity: 1;
+}
+  nav ul {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Light mode adjustments for modal */
+  .modal-content {
+    background: white;
+    color: #333;
+  }
+  
+  .close-modal {
+    color: #333;
+  }
+  @keyframes wobble {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.menu-item:hover img {
+  animation: wobble 0.5s infinite;
+}
+  .nutrition-fact {
+    border-bottom: 1px solid #eee;
+  }
+}
+    
+/* Food Fight Button */
+.food-fight-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Enhanced Contact Form Styles */
+.contact {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+.figurative-language {
+  background-color: #16873f;
+  color: #fff;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: 10px 0 20px;
+  font-size: 18px;
+  opacity: 0;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  animation: fadeIn 2s ease-out forwards;
+}
+
+.figurative-language strong {
+  font-weight: bold;
+}
+
+.figurative-language em {
+  font-style: italic;
+  display: inline-block;
+  margin-top: 5px;
+}
+.contact.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-accent);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 3px rgba(142, 255, 97, 0.2);
+  outline: none;
+}
+
+.form-group.active label,
+.form-group.active input,
+.form-group.active textarea {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#submit-contact {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  font-size: 16px;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.4s ease 0.3s;
+}
+
+#submit-contact.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#submit-contact:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 5px 15px rgba(142, 255, 97, 0.3);
+}
+
+#contact-confirmation {
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
+}
+
+#contact-confirmation.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#contact-confirmation h3 {
+  color: var(--text-accent);
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+#contact-confirmation p {
+  font-size: 18px;
+}
+#food-fight-btn {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#food-fight-btn:hover {
+  transform: scale(1.1);
+}
+
+#food-fight-btn:active {
+  transform: scale(0.9);
+}
+
+@keyframes foodFight {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); }
+}
+
+@keyframes foodFightReset {
+  0% { 
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+  }
+  80% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  90% {
+    transform: translate(0, -10px) rotate(0deg);
+  }
+  100% { 
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+html {overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none;}
+html::-webkit-scrollbar {display: none;}
+body {
+  font-family: 'Times', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;    
+  overscroll-behavior-y: none;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.container {
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+  
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+}
+
+/* Header and Navigation */
+header {
+  background: var(--bg-header);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  user-select: none;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.logo {
+  transform: scale(0.82);
+  transform: scaleY(0.82);
+  animation: fadeIn ease-out 1.2s;
+  user-select: none;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  user-select: none;
+}
+
+nav ul li {
+  margin-left: 5vh;
+  user-select: none;
+}
+
+nav ul li a {
+  font-size: 18px;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+.image-transition {
+  transition: all 0.3s ease;
+  transform: scale(0.9);
+  opacity: 0.7;
+  filter: sepia(1);
+}
+nav ul li a:hover {
+  color: var(--nav-hover);
+  user-select: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 2s ease-out;
+}
+
+.hero video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 72px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInDownBig 1.5s ease-out forwards;
+    color: #d1ffdd;
+}
+
+.hero p {
+  font-size: 24px;
+  margin-bottom: 40px;
+  user-select: none;
+  overflow: hidden;
+  opacity: 0;
+    color:#d1ffdd;
+  animation: fadeInUpBig 1.5s ease-out 1s forwards;
+}
+
+.hero b {
+  font-size: 16px;
+  margin-bottom: 40px;
+  user-select: none;
+  overflow: hidden;
+   color: #d1ffdd;
+  opacity: 0;
+  animation: rotateInUpLeft 1.5s forwards, rotateOutUpRight 1.5s 4s forwards, hideElement 0s 5.5s forwards;
+}
+
+.hours-status {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 18px;
+  opacity: 0;
+  animation: fadeIn 2s ease-out 1.5s forwards;
+  color: white;
+}
+
+.open {
+  background-color: #4CAF50;
+}
+
+.closed {
+  background-color: #f44336;
+}
+
+.github-link {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: var(--github-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 2s ease-out 2s forwards;
+}
+
+.github-link:hover {
+  color: var(--github-hover);
+  transform: scale(1.1);
+}
+
+@keyframes hideElement {
+  to {
+    display: none;
+  }
+}
+
+/* Smooth Transition */
+.transition {
+  height: 100px;
+  background: var(--transition-gradient);
+  position: relative;
+  top: -100px;
+}
+
+/* Our Story Section */
+.our-story {
+  padding: 150px 20px 100px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  position: relative;
+  top: -100px;
+}
+
+.our-story h2 {
+  font-size: 48px;
+  margin-bottom: 60px;
+  color: var(--text-accent);
+  opacity: 0;
+}
+
+.our-story p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  opacity: 0;
+}
+
+/* Menu Section */
+.menu {
+  padding: 150px 20px 100px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  position: relative;
+  top: -100px;
+}
+
+.menu h2 {
+  font-size: 48px;
+  margin-bottom: 60px;
+  color: var(--text-accent);
+  opacity: 0;
+}
+
+.menu-section {
+  margin-bottom: 80px;
+}
+
+.menu-section h3 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: var(--text-accent);
+  letter-spacing: 2px;
+  opacity: 0;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.menu-item {
+  width: 30%;
+  margin-bottom: 40px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.menu-item h3 {
+  font-size: 24px;
+  margin: 20px 0 10px;
+  color: var(--text-primary);
+  opacity: 0;
+}
+
+.menu-item p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  opacity: 0;
+}
+
+/* Price Sticker Styles */
+.price-sticker {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: var(--price-bg);
+  color: var(--price-text);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  transform: rotate(15deg);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  z-index: 2;
+  border: 3px solid var(--bg-card);
+  transition: transform 0.3s ease;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.modal-title {
+  font-size: 28px;
+  margin: 0;
+  color: var(--text-accent);
+}
+
+.modal-price {
+  background: var(--price-bg);
+  color: var(--price-text);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.modal-description {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+}
+
+.nutrition-title {
+  font-size: 20px;
+  margin: 25px 0 15px;
+  color: var(--text-accent);
+  border-bottom: 1px solid var(--text-accent);
+  padding-bottom: 5px;
+}
+
+.menu-item[data-item="bacon"]:hover,
+.menu-item[data-item="oil-stick"]:hover,
+.menu-item[data-item="fry-dumpblings-jam"]:hover {
+  box-shadow: 0 0 15px rgba(28, 255, 28, 0.5);
+}
+      /* Menu Search Bar */
+.menu-search-container {
+  position: sticky;
+  top: 100px; /* Adjust based on your header height */
+  z-index: 100;
+  margin: 0 auto 40px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border-radius: 30px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#menu-search {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  padding: 8px;
+  outline: none;
+}
+
+.menu-search-container i {
+  color: var(--text-secondary);
+  margin-left: 10px;
+}
+      .menu-search-container {
+  top: 80px; /* Header height */
+          animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Hide menu sections when filtering */
+.menu-section.hidden {
+  display: none;
+}
+.order-notification {
+  position: absolute;
+  top: 120px; /* Below the menu title */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff; /* High contrast white text */
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 10;
+  animation: floatUp 3.5s ease-out forwards;
+  max-width: 80%; /* Limit width to prevent overly wide notifications */
+  width: max-content; /* Allow it to grow with content */
+  word-wrap: break-word; /* Allow words to break if needed */
+  text-align: center; /* Center the text */
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translate(-0%, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+    54% {
+        opacity: 0.7;
+        transform: transalate(-50%, 0);
+    }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+}
+.menu-item.hidden {
+  display: none;
+}
+
+.nutrition-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.nutrition-fact {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg-secondary);
+}
+
+.nutrition-label {
+  font-weight: bold;
+}
+
+.nutrition-value {
+  color: var(--text-accent);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+
+/* For light mode */
+@media (prefers-color-scheme: light) {
+  .order-notification {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+}
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.9) !important;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 200px;
+    border-radius: 10px;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .menu-item {
+    width: 100%;
+  }
+  
+  .github-link {
+    font-size: 2rem;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .price-sticker {
+    width: 60px;
+    height: 60px;
+    font-size: 14px;
+  }
+  
+  .hero h1 {
+    font-size: 48px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+  }
+  
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .modal-image {
+    width: 100%;
+    height: 200px;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .nutrition-facts {
+    grid-template-columns: 1fr;
+  }
+}
+.special-deals-banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 auto 40px;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+.countdown-timer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-accent);
+  font-weight: bold;
+  text-align: center;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 0.5s ease;
+  display: inline-block;
+}
+.deal-item.expired {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+
+.deal-item.expired .deal-badge {
+  background: #f44336;
+  color: white;
+}
+
+.deal-item.expired .deal-price {
+  text-decoration: line-through;
+}
+.deal-item {
+  background: var(--bg-card);
+  border-radius: 15px;
+  padding: 20px;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  margin-bottom: 20px;
+}
+@media (max-width: 900px) {
+  .deal-item {
+    width: calc(50% - 20px);
+  }
+}
+@media (max-width: 600px) {
+  .deal-item {
+    width: 100%;
+  }
+}
+#offer-h3 {
+  font-size: 48px;
+  color: var(--text-accent);
+     width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  opacity: 0;
+}
+.deal-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.deal-badge {
+  background: var(--price-bg);
+  color: var(--price-text);
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-transform: uppercase;
+}
+
+.deal-item h3 {
+  color: var(--text-accent);
+  margin: 10px 0 8px;
+  font-size: 20px;
+}
+
+.deal-item p {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.deal-special {
+  color: var(--text-accent);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.deal-item small {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-style: italic;
+  display: block;
+  margin-top: 5px;
+}
+@media (max-width: 768px) {
+  .special-deals-banner {
+    align-items: center;
+  }
+  
+  .deal-item {
+    max-width: 100%;
+  }
+}
+.rewards {
+  padding: 150px 20px 100px;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  margin: 0 20px 50px;
+  border-radius: 20px;
+  position: relative;
+  top: -100px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.rewards.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rewards h2 {
+  font-size: 48px;
+  margin-bottom: 60px;
+  color: var(--text-accent);
+}
+
+.rewards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.points-display {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.points-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--price-bg);
+}
+
+.points-display h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.points-display p {
+  color: var(--text-secondary);
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+#points-counter {
+  color: var(--text-accent);
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.reward-item {
+  background: var(--bg-card);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(142, 255, 97, 0.2);
+}
+
+.reward-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border-color: rgba(142, 255, 97, 0.5);
+}
+
+.reward-item h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--text-accent);
+}
+
+.reward-item p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.reward-cost {
+  background: var(--price-bg);
+  color: var(--price-text);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.redeem-btn {
+  background: var(--price-bg);
+  color: var(--price-text);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.redeem-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(142, 255, 97, 0.3);
+}
+
+.redeem-btn:disabled {
+  background: var(--text-secondary);
+  color: var(--bg-card);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Progress bar style */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--price-bg);
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rewards {
+    padding: 100px 20px 60px;
+    top: -50px;
+  }
+  
+  .rewards h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .points-display h3 {
+    font-size: 24px;
+  }
+}
+@keyframes pointsAdded {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.points-added {
+  animation: pointsAdded 0.5s ease;
+}
+.animate-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+  transition-delay: var(--delay, 0s);
+}
+
+.animate-element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.points-display {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+    </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://hda-breakfast.vercel.app/cooltext478980411259758.png">
+    </div>
+    <nav>
+      <div class="menu-toggle" id="mobile-menu">
+        <span>&#9776;</span>
+      </div>
+      <ul id="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#our-story">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#rewards">Rewards</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>⠀⠀⠀⠀</li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+   <video autoplay muted loop playsinline webkit-playsinline x-webkit-airplay="allow" preload="auto" id="bg-video">
+  <source src="hero.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+    <div class="hero-content">
+      <h1 class="animate__animated animate__fadeInDownBig">Welcome to HDA Breakfast</h1>
+      <div id="hours-status" class="hours-status"></div>
+      <p class="animate__animated animate__fadeInUpBig animate__delay-1s">We make your food, so you can be a couch potato and not do it</p>
+      <b>Disclaimer: this is not a real restaurant, and only for a school project.</b>
+        <div id="figurative-language" class="hours-status"></div>
+    </div>
+    <a href="https://github.com/superskibidi69/HDA-BREAKFAST" class="github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </section>
+  <div class="transition"></div>
+  <section class="our-story" id="our-story">
+    <h2 class="animate-on-scroll">Our Story</h2>
+    <p class="animate-on-scroll">
+      HDA Breakfast was founded in 2025 by three students with a simple mission: to provide the most figurative breakfast possible. Our journey began in a language arts class, where we created this for a project. Today, we are proud to serve our class with a menu that combines humor and work, using only the freshest ingredients. Whether you're here for our not so famous bacon, stiff pancakes, or smashed orange juice, we attempt to make every meal a goofy one. Thank you for being a skibidi customer!
+    </p>
+  </section>
+  <section class="menu" id="menu">
+    <h2 class="animate-on-scroll">Our Menu</h2>
+    <h3 class="animate-on-scroll" id="offer-h3">Special offers</h3>
+    <div class="special-deals-banner">
+      <div class="deal-item animate-on-scroll" data-offer-end="2025-06-15">
+        <span class="deal-badge">Ends on 6/15/2025</span>
+        <h3>Early Bird Special</h3>
+        <p><span class="deal-special">10% off</span> all orders before 7:30 AM</p>
+        <small>Weekdays only</small>
+        <div class="countdown-timer"></div>
+      </div>
+      <div class="deal-item animate-on-scroll" data-offer-end="2025-06-12">
+        <span class="deal-badge">Ends on 6/12/2025</span>
+        <h3>Taste Tester Special</h3>
+        <p><span class="deal-special">20% off</span> if you can guess a dish blindfolded</p>
+        <small>Entrees only</small>
+        <div class="countdown-timer"></div>
+      </div>
+        <div class="deal-item animate-on-scroll" data-offer-end="2025-06-25">
+        <span class="deal-badge">Ends on 6/25/2025</span>
+        <h3>Pastry for a Post</h3>
+        <p>Earn a <span class="deal-special">free</span> pastry if you share about us on social media</p>
+        <small>Must show proof to a staff member, limited one free pastry per person</small>
+        <div class="countdown-timer"></div>
+      </div>
+    </div>
+    <div id="order-notification" class="order-notification"></div>
+      <div class="menu-search-container">
+  <input type="text" id="menu-search" placeholder="Search menu items..." aria-label="Search menu items">
+  <i class="fas fa-search"></i>
+</div>
+<div class="food-fight-container">
+    <button id="food-fight-btn" aria-label="Order Online">
+      <i class="fas fa-utensils"></i> Order online
+    </button>
+  </div>
+   <!-- Entrees -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Entrees</h3>
+      <div class="menu-items">
+        <div class="menu-item animate-on-scroll" data-item="gravy">
+            <div class="price-sticker">$6.95</div>
+            <img src="https://hda-breakfast.vercel.app/gravy.jpeg" loading="lazy" alt="Biscuit gravy">
+            <h3 class="animate-on-scroll">Biscuits and Gravy</h3>
+            <p class="animate-on-scroll">With the smoothest gravy ever, this biscuits and gravy dish is like bread and butter. The biscuits are as crunchy as toast, and each bite will make you forget every bland meal you ever had!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="burrito">
+            <div class="price-sticker">$4.99</div>
+            <img src="https://hda-breakfast.vercel.app/BreakfastBurritos_13.jpg" loading="lazy" alt="Burrito">
+            <h3 class="animate-on-scroll">Burrito</h3>
+            <p class="animate-on-scroll">Our breakfast burrito is so delicious, it could make an earthquake stop to take another bite! The ingredients are wrapped like in a sleeping bag. With fresh ingredients, this is the tastiest burrito in the world!</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="beef-hash">
+            <div class="price-sticker">$10.00</div>
+            <img src="https://hda-breakfast.vercel.app/Corned_Beef_Hash_Pan.jpg" loading="lazy" alt="Corned Beef hash">
+            <h3 class="animate-on-scroll">Corned Beef Hash</h3>
+            <p class="animate-on-scroll">Sprinkled with fresh spices even Gordon Ramsay would be jealous of, our corned beef hash is like no other. All of the ingredients will cause a painting in your mouth! Our hash has a flavor that is uniquely ours.</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="benedict">
+            <div class="price-sticker">$5.99</div>
+            <img src="https://hda-breakfast.vercel.app/eggs-bene.jpg" loading="lazy" alt="Eggs Benedict">
+            <h3 class="animate-on-scroll">Eggs Benedict</h3>
+            <p class="animate-on-scroll">Muffins mixed with the most memorable eggs, our eggs Benedict dish has the best flavors ever. It's made mildly salty, so its like machine-made. Made from fresh, savory muffins, a poached egg, and our special sauce.</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="french-toast">
+          <div class="price-sticker">$7.99</div>
+          <img src="/frenchtoast.jpeg" loading="lazy" alt="French Toast">
+          <h3 class="animate-on-scroll">French Toast</h3>
+          <p class="animate-on-scroll">From the oven, French toast's flavors flip a bad day upside down. This dish consists of toast with freshly gathered honey, butter, and fruits. The sweetness of the toast will melt in your mouth, and it will fill your tastebuds with joy.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="hash-browns">
+          <div class="price-sticker">$5.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0754.jpeg" loading="lazy" alt="Hash brown">
+          <h3 class="animate-on-scroll">Hash browns</h3>
+          <p class="animate-on-scroll">Our hash browns are perfectly cooked to the perfect golden brown color. They will make you want to take the whole supply home! They almost look like they are made of plastic! But that's just the perfect job our chef did!</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="oatmeal">
+            <div class="price-sticker">$5.49</div>
+            <img src="https://hda-breakfast.vercel.app/oatmeal.jpg" loading="lazy" alt="Oatmeal">
+            <h3 class="animate-on-scroll">Oatmeal</h3>
+            <p class="animate-on-scroll">Our oatmeal is the creamiest oatmeal ever, it is like eating a cloud. With fruit of your choice added, this is the best oatmeal in the world! It is so good, it almost feels like it was generated by artificial intelligence!</p>
+          </div>
+          <div class="menu-item animate-on-scroll" data-item="ome">
+          <div class="price-sticker">$7.00</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0793.jpeg" loading="lazy" alt="An Omelette">
+          <h3 class="animate-on-scroll">Omelette</h3>
+          <p class="animate-on-scroll">Stuffed with delicious fillings that can be modified upon request, this omelette is a unique dish that has many contrasting flavors, like a bookshelf's books. This omellete will bring immense joy to you!</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="pancakes">
+          <div class="price-sticker">$5.98</div>
+          <img src="IMG_0755.jpeg" loading="lazy" alt="Pancakes">
+          <h3 class="animate-on-scroll">Pancakes</h3>
+          <p class="animate-on-scroll">Best pancakes you will ever eat! Our pancakes are always freshly made with homemade syrup and whipped cream! Our pancakes will make you cry tears of joy!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="waffles">
+          <div class="price-sticker">$5.98</div>
+          <img src="/IMG_0749.jpeg" loading="lazy" alt="Waffles">
+          <h3 class="animate-on-scroll">Waffles</h3>
+          <p class="animate-on-scroll">Mmm! Our waffles are like icing on cake for your general breakfast. It is a stack of 4 waffles, and each have a unique fruit taste that will steal the spotlight.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="zhou">
+          <div class="price-sticker">$6.00</div>
+          <img src="https://hda-breakfast.vercel.app/zhou.jpg" loading="lazy" alt="Congee/zhou">
+          <h3 class="animate-on-scroll">Congee</h3>
+          <p class="animate-on-scroll">This is the best soup you will ever taste! It has a rich, creamy rice topped with meat, vegetables, eggs, or other foods. Each food will cause a flavor battle in your mouth, and the most delicious gets to be eaten.</p>
+        </div>
+    </div>
+    </div>
+    <!-- Sides -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Sides</h3>
+      <div class="menu-items">
+        <div class="menu-item animate-on-scroll" data-item="bacon">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0752.jpeg" loading="lazy" alt="Bacon">
+          <h3 class="animate-on-scroll">Bacon</h3>
+          <p class="animate-on-scroll">This bacon is as tasty as the finest cuisine. With the perfect balance of the best oil in the world and meat, this bacon will dance around on your tastebuds. They will sizzle like a firecracker in a pan. It tastes like it was made by Jamie Oliver in a Michelin-star restaurant!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="fruit-bowl">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0756.jpeg" loading="lazy" alt="Fruit bowl">
+          <h3 class="animate-on-scroll">Fruit bowl</h3>
+          <p class="animate-on-scroll">Come enjoy our fresh fruit bowl, our fruit bowl is the best. It's the most amazing and fresh fruit you will ever have! The fresh flavor will dance on your tongue! Our fruit bowl has a fresh fruit flavor and is a favorites. Try our fruit, it's the best fruit you will ever have.</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="fry-dumpblings-jam">
+          <div class="price-sticker">$2.99</div>
+          <img src="https://hda-breakfast.vercel.app/Jamaican-Fried-Dumpling_Featured-Image.jpg" loading="lazy" alt="Jamaican Fried Dumplings">
+          <h3 class="animate-on-scroll">Jamaican Fried Dumplings</h3>
+          <p class="animate-on-scroll">These dumplings are like golden little pillows of happiness, crispy on the outside and soft on the inside. With a buttery flavor that melts in your mouth, this dumpling will dance on your tastebuds. Yum!</p>
+        </div>      
+         <div class="menu-item animate-on-scroll" data-item="sausage">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0788.webp" loading="lazy" alt="sausage link">
+          <h3 class="animate-on-scroll">Sausage Links</h3>
+          <p class="animate-on-scroll">Seasoned with the freshest spices in the world, our sausage links will provide a unique taste that will be an amazing side dish. It's cooked to the perfect golden brown color, and has a crunchy outer shell. Paired with french toast, this dish is like 2 peas in a pod.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="muffin">
+            <div class="price-sticker">$2.99</div>
+            <img src="https://hda-breakfast.vercel.app/savoury-breakfast-muffins-recipe-header.jpg" alt="Muffin">
+            <h3 class="animate-on-scroll">Savory Muffin</h3>
+            <p class="animate-on-scroll">With ingredients as delicious as watermelon on a hot day, our muffin is baked perfectly to a golden color. With a recipe that is as sacred as the bible, this dish is uniquely ours. Each puff is the muffin improving itself, until it is suited for all your requests!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="sunny-side-up">
+          <div class="price-sticker">$2.99</div>
+          <img src="/sunnyside.jpeg" loading="lazy" alt="Sunny Side Up">
+          <h3 class="animate-on-scroll">Sunny side up</h3>
+          <p class="animate-on-scroll">Our sunny side up eggs are the best of the best top tier eggs, they taste better than any other eggs you will ever have! And they always come to your plate straight from a sizzling pan with butter and the best seasoning that is sprinkled by an expert chef!</p>
+        </div>
+        <div class="menu-item animate-on-scroll" data-item="oil-stick">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/Youtiao.jpg" loading="lazy" alt="Youtiao (Chinese donut)">
+          <h3 class="animate-on-scroll">Fried Dough Sticks</h3>
+          <p class="animate-on-scroll">Our fried dough sticks are the tastiest stick ever. With freshly rolled dough fried in oil, this is the perfect dish when paired with any type of milk. Perfect for picky children, it is like a combination of fries and bread.</p>
+        </div>
+      </div>
+    </div>
+  <!-- Beverages -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Beverages</h3>
+      <div class="menu-items">
+                  <div class="menu-item animate-on-scroll" data-item="chocolate-milk">
+          <div class="price-sticker">$3.99</div>
+          <img src="cmilk.jpeg" loading="lazy" alt="Chocolate milk">
+          <h3 class="animate-on-scroll">Chocolate milk</h3>
+          <p class="animate-on-scroll">Our chocolate milk is as fresh as a shiny coin, and the chocolate is from cocoa beans that are carefully harvested. Cooked with a low temperature, drinking it will put you on cloud nine.</p>
+        </div>
+           <div class="menu-item animate-on-scroll" data-item="coffee">
+          <div class="price-sticker">$3.99</div>
+          <img src="https://hda-breakfast.vercel.app/IMG_0761.jpeg" loading="lazy" alt="coffee">
+          <h3 class="animate-on-scroll">Coffee</h3>
+          <p class="animate-on-scroll">This coffee is as warm as a sauna. The coffee beans are fresh from the field. We offer different roast levels, and have many varieties based on request. Our premium coffee beans are fresh from brazil.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="icelandic-water">
+          <div class="price-sticker">$0.99</div>
+          <img src="https://hda-breakfast.vercel.app/Water.jpeg" loading="lazy" alt="Icelandic bottled water">
+          <h3 class="animate-on-scroll">Icelandic water</h3>
+          <p class="animate-on-scroll">Ice cold Icelandic water that tastes as fresh as glacier water, and as cold as a mountain top. Icelandic water will cool you down. It tastes just like Gatorade, but healthier and 1000 times more refreshing.</p>
+       </div>
+           <div class="menu-item animate-on-scroll" data-item="milk">
+            <div class="price-sticker">$2.99</div>
+            <img src="milk.jpeg" loading="lazy" alt="milk">
+            <h3 class="animate-on-scroll">Milk</h3>
+            <p class="animate-on-scroll">Fresh cow milk to start your day off, with nutriets as beneficial as an umbrella on a rainy day. Our cows are grass-fed, and with no antibiotics. It is the best milk in the world, and can't get more delicious!</p>
+          </div>
+        <div class="menu-item animate-on-scroll" data-item="orange-juice">
+          <div class="price-sticker">$3.99</div>
+          <img src="orange.jpeg" loading="lazy" alt="orange juice">
+          <h3 class="animate-on-scroll">Orange juice</h3>
+          <p class="animate-on-scroll">It comes from the farm, where carefully harvested. We have the best orange juice ever made, the freshest and tastiest orange juice and it's all organic. Freshly squeezed right into your cup. Now, you can enjoy it.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="smoothie">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/smothie.webp" loading="lazy" alt="A smoothie">
+          <h3 class="animate-on-scroll">Smoothies</h3>
+          <p class="animate-on-scroll">Made from the freshest fruits, and blended with almond milk, we offer a million flavors that are the best in the world. We will modify a smoothie, and change it to the perfect mix. It's creamy and rich, and filled with nutrition.</p>
+        </div>
+          <div class="menu-item animate-on-scroll" data-item="yogurt">
+          <div class="price-sticker">$4.99</div>
+          <img src="https://hda-breakfast.vercel.app/Yogurt.jpeg" loading="lazy" alt="Yogurt">
+          <h3 class="animate-on-scroll">Yogurt</h3>
+          <p class="animate-on-scroll">Our yogurt's taste is the best in the world. We have a million flavors, including different fruit, and it is a delicious luxury. It is made from grass-fed cows' milk, and will have you finish it in 1 second. Each spoonful is like a flavor explosion in your mouth!</p>
+        </div>
+      </div>
+    </div>
+      <!-- dessert -->
+    <div class="menu-section">
+      <h3 class="animate-on-scroll">Pastries</h3>
+      <div class="menu-items">
+             <div class="menu-item animate-on-scroll" data-item="cinnamon">
+            <div class="price-sticker">$4.59</div>
+            <img src="https://hda-breakfast.vercel.app/cinnamon.png" loading="lazy" alt="Cinnamon Roll">
+            <h3 class="animate-on-scroll">Cinnamon Roll</h3>
+            <p class="animate-on-scroll">With a unique flavor you won't find anywhere else, this cinnamon roll has all the most delicious spices in it. The texture starts out crunchy like a chip, and then it reveals a soft, creamy center.</p>
+          </div>
+              <div class="menu-item animate-on-scroll" data-item="crepes">
+            <div class="price-sticker">$5.00</div>
+            <img src="crepe.png" loading="lazy" alt="Crepes">
+            <h3 class="animate-on-scroll">Crêpes</h3>
+            <p class="animate-on-scroll">These crêpes are so good, you’ll forget your own name after the first bite! Crispy edges, chewy middle, and fillings so delicious that they should be illegal. It looks like plastic, but it's just our chef's talent!</p>
+          </div>
+              <div class="menu-item animate-on-scroll" data-item="cross">
+            <div class="price-sticker">$3.99</div>
+            <img src="https://hda-breakfast.vercel.app/croissant.jpg" loading="lazy" alt="croissant">
+            <h3 class="animate-on-scroll">Croissant</h3>
+            <p class="animate-on-scroll">Our croissant is as good as gold, with a flaky outer shell that crumbles like toast with each bite. Its crisp shell hides soft, buttery layers that are as fluffy as a pillow. It is almost like a sculpture, but it is our chef's specialty.</p>
+          </div>
+      </div>
+    </div>
+  </section>
+<!-- Rewards Section -->
+<section class="rewards animate-section" id="rewards">
+  <h2 class="animate-element"> Rewards</h2>
+  <div class="rewards-container">
+    <div class="points-display animate-element" style="--delay: 0.1s">
+      <h3>Your Points: <span id="points-counter">0</span></h3>
+      <p>Earn 1 point for each menu item you click!</p>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-item animate-element" style="--delay: 0.2s" data-cost="10">
+        <h3>Free Coffee</h3>
+        <p>Get a <span class="deal-special">free</span> cup of our premium coffee</p>
+        <div class="reward-cost">10 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.3s" data-cost="15">
+        <h3>Free Dessert</h3>
+        <p>Claim a free dessert when you order a breakfast that costs more than <span class="deal-special">$6.00</span></p>
+        <div class="reward-cost">15 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.4s" data-cost="30">
+        <h3>Breakfast Combo</h3>
+        <p>Any entree + side + beverage for <span class="deal-special">60%</span> off</p>
+        <div class="reward-cost">30 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+      <div class="reward-item animate-element" style="--delay: 0.5s" data-cost="50">
+        <h3>Double Breakfast</h3>
+        <p>Full breakfast for two people (1 entree for each, 2 sides for each, 1 beverage for each, and 1 dessert for each.) for <span class="deal-special">$4.49</span></p>
+        <div class="reward-cost">50 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+        <div class="reward-item animate-element" style="--delay: 0.6s" data-cost="120">
+        <h3>Breakfast Buffet</h3>
+        <p>Mix and make your own breakfast for <span class="deal-special">$10.75</span></p>
+        <div class="reward-cost">120 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+              <div class="reward-item animate-element" style="--delay: 0.7s" data-cost="10000">
+        <h3>Free Breakfast</h3>
+        <p>All breakfast orders are <span class="deal-special">free</span> for one week</p>
+        <div class="reward-cost">10,000 points</div>
+        <button class="redeem-btn">Redeem</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2 class="animate-on-scroll">Contact Us</h2>
+    <form id="contact-form" class="animate-on-scroll">
+      <div class="form-group">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" required placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" required placeholder="Your Email">
+      </div>
+      <div class="form-group">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" rows="5" required placeholder="Your Message"></textarea>
+      </div>
+      <button type="submit" id="submit-contact">Send Message</button>
+    </form>
+    <div id="contact-confirmation" style="display: none;">
+      <h3>Thank you for your message!</h3>
+      <p>We'll get back to you soon.</p>
+    </div>
+  </section>
+  <!-- Modal Popup -->
+  <div class="modal-overlay" id="item-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-modal">&times;</span>
+      <div class="modal-header">
+        <img class="modal-image" id="modal-image" src="" alt="">
+        <div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="modal-price" id="modal-price"></div>
+        </div>
+      </div>
+      <p class="modal-description" id="modal-description"></p>
+      <h3 class="nutrition-title">Food Facts</h3>
+      <div class="nutrition-facts" id="nutrition-facts">
+      </div>
+    </div>
+  </div>
+  <div id="custom-alert" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 99999; text-align: center;">
+    <p style="margin: 0; font-size: 18px; color: var(--text-primary);">Haha, get pranked!</p>
+    <button id="close-alert" style="margin-top: 15px; padding: 8px 20px; background: var(--price-bg); color: var(--price-text); border: none; border-radius: 5px; cursor: pointer;">OK</button>
+  </div>
+  <div id="alert-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99998;"></div>
+  <audio id="sizzle-sound" preload="auto" loop>
+    <source src="https://hda-breakfast.vercel.app/sizzle.mp3" type="audio/mpeg">
+  </audio>
+  <script defer>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    const menuItems = {
+      "bacon": {
+        "displayName": "bacon",
+        "calories": 130,
+        "servingSize": "3 strips",
+        "time": "12 minutes"
+      },
+      "french-toast": {
+        "displayName": "french toast",
+        "calories": 190,
+        "servingSize": "3 slices",
+        "time": "14 minutes"
+      },
+      "hash-browns": {
+        "displayName": "hash browns",
+        "calories": 165,
+        "servingSize": "4 pieces",
+        "time": "9 minutes"
+      },
+      "sunny-side-up": {
+        "displayName": "a sunny side up egg",
+        "calories": 70,
+        "servingSize": "1 egg",
+        "time": "3 minutes"
+      },
+      "waffles": {
+        "displayName": "waffles",
+        "calories": 218,
+        "servingSize": "3 waffles",
+        "time": "7 minutes"
+      },
+              "zhou": {
+        "displayName": "a bowl of congee",
+        "calories": 204,
+        "servingSize": "1 bowl",
+        "time": "11 minutes"
+      },
+      "burrito": {
+        "displayName": "a burrito",
+        "calories": 213,
+        "servingSize": "1 burrito",
+        "time": "7 minutes"
+      },
+      "pancakes": {
+        "displayName": "some pancakes",
+        "calories": 250,
+        "servingSize": "3 pancakes",
+        "time": "9 minutes"
+      },
+      "yogurt": {
+        "displayName": "yogurt",
+        "calories": 150,
+        "servingSize": "1 cup",
+        "time": "6 minutes"
+      },
+      "chocolate-milk": {
+        "displayName": "a cup of chocolate milk",
+        "calories": 197,
+        "servingSize": "1 cup",
+        "time": "3 minutes"
+      },
+       "milk": {
+        "displayName": "a glass of milk",
+        "calories": 67,
+        "servingSize": "1 cup",
+        "time": "2 minutes"
+      },
+      "oatmeal": {
+        "displayName": "a cup of fruit oatmeal",
+        "calories": 146,
+        "servingSize": "1 cup",
+        "time": "7 minutes"
+      },
+        "crepes": {
+        "displayName": "3 crêpes",
+        "calories": 239,
+        "servingSize": "3 crêpes",
+        "time": "14 minutes"
+      },
+        "sausage": {
+        "displayName": "sausages",
+        "calories": 125,
+        "servingSize": "3 links",
+        "time": "3 minutes"
+      },
+       "gravy": {
+        "displayName": "biscuits",
+        "calories": 274,
+        "servingSize": "2 biscuits, ½ cup of gravy",
+        "time": "10 minutes"
+      },
+        "smoothie": {
+            "displayName": "a fruit smoothie",
+         "calories": 75,
+         "servingSize": "1 cup",
+         "time": "2 minutes"
+      },
+      "icelandic-water": {
+        "displayName": "bottled icelandic water",
+        "calories": 0,
+        "servingSize": "1 bottle",
+        "time": "30 seconds"
+      },
+      "orange-juice": {
+        "displayName": "fresh orange juice",
+        "calories": 90,
+        "servingSize": "1 cup",
+        "time": "3 minutes"
+      },
+      "coffee": {
+        "displayName": "coffee",
+        "calories": 3,
+        "servingSize": "1 cup",
+         "time": "4 minutes"
+      },
+      "fruit-bowl": {
+        "displayName": "a small fruit bowl",
+        "calories": 120,
+        "servingSize": "1 bowl",
+        "time": "3 minutes"
+      },
+      "muffin": {
+        "displayName": "a vegetable muffin",
+        "calories": 186,
+        "servingSize": "1 piece",
+        "time": "8 minutes"
+      },
+      "oil-stick": {
+        "displayName": "a few pieces of fried dough sticks",
+        "calories": 180,
+        "servingSize": "2 sticks",
+        "time": "9 minutes"
+      },
+      "cross": {
+        "displayName": "a butter croissant",
+        "calories": 204,
+        "servingSize": "1 bun",
+        "time": "10 minutes"
+      },
+              "ome": {
+        "displayName": "a sizzling omelette",
+        "calories": 100,
+        "servingSize": "1 omelette",
+        "time": "6 minutes"
+      },
+      "fry-dumpblings-jam":{
+        "displayName": "a Jamaican fried dumpling",
+        "calories": 158,
+        "servingSize": "1 piece",
+        "time": "15 minutes"
+      },
+      "cinnamon":{
+        "displayName": "a cinnamon roll",
+        "calories": 243,
+        "servingSize": "1 roll",
+        "time": "18 minutes"
+      },
+         "benedict":{
+        "displayName": "a serving of eggs Benedict",
+        "calories": 502,
+        "servingSize": "1 muffin, 2 poached eggs",
+        "time": "20 minutes"
+      },
+      "beef-hash":{
+        "displayName": "a cup of corned beef hash",
+        "calories": 284,
+        "servingSize": "1 cup",
+        "time": "23 minutes"
+      },
+    };
+/* names*/ const firstNames = ['James', 'Mary', 'John', 'Karen', 'Hector', 'Jason', 'Mason','Jordan', 'Jeremy', 'Tyler', 'Dhruv', 'Ephraim', 'Patricia', 'Penelope', 'Robert', 'Jennifer', 'Travis', 'Michael', 'Linda', 'William', 'Elizabeth', 'Jack', 'Alex', 'Tim', 'Timmy', 'Drona'];
+const lastNames = ['S.', 'J.', 'W.', 'B.', 'A.', 'M.', 'D.', 'G.', 'R.', 'C.', 'T.', 'R.', 'K.'];
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check restaurant hours and update status
+      function updateHoursStatus() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const currentTime = hours * 60 + minutes;
+        
+        const openTime = 6 * 60 + 30; // 6:30 am in minutes
+        const closeTime = 10 * 60;    // 10:00 am in minutes
+        
+        const statusElement = document.getElementById('hours-status');
+        
+        if (currentTime >= openTime && currentTime < closeTime) {
+          statusElement.textContent = 'We are currently open (6:30 AM - 10:00 AM)';
+          statusElement.className = 'hours-status open';
+        } else {
+          statusElement.textContent = 'Sorry, we are closed now (Opens at 6:30 AM)';
+          statusElement.className = 'hours-status closed';
+        }
+      }
+      
+      // Initial update
+      updateHoursStatus();
+      
+      // Update every minute in case the page stays open
+      setInterval(updateHoursStatus, 60000);
+function updateFigurativeLanguage() {
+  // Array of figurative language types with examples
+  const figurativeLanguageTypes = [
+    { 
+      type: "Simile",
+      example: "Our pancakes are as fluffy as clouds!"
+    },
+    { 
+      type: "Metaphor",
+      example: "Our orange juice is liquid sunshine in a glass!"
+    },
+    { 
+      type: "Hyperbole",
+      example: "Our bacon is so good it'll make you cry tears of joy for a week!"
+    },
+    { 
+      type: "Personification",
+      example: "Our waffles dance with flavor in your mouth!"
+    },
+    { 
+      type: "Alliteration",
+      example: "Perfectly prepared pancakes please picky people!"
+    },
+    { 
+      type: "Onomatopoeia",
+      example: "Crunch! Our hash browns are like chips!"
+    },
+    { 
+      type: "Idiom",
+      example: "Our breakfast burrito is the best thing since sliced bread!"
+    }
+  ];
+  const day = new Date().getDay();
+  const language = figurativeLanguageTypes[day];
+  const languageElement = document.getElementById('figurative-language');
+  languageElement.innerHTML = `
+    <strong>Today's Figurative Language:</strong> ${language.type}<br>
+    <em>"${language.example}"</em>
+  `;
+  languageElement.style.opacity = '0';
+  languageElement.style.animation = 'fadeIn 2s ease-out forwards';
+}
+updateFigurativeLanguage();
+setInterval(updateFigurativeLanguage, 86400000); // 24 hours
+ 
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeIn', 'fadeIn');
+            entry.target.style.opacity = 1;
+          }
+        });
+      }, {
+        threshold: 0.15
+      });
+
+      document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.observe(element);
+      });
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+    
+            const navMenu = document.getElementById('nav-menu');
+            if (navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+            }
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const mobileMenu = document.getElementById('mobile-menu');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (mobileMenu && navMenu) {
+        mobileMenu.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+        });
+      }
+      document.querySelectorAll('.menu-item').forEach(item => {
+        const sticker = item.querySelector('.price-sticker');
+        
+        item.addEventListener('mouseenter', () => {
+          sticker.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg) scale(1.1)';
+          sticker.style.transition = 'transform 0.2s ease';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          sticker.style.transform = 'rotate(15deg) scale(1)';
+        });
+      });
+      
+      // Modal functionality
+      const modal = document.getElementById('item-modal');
+      const closeModal = document.getElementById('close-modal');
+      
+      // Close modal when clicking X
+      closeModal.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+      
+      // Close modal when clicking outside content
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      // Add click handlers to all menu items
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const itemId = this.getAttribute('data-item');
+          const itemData = menuItems[itemId];
+          const itemTitle = this.querySelector('h3').textContent;
+          const itemPrice = this.querySelector('.price-sticker').textContent;
+          const itemImage = this.querySelector('img').src;
+          const itemDescription = this.querySelector('p').textContent;
+          
+          // Populate modal
+          document.getElementById('modal-title').textContent = itemTitle;
+          document.getElementById('modal-price').textContent = itemPrice;
+          document.getElementById('modal-image').src = itemImage;
+          document.getElementById('modal-image').alt = itemTitle;
+          document.getElementById('modal-description').textContent = itemDescription;
+          
+          // Populate nutrition facts
+          const nutritionContainer = document.getElementById('nutrition-facts');
+          nutritionContainer.innerHTML = '';
+          
+          // Add serving size first
+          addNutritionFact(nutritionContainer, 'Serving size', itemData.servingSize);
+          
+          // Add calories
+          addNutritionFact(nutritionContainer, 'Total calories', itemData.calories);
+          
+          ////others
+          addNutritionFact(nutritionContainer, 'Time to prepare and serve', itemData.time);
+
+          modal.classList.add('active');
+        });
+      });
+      // Helper function to add nutrition facts
+      function addNutritionFact(container, label, value) {
+        const factElement = document.createElement('div');
+        factElement.className = 'nutrition-fact';
+        
+        const labelElement = document.createElement('span');
+        labelElement.className = 'nutrition-label';
+        labelElement.textContent = label;
+        
+        const valueElement = document.createElement('span');
+        valueElement.className = 'nutrition-value';
+        valueElement.textContent = value;
+        
+        factElement.appendChild(labelElement);
+        factElement.appendChild(valueElement);
+        container.appendChild(factElement);
+      }
+      
+      // Detect color scheme
+      function detectColorScheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.body.classList.add('light-mode');
+        } else {
+          document.body.classList.add('dark-mode');
+        }
+        
+        // Listen for changes
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+          if (e.matches) {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+          } else {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+          }
+        });
+      }
+      
+      detectColorScheme();
+    });
+const menuSearch = document.getElementById('menu-search');
+if (menuSearch) {
+  menuSearch.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const allMenuItems = document.querySelectorAll('.menu-item');
+    const allMenuSections = document.querySelectorAll('.menu-section');
+    if (searchTerm === '') {
+      allMenuItems.forEach(item => item.classList.remove('hidden'));
+      allMenuSections.forEach(section => section.classList.remove('hidden'));
+      document.getElementById('no-results-message')?.remove();
+      return;
+    }
+    let hasVisibleItems = false;
+    allMenuSections.forEach(section => {
+      const sectionItems = section.querySelectorAll('.menu-item');
+      let sectionHasVisibleItems = false;
+      
+      sectionItems.forEach(item => {
+        const itemName = item.querySelector('h3').textContent.toLowerCase();
+        
+        if (itemName.includes(searchTerm)) {
+          item.classList.remove('hidden');
+          sectionHasVisibleItems = true;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+      
+      if (sectionHasVisibleItems) {
+        section.classList.remove('hidden');
+        hasVisibleItems = true;
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+
+    // No results message
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (!hasVisibleItems) {
+      if (!noResultsMsg) {
+        const msg = document.createElement('p');
+        msg.id = 'no-results-message';
+        msg.textContent = 'No dishes found. Check your spelling, or look for a different dish.';
+        msg.style.textAlign = 'center';
+        msg.style.margin = '40px 0';
+        msg.style.color = 'var(--text-secondary)';
+        document.querySelector('.menu').appendChild(msg);
+      }
+    } else if (noResultsMsg) {
+      noResultsMsg.remove();
+    }
+  });
+}
+      // food right
+document.getElementById('food-fight-btn').addEventListener('click', () => {
+  const items = document.querySelectorAll('.menu-item');
+  
+  // First, remove food fight animations but preserve other styles
+  items.forEach(item => {
+    // Clear any transform/transition styles we added
+    item.style.transform = '';
+    item.style.transition = '';
+    item.style.animation = '';
+    
+    // Force reflow to ensure styles are cleared
+    void item.offsetHeight;
+  });
+  
+  // Scramble items
+  items.forEach((item, index) => {
+    const tx = (Math.random() * 250 - 106) + 'px';
+    const ty = (Math.random() * 230 - 100) + 'px';
+    const rot = (Math.random() * 90 - 42) + 'deg';
+    
+    item.style.setProperty('--tx', tx);
+    item.style.setProperty('--ty', ty);
+    item.style.setProperty('--rot', rot);
+    
+    item.style.transform = `translate(${tx}, ${ty}) rotate(${rot})`;
+    item.style.transition = 'transform 0.76s ease-out';
+  });
+  
+  // Reset with staggered timing and bounce effect
+  setTimeout(() => {
+    items.forEach((item, index) => {
+      const delay = index * 80;
+      
+      setTimeout(() => {
+        item.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        item.style.transform = 'translate(0, 0) rotate(0deg)';
+        
+        setTimeout(() => {
+          // Clean up our styles but leave original classes intact
+          item.style.transform = '';
+          item.style.transition = '';
+          
+          // Restore hover animations by reattaching event listeners
+          const sticker = item.querySelector('.price-sticker');
+          if (sticker) {
+            item.addEventListener('mouseenter', () => {
+              sticker.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg) scale(1.1)';
+              sticker.style.transition = 'transform 0.2s ease';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+              sticker.style.transform = 'rotate(15deg) scale(1)';
+            });
+          }
+          
+          // Show alert when last item finishes
+          if (index === items.length - 1) {
+            showCustomAlert('Haha, get pranked!');
+          }
+        }, 800);
+      }, delay);
+    });
+  }, 3500);
+});
+
+// Helper function to show custom alerts
+function showCustomAlert(message) {
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+  
+  alertMessage.textContent = message;
+  customAlert.style.display = 'block';
+  alertOverlay.style.display = 'block';
+  
+  // Reset close button event listener
+  const closeAlert = document.getElementById('close-alert');
+  closeAlert.onclick = function() {
+    customAlert.style.display = 'none';
+    alertOverlay.style.display = 'none';
+  };
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const sizzleSound = document.getElementById('sizzle-sound');
+  // Only target these specific menu items
+  const sizzleItems = document.querySelectorAll(
+    '.menu-item[data-item="bacon"], ' +
+    '.menu-item[data-item="oil-stick"], ' +
+    '.menu-item[data-item="fry-dumpblings-jam"]'
+  );
+
+  sizzleItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      sizzleSound.currentTime = 0;
+      sizzleSound.play().catch(e => console.log("Audio play failed:", e));
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      sizzleSound.pause();
+    });
+  });
+});
+// Enhanced Contact Form Animation
+document.addEventListener('DOMContentLoaded', function() {
+  const contactSection = document.querySelector('.contact');
+  const contactForm = document.getElementById('contact-form');
+  
+  if (contactSection && contactForm) {
+    // Animate contact section into view
+    setTimeout(() => {
+      contactSection.classList.add('visible');
+      
+      // Animate form elements sequentially
+      const formGroups = document.querySelectorAll('.form-group');
+      formGroups.forEach((group, index) => {
+        setTimeout(() => {
+          group.classList.add('active');
+        }, 150 * index);
+      });
+      
+      // Animate submit button last
+      setTimeout(() => {
+        const submitBtn = document.getElementById('submit-contact');
+        if (submitBtn) submitBtn.classList.add('visible');
+      }, 150 * formGroups.length);
+    }, 300);
+    
+    // Form submission handler
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const contactData = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        message: document.getElementById('contact-message').value
+      };
+      
+      console.log("Contact Form Submitted:", contactData);
+      
+      // Hide form with animation
+      contactForm.style.opacity = '0';
+      contactForm.style.transform = 'translateY(-20px)';
+      
+      // Show confirmation with animation
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        const confirmation = document.getElementById('contact-confirmation');
+        confirmation.classList.add('visible');
+        
+        // Optional: Reset form after 5 seconds
+        setTimeout(() => {
+          confirmation.classList.remove('visible');
+          contactForm.reset();
+          contactForm.style.display = 'block';
+          setTimeout(() => {
+            contactForm.style.opacity = '1';
+            contactForm.style.transform = 'translateY(0)';
+          }, 50);
+        }, 5000);
+      }, 300);
+    });
+  }
+});
+      /* bacon */
+      let isBaconMode = false;
+const originalImages = {};
+
+document.querySelector('.logo').addEventListener('click', function() {
+  const menuItems = document.querySelectorAll('.menu-item');
+  
+  // Immediately change images before animation
+  if (!isBaconMode) {
+    menuItems.forEach(item => {
+      const img = item.querySelector('img');
+      if (!originalImages[item.dataset.item]) {
+        originalImages[item.dataset.item] = {
+          src: img.src,
+          alt: img.alt
+        };
+      }
+      img.src = 'https://hda-breakfast.vercel.app/IMG_0752.jpeg';
+      img.alt = 'Bacon';
+    });
+    showCustomAlert('Everything is bacon now! 🥓');
+  } else {
+    menuItems.forEach(item => {
+      const img = item.querySelector('img');
+      const original = originalImages[item.dataset.item];
+      if (original) {
+        img.src = original.src;
+        img.alt = original.alt;
+      }
+    });
+    showCustomAlert('Images restored!');
+  }
+
+  // Apply animation to all images
+  menuItems.forEach(item => {
+    const img = item.querySelector('img');
+    img.classList.add('image-transition');
+    
+    setTimeout(() => {
+      img.classList.remove('image-transition');
+    }, 500);
+  });
+
+  isBaconMode = !isBaconMode;
+});
+
+// Unified custom alert function
+function showCustomAlert(message) {
+  const customAlert = document.getElementById('custom-alert');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertMessage = customAlert.querySelector('p');
+  
+  // Remove any existing event listeners to prevent duplicates
+  const closeAlert = document.getElementById('close-alert');
+  const newCloseAlert = closeAlert.cloneNode(true);
+  closeAlert.parentNode.replaceChild(newCloseAlert, closeAlert);
+  
+  // Set new message
+  alertMessage.textContent = message;
+  
+  // Show alert
+  customAlert.style.display = 'block';
+  alertOverlay.style.display = 'block';
+  
+  // Add new event listener
+  newCloseAlert.addEventListener('click', function() {
+    customAlert.style.display = 'none';
+    alertOverlay.style.display = 'none';
+  });
+}
+document.getElementById('close-alert').addEventListener('click', function() {
+  document.getElementById('custom-alert').style.display = 'none';
+  document.getElementById('alert-overlay').style.display = 'none';
+});
+
+// fake orders
+let notificationInterval;
+let isNotificationShowing = false; // Track if a notification is currently visible
+
+function showRandomOrder() {
+  if (isNotificationShowing) return; // Skip if one is already showing
+  
+  const notification = document.getElementById('order-notification');
+  const itemKeys = Object.keys(menuItems);
+  const randomKey = itemKeys[Math.floor(Math.random() * itemKeys.length)];
+  const itemName = menuItems[randomKey].displayName;
+  const funnyComments = [
+  "and demanded extra!",
+  "while doing a little dance!",
+  "and tipped 100%!",
+  "then asked for the chef's autograph!",
+  "while singing 'I Want It That Way'!",
+  "and immediately ordered seconds!",
+  "but tripped and spilled their order!",
+  "while scrolling on the HDA Breakfast TikTok! (We don't have one)",
+  "while playing Brawl Stars on their phone!",
+  "and complained about the temperature, so they went to speak to the manager!",
+  "and complained about the texture, so they demanded to speak to the manager!",
+  "while singing 'Africa'!",
+  "and tried to pay with Monopoly money!",
+  "and whispered, 'This dish... it speaks to me.'",
+  "then left a note saying, ‘Whoever made this, I hope you have a wonderful day.’",
+  "then bought an extra meal to give to someone in need.",
+  "and after finishing, declared it the best breakfast they’ve ever eaten.",
+  "and took 15 pictures of the food before eating it.",
+  "and created a video tagged with #hdabreakfast on YouTube!"
+];
+    const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+  const randomComment = funnyComments[Math.floor(Math.random() * funnyComments.length)];
+  notification.style.animation = 'none';
+  void notification.offsetWidth;
+  notification.textContent = `${randomFirstName} ${randomLastName} just ordered ${itemName} ${randomComment}`;
+  isNotificationShowing = true;
+  notification.style.animation = 'floatUp 4.7329383829293s ease-out forwards';
+  notification.addEventListener('animationend', () => {
+    isNotificationShowing = false;
+  }, { once: true });
+  console.log(' order:', randomFirstName, randomLastName, itemName); 
+}
+
+function startOrderNotifications() {
+  if (notificationInterval) {
+    clearInterval(notificationInterval);
+  }
+  
+  function scheduleNext() {
+    const delay = Math.random() * 7000 + 3000; 
+    notificationInterval = setTimeout(() => {
+      showRandomOrder();
+      scheduleNext(); 
+    }, delay);
+  }
+  
+  // Initial call
+  showRandomOrder();
+  scheduleNext();
+}
+
+document.addEventListener('DOMContentLoaded', startOrderNotifications);
+function loadCSS(href) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+  // diff expire
+  function updateOfferStatus() {
+  const offerItems = document.querySelectorAll('.deal-item[data-offer-end]');
+  if (!offerItems.length) return;
+
+  offerItems.forEach(offerItem => {
+    const endDate = new Date(offerItem.dataset.offerEnd + 'T00:00:00');
+    const now = new Date();
+    const badge = offerItem.querySelector('.deal-badge');
+    const countdown = offerItem.querySelector('.countdown-timer');
+    const timeRemaining = endDate - now;
+    if (timeRemaining < -86400000) {
+      offerItem.remove();
+      return;
+    }
+    if (timeRemaining < 0) {
+      offerItem.classList.add('expired');
+      badge.textContent = 'Offer Ended';
+      countdown.textContent = 'This offer has ended. No need to feel down; a new offer will come out as quick as a running cheetah!';
+      return;
+    }
+    updateCountdown(timeRemaining, countdown);
+  });
+  setTimeout(updateOfferStatus, 1000);
+}
+
+function updateCountdown(timeRemaining, element) {
+  // Calculate total seconds remaining first
+  const totalSeconds = Math.floor(timeRemaining / 1000);
+  
+  // Then calculate each time component
+  const days = Math.floor(totalSeconds / (3600 * 24));
+  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+  
+  // Build the display string
+  let countdownStr = '';
+  if (days > 0) countdownStr += `${days} day${days !== 1 ? 's' : ''} `;
+  if (hours > 0 || days > 0) countdownStr += `${hours} hour${hours !== 1 ? 's' : ''} `;
+  if (minutes > 0 || hours > 0 || days > 0) countdownStr += `${minutes} minute${minutes !== 1 ? 's' : ''} `;
+  countdownStr += `${seconds} second${seconds !== 1 ? 's' : ''}`;
+  
+  element.textContent = `Time remaining: ${countdownStr.trim()}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateOfferStatus();
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        updateOfferStatus();
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  const offerSection = document.querySelector('.special-deals-banner');
+  if (offerSection) {
+    observer.observe(offerSection);
+  }
+});
+function setupRewardsAnimations() {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const elements = entry.target.querySelectorAll('.animate-element');
+        elements.forEach(el => {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, parseFloat(getComputedStyle(el).getPropertyValue('--delay').replace('s', '')) * 1000);
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-section').forEach(section => {
+    sectionObserver.observe(section);
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  setupRewardsAnimations();
+  let userPoints = parseInt(localStorage.getItem('hdaBreakfastPoints')) || 0;
+  updatePointsDisplay();
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+      addPoints(1);
+    });
+  });
+
+  document.querySelectorAll('.redeem-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const rewardItem = this.closest('.reward-item');
+      const cost = parseInt(rewardItem.getAttribute('data-cost'));
+      
+      if (userPoints >= cost) {
+        redeemReward(cost, rewardItem.querySelector('h3').textContent);
+      } else {
+        showCustomAlert(`You need ${cost - userPoints} more points for this reward!`);
+      }
+    });
+  });
+
+  function addPoints(points) {
+    userPoints += points;
+    updatePointsDisplay();
+    localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
+    const notification = document.getElementById('order-notification');
+    notification.textContent = `+${points} points! Total: ${userPoints} points`;
+    notification.style.animation = 'none';
+    void notification.offsetWidth;
+    notification.style.animation = 'floatUp 3s ease-out forwards';
+  }
+
+  function updatePointsDisplay() {
+    const pointsDisplay = document.getElementById('points-counter');
+    if (pointsDisplay) {
+      pointsDisplay.style.transition = 'all 0.5s ease-out';
+      pointsDisplay.textContent = userPoints;
+      pointsDisplay.classList.add('pulse');
+      setTimeout(() => {
+        pointsDisplay.classList.remove('pulse');
+      }, 500);
+      document.querySelectorAll('.reward-item').forEach(item => {
+        const cost = parseInt(item.getAttribute('data-cost'));
+        const button = item.querySelector('.redeem-btn');
+        button.disabled = userPoints < cost;
+      });
+    }
+  }
+
+  function redeemReward(cost, rewardName) {
+    userPoints -= cost;
+    updatePointsDisplay();
+    localStorage.setItem('hdaBreakfastPoints', userPoints.toString());
+    showCustomAlert(`Congratulations! You redeemed: ${rewardName}`);
+  }
+});
+  </script>
+</body>
+</html>
