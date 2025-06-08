@@ -39,6 +39,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || url.pathname.startsWith('/_vercel')) {
     return;
   }
+  if (url.pathname.includes('hero.mp4')) return;
   if (isVideo) {
     event.respondWith(
       cacheFirstWithRefresh(event.request, VIDEO_CACHE)
