@@ -1631,9 +1631,7 @@ nav ul li a:hover {
   <audio id="sizzle-sound" preload="auto" loop>
     <source src="https://hda-breakfast.vercel.app/sizzle.mp3" type="audio/mpeg">
   </audio>
-  <script>
-      const video = document.getElementById('hero-video');
-      video.src = `/hero.mp4?v=${Date.now()}`;
+  <script defer>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     const menuItems = {
       "bacon": {
