@@ -2534,6 +2534,24 @@ document.addEventListener('DOMContentLoaded', function() {
     showCustomAlert(`Congratulations! You redeemed: ${rewardName}`);
   }
 });
+    document.addEventListener('DOMContentLoaded', () => {
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  if (isSafari && !localStorage.getItem('safariAlertDismissed')) {
+    const customAlert = document.getElementById('custom-alert');
+    const alertOverlay = document.getElementById('alert-overlay');
+    customAlert.querySelector('p').textContent = "It seems that you are using Safari. For the best experience, use Chrome.";
+
+    customAlert.style.display = 'block';
+    alertOverlay.style.display = 'block';
+
+    document.getElementById('close-alert').onclick = () => {
+      customAlert.style.display = 'none';
+      alertOverlay.style.display = 'none';
+      localStorage.setItem('safariAlertDismissed', 'true'); 
+    };
+  }
+});
   </script>
 </body>
 </html>
