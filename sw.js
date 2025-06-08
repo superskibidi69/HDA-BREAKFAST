@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hda-breakfast';
+const CACHE_NAME = 'hda-breakfast-plswork';
 const MAX_CACHE_SIZE = 150;
 
 const PRECACHE_ASSETS = [
