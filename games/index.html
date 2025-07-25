@@ -1,7 +1,117 @@
-<meta http-equiv="refresh" content="0; url=https://iplogger.com/hda-breakfast">
-    <meta name="theme-color" content="#8eff61">  <meta name="msapplication-TileColor" content="#8eff61">
-      <meta property="og:type" content="website">
-  <meta property="og:title" content="HDA Breakfast Games">
-  <meta property="og:description" content="Discover HDA Breakfast's games: clickers and more!">
-  <meta property="og:image" content="/banner.jpeg">
-  <meta property="og:url" content="https://hda-breakfast.vercel.app/games">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Games Browser</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+      color: #fff;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #8eff61;
+    }
+
+    .games-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .game-card {
+      background: #383838;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .game-content {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #8eff61;
+    }
+
+    .game-desc {
+      font-size: 14px;
+      color: #ccc;
+      flex-grow: 1;
+    }
+
+    .play-btn {
+      background: #8eff61;
+      color: #1a1a1a;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: auto;
+    }
+
+    .play-btn:hover {
+      background: #b5ffa0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Play Some Breakfast Games</h1>
+  <div class="games-container">
+    <div class="game-card">
+      <img src="https://hda-breakfast.vercel.app/IMG_0755.jpeg" alt="Clicker">
+      <div class="game-content">
+        <div class="game-title">Breakfast Clicker</div>
+        <div class="game-desc">Cook pancakes fast. Upgrade. Be legendary.</div>
+        <a href="breakfast-clicker.html" class="play-btn">Play</a>
+      </div>
+    </div>
+    <div class="game-card">
+      <img src="https://hda-breakfast.vercel.app/IMG_0749.jpeg" alt="Memory Game">
+      <div class="game-content">
+        <div class="game-title">Waffle Memory</div>
+        <div class="game-desc">Match breakfast cards. Remember or fail.</div>
+        <a href="memory.html" class="play-btn">Play</a>
+      </div>
+    </div>
+    <div class="game-card">
+      <img src="https://hda-breakfast.vercel.app/IMG_0752.jpeg" alt="Bacon Quiz">
+      <div class="game-content">
+        <div class="game-title">Bacon Trivia</div>
+        <div class="game-desc">Answer goofy questions before they burn.</div>
+        <a href="quiz.html" class="play-btn">Play</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
