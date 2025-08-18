@@ -32,6 +32,7 @@ Sitemap: https://hda-breakfast.vercel.app/sitemap.xml
 #User-agent: Meta-ExternalAgent
 #User-agent: Meta-ExternalFetcher
 #User-agent: OAI-SearchBot
+# Algolia-Crawler-Verif: 0D416F27EE821E6E
 #User-agent: omgili
 #User-agent: omgilibot
 #User-agent: PanguBot
